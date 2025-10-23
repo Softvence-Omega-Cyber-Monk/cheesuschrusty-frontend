@@ -1,0 +1,70 @@
+// UnlockProCard.tsx
+import React from 'react';
+
+// 1. Define the TypeScript interface for the component's props
+interface UnlockProCardProps {
+  // Title (e.g., "Unlock Pro")
+  title: string;
+  // Description/Feature List
+  description: string;
+  // Text for the call-to-action button (e.g., "Try 7 Days Free")
+  buttonText: string;
+  // Optional: Function to call when the button is clicked
+  onButtonClick?: () => void; 
+}
+
+// 2. Use the interface to type the component and destructure the props
+const UnlockProCard: React.FC<UnlockProCardProps> = ({ 
+  title, 
+  description, 
+  buttonText, 
+  onButtonClick 
+}) => {
+  return (
+    <div className="
+      p-6 
+      sm:p-8 
+      bg-gray-50 
+      rounded-xl 
+      shadow-md 
+       
+      mx-auto 
+      border border-gray-100
+    ">
+      
+      {/* --- Card Content --- */}
+      <div className="mb-6">
+        <div className="flex items-center mb-1">
+          {/* Crown Icon */}
+          <span className="text-2xl mr-3 text-yellow-500" role="img" aria-label="crown">
+            👑
+          </span>
+          {/* Dynamically display the title */}
+          <h2 className="text-xl font-semibold text-gray-800">
+            {title}
+          </h2>
+        </div>
+        
+        {/* Dynamically display the description */}
+        <p className="text-sm text-gray-600 ml-9">
+          {description}
+        </p>
+      </div>
+
+      {/* --- Gradient Button --- */}
+      <button 
+        className="
+          bg-blue-600 cursor-pointer hover:bg-blue-700 text-white font-medium py-2.5 px-4 rounded-lg transition-colors inline-block
+        " style={{ background: "linear-gradient(180deg, #667EEA 0%, #764BA2 100%)" }}
+        // Use the optional onButtonClick function
+        onClick={onButtonClick} 
+      >
+        {/* Dynamically display the button text */}
+        {buttonText}
+      </button>
+
+    </div>
+  );
+};
+
+export default UnlockProCard;
