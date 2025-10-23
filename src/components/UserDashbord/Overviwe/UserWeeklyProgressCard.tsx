@@ -34,7 +34,7 @@ const UserWeeklyProgressCard: React.FC<WeeklyProgressCardProps> = ({
   const clampedProgress = Math.min(100, Math.max(0, progress));
 
   return (
-    <div className="p-6 bg-white rounded-xl shadow-lg"  >
+    <div className="p-6  bg-white rounded-xl shadow-lg"  >
       {/* Header */}
       <div className="mb-6">
         <h2 className="text-xl font-semibold text-gray-800">{title}</h2>
