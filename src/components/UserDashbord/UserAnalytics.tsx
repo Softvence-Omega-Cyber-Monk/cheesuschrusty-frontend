@@ -5,59 +5,110 @@ import {
   BookMarked, Users, Sparkles,
   FireExtinguisher
 } from 'lucide-react'; 
-
+import { ProgressBar } from '../ProgressBar/ProgressBar';
+import timeicon from "../../assets/Dashbord/timeicon.svg"
+import fireicon from "../../assets/Dashbord/fireicon2.svg"
+import bookicon from "../../assets/Dashbord/bookopen.svg"
+import tergeticon from "../../assets/Dashbord/tergeticon.svg"
 // --- 1. Small Components (For Organization) ---
 
 // 1.1. SummaryCard (The top row of stats)
 interface SummaryCardProps {
     title: string;
     value: string;
-    icon: React.ReactNode;
+    icon: string | undefined;
     color: string;
 }
 const SummaryCard: React.FC<SummaryCardProps> = ({ title, value, icon, color }) => (
-    <div className="flex items-center justify-between p-4 bg-white rounded-xl shadow-sm border border-gray-100">
+    <div className="flex   justify-between p-4 items-start bg-white rounded-xl shadow-sm border border-gray-100">
         <div className="flex flex-col">
             <p className="text-sm font-medium text-gray-500">{title}</p>
             <div className="text-3xl font-bold text-gray-900 mt-1">{value}</div>
         </div>
-        <div className={`w-10 h-10 rounded-full flex items-center justify-center ${color}`}>
-            {icon}
+        <div className={`w-10 h-10 rounded-full flex items-center justify-center `}>
+       <img src={icon} alt="" />
         </div>
     </div>
 );
 
 // 1.2. WeeklyBar (Individual progress bar for Weekly Performance)
-interface WeeklyBarProps {
-    day: string;
-    accuracy: number;
-    minutes: number;
-}
-const WeeklyBar: React.FC<WeeklyBarProps> = ({ day, accuracy, minutes }) => {
-    const goalMinutes = 40;
-    const progressWidth = (minutes / goalMinutes) * 100;
+// interface WeeklyBarProps {
+//     day: string;
+//     accuracy: number;
+//     minutes: number;
+// }
+// const WeeklyBar: React.FC<WeeklyBarProps> = ({ day, accuracy, minutes }) => {
+//     const goalMinutes = 40;
+//     const progressWidth = (minutes / goalMinutes) * 100;
 
-    return (
-        <div className="mb-4">
-            <div className="flex justify-between items-center text-sm mb-1">
-                <div className="font-semibold text-gray-700">{day}</div>
-                <div className={`font-medium ${accuracy >= 70 ? 'text-green-600' : 'text-orange-500'}`}>
-                    {accuracy}% Accuracy
-                </div>
-            </div>
-            <div className="h-2 bg-gray-200 rounded-full">
-                <div 
-                    className="h-2 bg-indigo-600 rounded-full" 
-                    style={{ width: `${Math.min(progressWidth, 100)}%` }}
-                ></div>
-            </div>
-            <div className="flex justify-between text-xs text-gray-500 mt-1">
-                <span>{minutes} min</span>
-                <span>{goalMinutes} min goal</span>
-            </div>
+//     return (
+//         <div className="mb-4">
+//             <div className="flex justify-between items-center text-sm mb-1">
+//                 <div className="font-semibold text-gray-700">{day}</div>
+//                 <div className={`font-medium ${accuracy >= 70 ? 'text-green-600' : 'text-orange-500'}`}>
+//                     {accuracy}% Accuracy
+//                 </div>
+//             </div>
+//             <div className="h-2 bg-gray-200 rounded-full">
+//                 <div 
+//                     className="h-2 bg-indigo-600 rounded-full" 
+//                     style={{ width: `${Math.min(progressWidth, 100)}%` }}
+//                 ></div>
+//             </div>
+//             <div className="flex justify-between text-xs text-gray-500 mt-1">
+//                 <span>{minutes} min</span>
+//                 <span>{goalMinutes} min goal</span>
+//             </div>
+//         </div>
+//     );
+// };
+
+
+  
+interface WeeklyBarProps {
+  day: string;
+  accuracy: number;
+  minutes: number;
+}
+
+const WeeklyBar: React.FC<WeeklyBarProps> = ({ day, accuracy, minutes }) => {
+  const goalMinutes = 40;
+
+  return (
+    <div className="mb-4 border rounded-xl border-[#EBEBEB] p-3">
+      {/* Header with day and accuracy */}
+      <div className="flex justify-between items-center text-sm mb-3">
+        <div className="font-semibold text-[#585858]">{day}</div>
+        <div
+          className={`font-medium ${
+            accuracy >= 70 ? "text-green-600" : "text-[#0E9F6E]"
+          }`}
+        >
+          {accuracy}% Accuracy
         </div>
-    );
+      </div>
+
+      {/* Use the reusable ProgressBar */}
+      <ProgressBar
+        current={minutes}
+        total={goalMinutes}
+        color="bg-black"
+        height="h-2"
+        rounded="rounded-full"
+      />
+
+      {/* Footer with numeric minutes */}
+      <div className="flex mt-3 justify-between text-xs text-gray-500 ">
+        <span>{minutes} min</span>
+        <span>{goalMinutes} min goal</span>
+      </div>
+    </div>
+  );
 };
+
+ 
+
+
 
 // 1.3. SkillProgressCard (Reading, Listening, Writing, Speaking)
 interface SkillCardProps {
@@ -149,8 +200,12 @@ export const UserAnalytics: React.FC = () => {
         { day: 'Sunday', accuracy: 55, minutes: 25 },
     ];
 
+ 
+
+
+
     return (
-        <div className="p-6 bg-gray-50 min-h-screen">
+        <div className="p-6   min-h-screen">
             <h1 className="text-3xl font-bold text-gray-900 mb-2">Advanced Analytics</h1>
             <p className="text-gray-600 mb-8">Track your progress and achievements in Italian learning</p>
 
@@ -159,25 +214,26 @@ export const UserAnalytics: React.FC = () => {
                 <SummaryCard 
                     title="This Week" 
                     value="175m" 
-                    icon={<Clock className="w-5 h-5 text-white" />} 
+                    // icon={<Clock className="w-5 h-5 text-white" />} 
+                    icon={timeicon} 
                     color="bg-indigo-500"
                 />
                 <SummaryCard 
                     title="Current Streak" 
                     value="7 Days" 
-                    icon={<FireExtinguisher className="w-5 h-5 text-white" />} 
+                    icon={fireicon} 
                     color="bg-red-500"
                 />
                 <SummaryCard 
                     title="Avg. Accuracy" 
                     value="86%" 
-                    icon={<Target className="w-5 h-5 text-white" />} 
+                    icon={tergeticon} 
                     color="bg-green-500"
                 />
                 <SummaryCard 
                     title="Total Lessons" 
                     value="84" 
-                    icon={<BookOpen className="w-5 h-5 text-white" />} 
+                    icon={bookicon} 
                     color="bg-blue-500"
                 />
             </div>
