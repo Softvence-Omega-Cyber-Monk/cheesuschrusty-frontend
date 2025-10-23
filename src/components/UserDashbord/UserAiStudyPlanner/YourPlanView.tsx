@@ -1,5 +1,5 @@
 import React from 'react';
-import { BookOpen, Zap, Star } from 'lucide-react';
+import {   Zap,  } from 'lucide-react';
 import { GoalData } from './AIStudyPlanner';
 import { GiBookmarklet } from "react-icons/gi";
 import { IoSparklesSharp } from 'react-icons/io5';

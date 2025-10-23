@@ -1,9 +1,8 @@
 
 import React from 'react';
-import { Plus, Check } from 'lucide-react';
+import {  Check } from 'lucide-react';
 import { GoalData } from './AIStudyPlanner';
-import { ProgressBar } from '@/components/ProgressBar/ProgressBar';
-import { IoSparklesSharp } from "react-icons/io5";
+ import { IoSparklesSharp } from "react-icons/io5";
 
 type SetupGoalProps = {
   goalData: GoalData;
@@ -137,7 +136,7 @@ export const SetupGoalView: React.FC<SetupGoalProps> = ({ goalData, setGoalData,
 
   {/* Day labels below the bar */}
   <div className="relative mt-4 grid grid-cols-7 text-center text-sm font-normal text-gray-500">
-    {[1, 2, 3, 4, 5, 6, 7].map((day, index) => (
+    {[1, 2, 3, 4, 5, 6, 7].map((day,  ) => (
       <div key={day} className="relative">
         {/* Day number label */}
         <span
