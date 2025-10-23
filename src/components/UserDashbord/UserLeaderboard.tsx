@@ -335,7 +335,7 @@ const QuickStats: React.FC = () => (
 
 export const UserLeaderboard: React.FC = () => {
   return (
-    <div className="min-h-screen bg-gray-50 p-8">
+    <div className="min-h-screen   p-8">
       {/* Header */}
       <header className="flex justify-between items-center mb-6">
         <div>
