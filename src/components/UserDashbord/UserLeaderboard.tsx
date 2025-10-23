@@ -1,9 +1,8 @@
 import React from 'react';
-import { Flame, Star, Share2,  ChevronDown, BookOpen, Volume2, Edit, Mic, Trophy } from 'lucide-react';
+import { Flame, Star,   BookOpen, Volume2,   Trophy } from 'lucide-react';
 import { FaHeadphonesAlt } from "react-icons/fa";
 import { FaPenFancy } from "react-icons/fa6";
-import speaking from "../../assets/Dashbord/speaking.svg"
-
+ 
 // --- Type Definitions ---
 
 /**

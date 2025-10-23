@@ -1,7 +1,7 @@
 import React from 'react';
 import { 
-    Target, BookOpen, Bolt,  Mic, Pencil, 
-  Headphones, TrendingUp, Clock, ArrowUpRight,   BookA,
+      Bolt,  Mic, Pencil, 
+  Headphones, TrendingUp,   ArrowUpRight,   BookA,
   BookMarked, Users, Sparkles,
   FireExtinguisher
 } from 'lucide-react'; 
@@ -19,7 +19,7 @@ interface SummaryCardProps {
     icon: string | undefined;
     color: string;
 }
-const SummaryCard: React.FC<SummaryCardProps> = ({ title, value, icon, color }) => (
+const SummaryCard: React.FC<SummaryCardProps> = ({ title, value, icon,   }) => (
     <div className="flex   justify-between p-4 items-start bg-white rounded-xl shadow-sm border border-gray-100">
         <div className="flex flex-col">
             <p className="text-sm font-medium text-gray-500">{title}</p>
