@@ -52,7 +52,7 @@ const AdminSupport: React.FC = () => {
   const conversation = allConversations.find(c => c.ticketId === selectedTicket?.id);
 
   return (
-    <div className="min-h-screen   text-gray-800 p-4 sm:p-6  ">
+    <div className="min-h-screen   text-gray-800   ">
       {selectedTicket ? (
         <TicketDetail 
           ticket={selectedTicket} 

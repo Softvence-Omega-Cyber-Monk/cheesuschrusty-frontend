@@ -57,7 +57,7 @@ const Lessons: React.FC = () => {
                     <h2 className="text-2xl font-bold text-slate-900">Lessons</h2>
                     <p className="text-slate-500 mt-1">Manage structured Italian learning lessons</p>
                 </div>
-                <button onClick={() => setIsCreating(true)} className="bg-blue-600 text-white font-semibold px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors flex items-center gap-2 shadow-sm hover:shadow-md">
+                <button onClick={() => setIsCreating(true)} className="bg-blue-600 cursor-pointer text-white font-semibold px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors flex items-center gap-2 shadow-sm hover:shadow-md">
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clipRule="evenodd" /></svg>
                     Create Lesson
                 </button>
@@ -65,7 +65,7 @@ const Lessons: React.FC = () => {
             
             <div className="bg-white rounded-xl shadow-sm overflow-hidden">
                 <div className="overflow-x-auto">
-                    <table className="w-full text-sm text-left text-slate-500">
+                    <table className="w-full text-sm text-left text-slate-500 ">
                         <thead className="text-xs text-slate-700 uppercase bg-slate-50 tracking-wider">
                             <tr>
                                 <th scope="col" className="px-6 py-3">Title</th>
@@ -91,9 +91,9 @@ const Lessons: React.FC = () => {
                                     <td className="px-6 py-4">{lesson.lastModified}</td>
                                     <td className="px-6 py-4">
                                         <div className="flex items-center space-x-3">
-                                            <button className="text-slate-400 hover:text-blue-600"><EyeIcon /></button>
-                                            <button className="text-slate-400 hover:text-green-600"><PencilIcon /></button>
-                                            <button className="text-slate-400 hover:text-red-600"><BlockIcon /></button>
+                                            <button className="text-slate-400 cursor-pointer hover:text-blue-600"><EyeIcon /></button>
+                                            <button className="text-slate-400 cursor-pointer hover:text-green-600"><PencilIcon /></button>
+                                            <button className="text-slate-400 cursor-pointer hover:text-red-600"><BlockIcon /></button>
                                         </div>
                                     </td>
                                 </tr>

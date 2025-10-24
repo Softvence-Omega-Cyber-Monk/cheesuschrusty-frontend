@@ -39,7 +39,7 @@ const ListeningModule: React.FC = () => {
             {/* Header */}
             <button
               onClick={() => navigate("/user/practice")}
-              className="flex items-center gap-2 text-gray-700 hover:text-gray-900 mb-4"
+              className="flex items-center gap-2 text-gray-700 cursor-pointer hover:text-gray-900 mb-4"
             >
               <ChevronLeft className="w-4 h-4" />
               <span className="text-sm">Back To Practice</span>
@@ -75,7 +75,7 @@ const ListeningModule: React.FC = () => {
               </div>
 
               <div className="flex items-center gap-4">
-                <button onClick={handlePlayPause} className="w-14 h-14 bg-indigo-600 hover:bg-indigo-700 cursor-pointer rounded-full flex items-center justify-center">
+                <button onClick={handlePlayPause} className="w-14 h-14 bg-indigo-600  hover:bg-indigo-700 cursor-pointer rounded-full flex items-center justify-center">
                   {isPlaying ? 'Pause' : 'Play'}
                 </button>
               </div>

@@ -19,7 +19,7 @@ alert("clicked")
           <div className="p-2">
             <button
               onClick={() => setSidebarOpen(true)}
-              className="w-8 h-8 bg-gray-900 text-white rounded-full cursor-pointer flex items-center justify-center"
+              className="w-8 h-8 bg-gray-900 text-white cursor-pointer rounded-full cursor-pointer flex items-center justify-center"
             >
               ☰
             </button>

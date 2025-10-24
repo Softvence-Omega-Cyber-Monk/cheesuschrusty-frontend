@@ -140,7 +140,7 @@ const ListeningPractice: React.FC<ListeningPracticeProps> = ({ continueCallback 
                     <button
                       onClick={handleNextQuestion}
                       disabled={!questions[currentQuestion].selectedAnswer}
-                      className={`px-6 py-3 rounded-lg font-medium flex items-center gap-2 transition-colors cursor-pointer ${
+                      className={`px-6 py-3 rounded-lg font-medium  flex items-center gap-2 transition-colors cursor-pointer ${
                         !questions[currentQuestion].selectedAnswer
                           ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
                           : 'bg-blue-600 text-white hover:bg-blue-700'

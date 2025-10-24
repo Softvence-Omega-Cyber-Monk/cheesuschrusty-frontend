@@ -19,7 +19,7 @@ export default function FreeUserLayout() {
                     <div className="p-2">
                         <button
                             onClick={() => setSidebarOpen(true)}
-                            className="w-8 h-8 bg-gray-900 text-white rounded-full flex items-center justify-center"
+                            className="w-8 h-8 bg-gray-900 text-white cursor-pointer rounded-full flex items-center justify-center"
                         >
                             ☰
                         </button>

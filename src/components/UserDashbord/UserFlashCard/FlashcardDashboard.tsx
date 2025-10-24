@@ -156,7 +156,7 @@ export const FlashcardDashboard: React.FC<FlashcardDashboardProps> = ({
           <button
             onClick={goToPrevPage}
             disabled={currentPage === 1}
-            className={`px-4 py-2 rounded-lg border text-sm ${
+            className={`px-4 py-2 cursor-pointer rounded-lg border text-sm ${
               currentPage === 1
                 ? "text-gray-400 border-gray-200 cursor-not-allowed"
                 : "text-blue-600 border-blue-300 hover:bg-blue-50"
@@ -170,7 +170,7 @@ export const FlashcardDashboard: React.FC<FlashcardDashboardProps> = ({
           <button
             onClick={goToNextPage}
             disabled={currentPage === totalPages}
-            className={`px-4 py-2 rounded-lg border text-sm ${
+            className={`px-4 py-2 rounded-lg cursor-pointer border text-sm ${
               currentPage === totalPages
                 ? "text-gray-400 border-gray-200 cursor-not-allowed"
                 : "text-blue-600 border-blue-300 hover:bg-blue-50"

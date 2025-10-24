@@ -58,8 +58,8 @@ const CreateLessonForm: React.FC<CreateLessonFormProps> = ({ onSave, onCancel })
                     <p className="text-slate-500 mt-1">Build engaging Italian lessons for your students</p>
                 </div>
                 <div className="flex gap-4">
-                    <button type="button" onClick={onCancel} className="bg-slate-100 text-slate-700 font-semibold px-4 py-2 rounded-lg hover:bg-slate-200 transition-colors">Cancel</button>
-                    <button type="submit" className="bg-blue-600 text-white font-semibold px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors shadow-sm hover:shadow-md">Save Lesson</button>
+                    <button type="button" onClick={onCancel} className="bg-slate-100 cursor-pointer text-slate-700 font-semibold px-4 py-2 rounded-lg hover:bg-slate-200 transition-colors">Cancel</button>
+                    <button type="submit" className="bg-blue-600 text-white font-semibold cursor-pointer px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors shadow-sm hover:shadow-md">Save Lesson</button>
                 </div>
             </div>
 
@@ -103,10 +103,10 @@ const CreateLessonForm: React.FC<CreateLessonFormProps> = ({ onSave, onCancel })
             <div className="space-y-6 border-t border-slate-200 pt-8">
                  <h3 className="text-lg font-semibold text-slate-900">Lesson Content</h3>
                  <div className="flex flex-wrap gap-4">
-                     <button type="button" onClick={() => addSection(LessonSectionType.Vocabulary)} className="content-btn"><VocabularyIcon /> Add Vocabulary</button>
-                     <button type="button" onClick={() => addSection(LessonSectionType.Grammar)} className="content-btn"><GrammarIcon /> Add Grammar</button>
-                     <button type="button" onClick={() => addSection(LessonSectionType.Exercise)} className="content-btn"><ExerciseIcon /> Add Exercise</button>
-                     <button type="button" onClick={() => addSection(LessonSectionType.Media)} className="content-btn"><MediaIcon /> Add Media</button>
+                     <button type="button" onClick={() => addSection(LessonSectionType.Vocabulary)} className="content-btn cursor-pointer"><VocabularyIcon /> Add Vocabulary</button>
+                     <button type="button" onClick={() => addSection(LessonSectionType.Grammar)} className="content-btn cursor-pointer"><GrammarIcon /> Add Grammar</button>
+                     <button type="button" onClick={() => addSection(LessonSectionType.Exercise)} className="content-btn cursor-pointer"><ExerciseIcon /> Add Exercise</button>
+                     <button type="button" onClick={() => addSection(LessonSectionType.Media)} className="content-btn cursor-pointer"><MediaIcon /> Add Media</button>
                  </div>
                  <div className="space-y-6">
                     {sections.map(section => (

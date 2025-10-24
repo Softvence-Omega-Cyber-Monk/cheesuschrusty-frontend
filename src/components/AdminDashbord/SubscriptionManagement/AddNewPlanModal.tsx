@@ -107,7 +107,7 @@ const AddNewPlanModal: React.FC<AddNewPlanModalProps> = ({ onClose, onAddPlan })
               <button
                 type="button"
                 onClick={handleAddFeature}
-                className="inline-flex items-center px-4 py-2 border border-l-0 border-gray-300 bg-gray-50 text-sm font-medium text-gray-700 hover:bg-gray-100 rounded-r-md"
+                className="inline-flex items-center cursor-pointer px-4 py-2 border border-l-0 border-gray-300 bg-gray-50 text-sm font-medium text-gray-700 hover:bg-gray-100 rounded-r-md"
               >
                 Add
               </button>
@@ -120,7 +120,7 @@ const AddNewPlanModal: React.FC<AddNewPlanModalProps> = ({ onClose, onAddPlan })
                     {features.map((feature, index) => (
                         <div key={index} className="flex items-center bg-blue-100 text-blue-800 text-sm font-medium px-2.5 py-1 rounded-full">
                             {feature}
-                            <button type="button" onClick={() => handleRemoveFeature(feature)} className="ml-2 text-blue-600 hover:text-blue-800">
+                            <button type="button" onClick={() => handleRemoveFeature(feature)} className="ml-2 text-blue-600 cursor-pointer hover:text-blue-800">
                                 <XIcon />
                             </button>
                         </div>
@@ -132,13 +132,13 @@ const AddNewPlanModal: React.FC<AddNewPlanModalProps> = ({ onClose, onAddPlan })
             <button
               type="button"
               onClick={onClose}
-              className="px-4 py-2 bg-white border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50"
+              className="px-4 py-2 cursor-pointer bg-white border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50"
             >
               Cancel
             </button>
             <button
               type="submit"
-              className="px-4 py-2 bg-blue-600 border border-transparent rounded-md text-sm font-medium text-white hover:bg-blue-700"
+              className="px-4 cursor-pointer py-2 bg-blue-600 border border-transparent rounded-md text-sm font-medium text-white hover:bg-blue-700"
             >
               Create Plan
             </button>

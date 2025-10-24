@@ -42,3 +42,35 @@ export interface Ticket {
   created: string;
   assignee: string;
 }
+
+
+
+
+
+// // src/types.ts
+
+// export interface Message {
+//   sender: string;
+//   role: 'User' | 'Support';
+//   timestamp: string;
+//   content: string;
+//   attachment?: string;
+// }
+
+// export interface Ticket {
+//   id: string;
+//   subject: string;
+//   user: string;
+//   email: string;
+//   priority: 'High' | 'Medium' | 'Low';
+//   category: string;
+//   lastUpdate: string; // e.g., "2024-09-29"
+//   status: 'Open' | 'In Progress' | 'Resolved';
+//   assignee: string;
+//   joinedDate: string; // e.g., "2023-05-15"
+//   subscription: string; // e.g., "Pro"
+//   responses: number;
+//   messages: Message[];
+// }
+
+

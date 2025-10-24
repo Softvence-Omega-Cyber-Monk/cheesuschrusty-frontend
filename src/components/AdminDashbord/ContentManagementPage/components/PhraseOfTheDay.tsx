@@ -48,7 +48,7 @@ const PhraseOfTheDay: React.FC = () => {
                 <textarea id="explanation" name="explanation" value={phrase.explanation} onChange={handleChange} rows={3} className="mt-1 block w-full input"/>
             </div>
             <div>
-                <button type="submit" className="w-full bg-blue-600 text-white font-semibold px-4 py-3 rounded-lg hover:bg-blue-700 transition-colors shadow-sm hover:shadow-md">
+                <button type="submit" className="w-full cursor-pointer bg-blue-600 text-white font-semibold px-4 py-3 rounded-lg hover:bg-blue-700 transition-colors shadow-sm hover:shadow-md">
                     Update Todays Phrase
                 </button>
             </div>

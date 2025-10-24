@@ -138,7 +138,7 @@ const CompleteSentences: React.FC<Props> = ({ onPrev, onNext }) => {
               />
               <span >{s.suffix}</span>
             </div>
-            <button onClick={() => toggleHint(s.id)} className="flex mt-4 cursor-pointer bg-[#F7F9FF] border border-[#AFC7FF] text-base cursor-pointer items-center gap-2  rounded-xl p-2 text-gray-600">
+            <button onClick={() => toggleHint(s.id)} className="flex mt-4   bg-[#F7F9FF] border border-[#AFC7FF] text-base cursor-pointer items-center gap-2  rounded-xl p-2 text-gray-600">
               <Lightbulb className="w-4 h-4 text-yellow-500" />
               {showHints[s.id] ? s.hint : 'Click to show hint'}
             </button>

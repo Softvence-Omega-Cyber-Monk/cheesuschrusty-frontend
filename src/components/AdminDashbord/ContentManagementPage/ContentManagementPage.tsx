@@ -48,13 +48,13 @@ const ContentManagementPage: React.FC = () => {
 
         <main>
           <div className="bg-slate-200/60 p-1 rounded-xl inline-flex items-center mb-6">
-            <button onClick={() => setActiveTab('flashcards')} className={getTabClass('flashcards')}>
+            <button  onClick={() => setActiveTab('flashcards')} className={` cursor-pointer  ${getTabClass('flashcards')}`}>
               Flashcard Decks
             </button>
-            <button onClick={() => setActiveTab('lessons')} className={getTabClass('lessons')}>
+            <button onClick={() => setActiveTab('lessons')} className={`cursor-pointer ${getTabClass('lessons')}`}>
               Lessons
             </button>
-            <button onClick={() => setActiveTab('phrase')} className={getTabClass('phrase')}>
+            <button onClick={() => setActiveTab('phrase')} className={`cursor-pointer ${getTabClass('phrase')}`}>
               Phrase of the Day
             </button>
           </div>

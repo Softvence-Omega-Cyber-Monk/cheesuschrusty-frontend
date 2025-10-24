@@ -31,7 +31,7 @@ const SettingsLayout: React.FC = () => {
   };
 
   return (
-    <div className="max-w-5xl mx-auto">
+    <div className="  mx-auto">
       <header className="mb-8">
         <h1 className="text-3xl font-bold text-slate-900">Settings</h1>
         <p className="text-slate-500 mt-1">
@@ -49,7 +49,7 @@ const SettingsLayout: React.FC = () => {
                 activeTab === tab
                   ? 'bg-white text-slate-900 shadow-sm'
                   : 'bg-transparent text-slate-600 hover:bg-white/70 hover:text-slate-900'
-              } whitespace-nowrap py-2 px-3 rounded-md font-medium text-sm transition-all duration-200`}
+              } whitespace-nowrap py-2 px-3 rounded-md cursor-pointer font-medium text-sm transition-all duration-200`}
             >
               {tab}
             </button>
