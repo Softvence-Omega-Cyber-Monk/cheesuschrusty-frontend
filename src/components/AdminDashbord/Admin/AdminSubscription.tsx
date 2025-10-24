@@ -48,8 +48,8 @@ function AdminSubscription() {
   };
 
   return (
-    <div className="bg-slate-50 min-h-screen font-sans text-gray-800">
-      <div className="container mx-auto p-4 sm:p-6 lg:p-8">
+    <div className="  min-h-screen font-sans text-gray-800">
+      <div className="container mx-auto p-4 sm:p-6  ">
         <header className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8">
           <div>
             <h1 className="text-3xl font-bold text-gray-900">Content Management</h1>
