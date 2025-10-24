@@ -1,46 +1,69 @@
- import React from 'react';
+import React, { useState } from 'react';
+import Dashboard from '../Support/Dashboard';
+import TicketDetail from '../Support/TicketDetail';
+import { tickets as ticketsData, conversations as conversationsData } from '../Support/data';
+import type { Ticket, TicketConversation, Message } from '../Support/types';
 
 const AdminSupport: React.FC = () => {
-  return (
-    <div className="p-6">
-      <h1 className="text-2xl font-bold mb-4">Support</h1>
-      <p className="text-gray-600 mb-6">
-        View and respond to user support tickets and feedback.
-      </p>
+  const [allTickets, setAllTickets] = useState<Ticket[]>(ticketsData);
+  const [allConversations, setAllConversations] = useState<TicketConversation[]>(conversationsData);
+  const [selectedTicketId, setSelectedTicketId] = useState<string | null>(null);
 
-      <div className="bg-white rounded-lg shadow-sm p-4">
-        <table className="w-full text-sm text-left">
-          <thead>
-            <tr className="border-b text-gray-600">
-              <th className="py-2 px-3">User</th>
-              <th className="py-2 px-3">Issue</th>
-              <th className="py-2 px-3">Status</th>
-              <th className="py-2 px-3">Last Updated</th>
-              <th className="py-2 px-3 text-right">Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr className="border-b hover:bg-gray-50">
-              <td className="py-2 px-3">Alex Brown</td>
-              <td className="py-2 px-3">Login issue</td>
-              <td className="py-2 px-3 text-yellow-600 font-semibold">Pending</td>
-              <td className="py-2 px-3">Oct 12, 2025</td>
-              <td className="py-2 px-3 text-right">
-                <button className="text-blue-500 hover:underline">View</button>
-              </td>
-            </tr>
-            <tr className="hover:bg-gray-50">
-              <td className="py-2 px-3">Lily White</td>
-              <td className="py-2 px-3">Payment not processed</td>
-              <td className="py-2 px-3 text-green-600 font-semibold">Resolved</td>
-              <td className="py-2 px-3">Oct 9, 2025</td>
-              <td className="py-2 px-3 text-right">
-                <button className="text-blue-500 hover:underline">View</button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+  const handleSelectTicket = (ticketId: string) => {
+    setSelectedTicketId(ticketId);
+  };
+
+  const handleBackToDashboard = () => {
+    setSelectedTicketId(null);
+  };
+  
+  const handleUpdateTicket = (updatedTicket: Ticket) => {
+    setAllTickets(prevTickets => 
+      prevTickets.map(ticket => ticket.id === updatedTicket.id ? updatedTicket : ticket)
+    );
+  };
+
+  const handleAddMessage = (ticketId: string, content: string) => {
+    const newMessage: Message = {
+      id: Date.now(),
+      sender: 'Anna Verdi', // Assuming the current logged in support agent
+      role: 'Support',
+      timestamp: new Date().toISOString().replace('T', ' ').substring(0, 16),
+      content,
+    };
+
+    setAllConversations(prev => {
+      const conversationIndex = prev.findIndex(c => c.ticketId === ticketId);
+      
+      if (conversationIndex > -1) {
+        const updatedConversations = [...prev];
+        const updatedConversation = { ...updatedConversations[conversationIndex] };
+        updatedConversation.messages = [...updatedConversation.messages, newMessage];
+        updatedConversations[conversationIndex] = updatedConversation;
+        return updatedConversations;
+      } else {
+        const newConversation: TicketConversation = { ticketId, messages: [newMessage] };
+        return [...prev, newConversation];
+      }
+    });
+  };
+
+  const selectedTicket = allTickets.find(t => t.id === selectedTicketId);
+  const conversation = allConversations.find(c => c.ticketId === selectedTicket?.id);
+
+  return (
+    <div className="min-h-screen bg-gray-50 text-gray-800 p-4 sm:p-6 lg:p-8">
+      {selectedTicket ? (
+        <TicketDetail 
+          ticket={selectedTicket} 
+          conversation={conversation ?? { ticketId: selectedTicket.id, messages: [] }} 
+          onBack={handleBackToDashboard}
+          onUpdateTicket={handleUpdateTicket}
+          onAddMessage={handleAddMessage}
+        />
+      ) : (
+        <Dashboard tickets={allTickets} onSelectTicket={handleSelectTicket} />
+      )}
     </div>
   );
 };

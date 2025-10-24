@@ -1,15 +1,27 @@
 // UserDetailsPage.tsx
 
-import React from 'react';
+import React, { useState } from 'react';
 import UserInfoCard from './UserInfoCard';
 import StatsGrid from './StatsGrid';
 import PersonalInformation from './PersonalInformation';
 import LearningOverview from './LearningOverview';
 import SubscriptionDetails from './SubscriptionDetails';
-import { mockUserData } from './types'; // Import the mock data
+import { mockUserData, UserData } from './types'; // Import UserData interface
 
 const UserDetailsPage: React.FC = () => {
-  const user = mockUserData; // Use the mock data for the page
+  // Use state to manage the user data, allowing it to be updated
+  const [user, setUser] = useState<UserData>(mockUserData); 
+
+  // Handler function to update a specific field in the user state
+  const handlePersonalInformationUpdate = (
+    field: 'fullName' | 'email' | 'phone' | 'location',
+    value: string
+  ) => {
+    setUser((prevUser) => ({
+      ...prevUser,
+      [field]: value, // Safely update the specified field
+    }));
+  };
 
   return (
     <div className="bg-gray-50 min-h-screen p-8">
@@ -23,14 +35,17 @@ const UserDetailsPage: React.FC = () => {
 
       <main className="max-w-7xl mx-auto">
         
-        {/* 1. Top User Info and Status */}
+        {/* 1. Top User Info and Status - Now uses the state data */}
         <UserInfoCard user={user} />
         
         {/* 2. Stats Grid */}
         <StatsGrid stats={user.stats} dayStreak={user.dayStreak} />
 
-        {/* 3. Personal Information */}
-        <PersonalInformation user={user} />
+        {/* 3. Personal Information - Now passes the state data and the update handler */}
+        <PersonalInformation 
+          user={user} 
+          onUpdateField={handlePersonalInformationUpdate} 
+        />
 
         {/* 4. Learning Statistics and Progress */}
         <LearningOverview learning={user.learning} stats={user.stats} />

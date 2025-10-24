@@ -1,42 +1,75 @@
-import React from 'react';
-import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
 
-interface AdminAnalytics {
-  month: string;
-  activeUsers: number;
-  sessions: number;
-}
+import React, { useState, useMemo } from 'react';
+import StatCard from '../Analytics/componentes/StatCard';
+import TabButton from '../Analytics/componentes/TabButton';
+import { UserIcon, CrownIcon, ChartPieIcon, ThumbsUpIcon } from '../Analytics/componentes/icons';
+import UserEngagementView from '../Analytics/views/UserEngagementView';
+import ContentPerformanceView from '../Analytics/views/ContentPerformanceView';
+import LearningProgressView from '../Analytics/views/LearningProgressView';
+import UserRetentionView from '../Analytics/views/UserRetentionView';
 
-const data: AdminAnalytics[] = [
-  { month: 'Jan', activeUsers: 400, sessions: 240 },
-  { month: 'Feb', activeUsers: 420, sessions: 250 },
-  { month: 'Mar', activeUsers: 460, sessions: 280 },
-  { month: 'Apr', activeUsers: 480, sessions: 300 },
-  { month: 'May', activeUsers: 500, sessions: 320 },
-];
+type Tab = 'User Engagement' | 'Content Performance' | 'Learning Progress' | 'User Retention';
 
-const AdminAnalytics: React.FC = () => {
+const App: React.FC = () => {
+  const [activeTab, setActiveTab] = useState<Tab>('User Engagement');
+
+  const tabs: Tab[] = ['User Engagement', 'Content Performance', 'Learning Progress', 'User Retention'];
+
+  const renderActiveView = () => {
+    switch (activeTab) {
+      case 'User Engagement':
+        return <UserEngagementView />;
+      case 'Content Performance':
+        return <ContentPerformanceView />;
+      case 'Learning Progress':
+        return <LearningProgressView />;
+      case 'User Retention':
+        return <UserRetentionView />;
+      default:
+        return <UserEngagementView />;
+    }
+  };
+
+  const statCards = useMemo(() => [
+    { title: 'Daily Active Users', value: '1,520', icon: <ThumbsUpIcon />, iconBg: 'bg-orange-100', iconColor: 'text-orange-500' },
+    { title: 'Avg. Study Time', value: '22m', icon: <CrownIcon />, iconBg: 'bg-yellow-100', iconColor: 'text-yellow-500' },
+    { title: 'Content Completion', value: '74.2%', icon: <ChartPieIcon />, iconBg: 'bg-green-100', iconColor: 'text-green-500' },
+    { title: 'User Retention', value: '68.4%', icon: <UserIcon />, iconBg: 'bg-blue-100', iconColor: 'text-blue-500' },
+  ], []);
+
   return (
-    <div className="p-6">
-      <h1 className="text-2xl font-bold mb-4">Analytics</h1>
-      <p className="text-gray-600 mb-6">
-        Get insights into user engagement, learning activity, and growth.
-      </p>
+    <div className="min-h-screen bg-gray-50 text-gray-800 p-4 sm:p-6 lg:p-8">
+      <div className="max-w-7xl mx-auto">
+        <header className="mb-8">
+          <h1 className="text-3xl font-bold text-gray-900">Analytics</h1>
+          <p className="text-gray-500 mt-1">Welcome back! Here's what's happening with your platform today.</p>
+        </header>
 
-      <div className="bg-white p-6 rounded-lg shadow-sm">
-        <h2 className="text-lg font-semibold mb-4">Monthly Engagement</h2>
-        <ResponsiveContainer width="100%" height={300}>
-          <BarChart data={data}>
-            <XAxis dataKey="month" />
-            <YAxis />
-            <Tooltip />
-            <Bar dataKey="activeUsers" fill="#6366f1" />
-            <Bar dataKey="sessions" fill="#22c55e" />
-          </BarChart>
-        </ResponsiveContainer>
+        <main>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+            {statCards.map(card => (
+              <StatCard key={card.title} {...card} />
+            ))}
+          </div>
+
+          <div className="bg-white rounded-lg shadow-sm p-2 mb-8 inline-flex items-center space-x-1">
+            {tabs.map(tab => (
+              <TabButton
+                key={tab}
+                label={tab}
+                isActive={activeTab === tab}
+                onClick={() => setActiveTab(tab)}
+              />
+            ))}
+          </div>
+          
+          <div className="transition-all duration-300">
+            {renderActiveView()}
+          </div>
+        </main>
       </div>
     </div>
   );
 };
 
-export default AdminAnalytics;
+export default App;
