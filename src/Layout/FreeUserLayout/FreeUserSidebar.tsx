@@ -98,12 +98,12 @@ export const FreeUserSidebar: React.FC<SidebarProps> = ({
                                 key={item.path}
                                 to={isDisabled ? "#" : item.path}
                                 onClick={(e) => isDisabled && e.preventDefault()}
-                                className={`group flex items-center gap-3 mb-2 px-4 py-3 rounded-lg transition-all duration-200 
+                                className={`group flex font-semibold items-center gap-3 mb-2 px-4 py-3 rounded-lg transition-all duration-200 
                   ${isActive
                                         ? "bg-[#111827] text-white"
                                         : isDisabled
                                             ? "text-gray-400 cursor-not-allowed"
-                                            : "text-[#7E7E7E] hover:bg-[#111827] hover:text-white"
+                                            : "text-[#585858] hover:bg-[#111827] hover:text-white"
                                     }
                   ${isCollapsed ? "justify-center px-2" : ""}
                 `}

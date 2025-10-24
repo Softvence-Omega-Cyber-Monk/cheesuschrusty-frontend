@@ -33,7 +33,7 @@ const TopicCard: React.FC<TopicCardProps> = ({
       }
     >
       {/* Card content */}
-      <div className="bg-white p-5 rounded-xl shadow-sm border border-gray-200 flex flex-col cursor-pointer">
+      <div className="bg-white p-5 rounded-xl shadow-sm border border-gray-200 flex flex-col  ">
         <h3 className="text-lg font-bold text-gray-900">{title}</h3>
 
         <div className="flex justify-between text-sm mt-3 mb-4 text-gray-600">
