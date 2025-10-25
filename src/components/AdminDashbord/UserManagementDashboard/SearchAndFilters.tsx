@@ -34,7 +34,7 @@ const SearchAndFilters: React.FC<SearchAndFiltersProps> = ({
           />
         </div>
         <select
-          className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="px-4 py-2 border cursor-pointer border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           value={roleFilter}
           onChange={(e) => setRoleFilter(e.target.value as 'All Role' | 'Pro' | 'Free')}
         >
@@ -43,7 +43,7 @@ const SearchAndFilters: React.FC<SearchAndFiltersProps> = ({
           <option>Free</option>
         </select>
         <select
-          className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="px-4 py-2 border cursor-pointer border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           value={statusFilter}
           onChange={(e) => setStatusFilter(e.target.value as 'All Status' | 'Active' | 'Suspended')}
         >

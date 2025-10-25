@@ -5,21 +5,22 @@ import {
   Target,
   Brain,
   Flame,
-  Volume2,
-  CheckSquare,
-  Mic,
-  FileText,
+  
   Zap,
   Award,
-   
+
 } from "lucide-react";
- 
+
 import ContinueLearningCard from "./UserContinueLearningCard";
 import WeeklyProgressCard from "./UserWeeklyProgressCard";
 import StreakBadge from "./UserStreakBadge";
 import Header from "../../Header/Header";
 import sessionicon from "../../../assets/Dashbord//startsession.svg"
 import fireicon from "../../../assets/Dashbord//fireicon.svg"
+import reading from "../../../assets/Dashbord//bookopen.svg"
+import listening from "../../../assets/Dashbord//microhead.svg"
+import writing from "../../../assets/Dashbord//writing.svg"
+import speaking from "../../../assets/Dashbord//speaking.svg"
 import { UserStatCard } from "./UserStatCard";
 import { UserPracticeAreaCard } from "./UserPracticeAreaCard";
 import { UserAchievementsCard } from "./UserAchievementsCard";
@@ -46,10 +47,10 @@ export const UserOverview: React.FC = () => {
   const weeklyProgress = Math.round((stats.weeklyTime / stats.weeklyGoal) * 100);
 
   const practiceAreas = [
-    { name: "Reading", icon: FileText, iconColor: "text-blue-600", completed: 12, total: 16, completionText: "12 Lessons completed" },
-    { name: "Listening", icon: Volume2, iconColor: "text-orange-600", completed: 12, total: 16, completionText: "12 Lessons completed" },
-    { name: "Writing", icon: CheckSquare, iconColor: "text-green-600", completed: 12, total: 16, completionText: "12 Lessons completed" },
-    { name: "Speaking", icon: Mic, iconColor: "text-purple-600", completed: 12, total: 16, completionText: "12 Lessons completed" },
+    { name: "Reading", icon: reading, iconColor: "text-blue-600", completed: 12, total: 16, completionText: "12 Lessons completed" },
+    { name: "Listening", icon: listening, iconColor: "text-orange-600", completed: 12, total: 16, completionText: "12 Lessons completed" },
+    { name: "Writing", icon: writing, iconColor: "text-green-600", completed: 12, total: 16, completionText: "12 Lessons completed" },
+    { name: "Speaking", icon: speaking, iconColor: "text-purple-600", completed: 12, total: 16, completionText: "12 Lessons completed" },
   ];
 
   const recentAchievements = [
@@ -73,96 +74,97 @@ export const UserOverview: React.FC = () => {
 
   return (
     <div className="p-6    mx-auto font-sans   min-h-screen">
-    <Header title={"Welcome back, Marco! 👋"} subtitle={"Ready to continue your Italian learning journey?"}/>
-  <div className=" flex flex-col mt-8 gap-10">
-    <div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
-            <UserStatCard
-              title="Minutes Studied"
-              icon={Clock}
-              iconColor="text-blue-500"
-              value={stats.minutesStudied}
-              total={stats.totalMinutes}
-              progressBarColor="bg-[#0B5FFF]"
-            />
-            <UserStatCard
-              title="Lessons Completed"
-              icon={BookOpen}
-              iconColor="text-green-500"
-              value={stats.lessonsCompleted}
-              total={stats.totalLessons}
-              progressBarColor="bg-[#0B5FFF]"
-            />
-            <UserStatCard
-              title="Accuracy Rate"
-              icon={Target}
-              iconColor="text-red-500"
-              value={stats.accuracyRate}
-              progressBarColor="bg-[#0B5FFF]"
-              unit="%"
-            />
-            <UserStatCard
-              title="Words Learned"
-              icon={Brain}
-              iconColor="text-orange-500"
-              value={stats.wordsLearned}
-              total={stats.totalWords}
-              progressBarColor="bg-[#0B5FFF]"
-            />
-          </div>
-      <div className="grid grid-cols-1 md:grid-cols-12 gap-6 ">
-        {/* Left Column */}
-        <div className="md:col-span-8  space-y-10">
-        
-
-          <ContinueLearningCard
-            title="Continue Learning"
-            goalText={`You're ${minutesRemaining} minutes away from your daily goal`}
-            buttonText="Start Practice Session"
-            img={sessionicon}
-            onButtonClick={handleStartSession}
+      <Header title={"Welcome back, Marco! 👋"} subtitle={"Ready to continue your Italian learning journey?"} />
+      <div className=" flex flex-col mt-8 gap-10">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
+          <UserStatCard
+            title="Minutes Studied"
+            icon={Clock}
+            iconColor="text-blue-500"
+            value={stats.minutesStudied}
+            total={stats.totalMinutes}
+            progressBarColor="bg-[#0B5FFF]"
           />
+          <UserStatCard
+            title="Lessons Completed"
+            icon={BookOpen}
+            iconColor="text-green-500"
+            value={stats.lessonsCompleted}
+            total={stats.totalLessons}
+            progressBarColor="bg-[#0B5FFF]"
+          />
+          <UserStatCard
+            title="Accuracy Rate"
+            icon={Target}
+            iconColor="text-red-500"
+            value={stats.accuracyRate}
+            progressBarColor="bg-[#0B5FFF]"
+            unit="%"
+          />
+          <UserStatCard
+            title="Words Learned"
+            icon={Brain}
+            iconColor="text-orange-500"
+            value={stats.wordsLearned}
+            total={stats.totalWords}
+            progressBarColor="bg-[#0B5FFF]"
+          />
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-6 ">
+          {/* Left Column */}
+          <div className="md:col-span-8  space-y-10">
 
-          <div className="bg-white rounded-xl shadow-md p-8">
-            <h2 className="text-xl font-semibold text-gray-900 mb-4">
-              Practice Areas
-            </h2>
-            <p className="text-gray-600 mb-6">
-              Track your progress across different skills
-            </p>
-            <div className="grid grid-cols-2 gap-6">
-              {practiceAreas.map((area) => (
-                <UserPracticeAreaCard
-                  key={area.name}
-                  {...area}
-                  progress={Math.round((area.completed / area.total) * 100)}
-                />
-              ))}
+
+            <ContinueLearningCard
+              title="Continue Learning"
+              goalText={`You're ${minutesRemaining} minutes away from your daily goal`}
+              buttonText="Start Practice Session"
+              img={sessionicon}
+              onButtonClick={handleStartSession}
+            />
+
+            <div className="bg-white 
+dark:bg-[linear-gradient(180deg,#34495E_0%,#2C3E50_100%)] rounded-xl shadow-md p-8">
+              <h2 className="text-xl font-semibold dark:text-gray-200 text-gray-900 mb-4">
+                Practice Areas
+              </h2>
+              <p className="text-gray-600 mb-6 dark:text-gray-200">
+                Track your progress across different skills
+              </p>
+              <div className="grid grid-cols-2 gap-6">
+                {practiceAreas.map((area) => (
+                  <UserPracticeAreaCard
+                    key={area.name}
+                    {...area}
+                    progress={Math.round((area.completed / area.total) * 100)}
+                  />
+                ))}
+              </div>
             </div>
           </div>
-        </div>
 
-        {/* Right Column */}
-        <div className="md:col-span-4 space-y-6">
-          <StreakBadge
-            streakCount={stats.streak}
-            streakUnit="Day"
-            fireicon={fireicon}
-            message="Keep the fire burning!"
-          />
+          {/* Right Column */}
+          <div className="md:col-span-4 space-y-6">
+            <StreakBadge
+              streakCount={stats.streak}
+              streakUnit="Day"
+              fireicon={fireicon}
+              message="Keep the fire burning!"
+            />
 
-          <WeeklyProgressCard
-            title="This Week"
-            subtitle="Your learning progress"
-            progress={weeklyProgress}
-            stats={weeklyStats}
-            buttonText="View Detailed Analytics"
-            onButtonClick={handleViewAnalytics}
-          />
+            <WeeklyProgressCard
+              title="This Week"
+              subtitle="Your learning progress"
+              progress={weeklyProgress}
+              stats={weeklyStats}
+              buttonText="View Detailed Analytics"
+              onButtonClick={handleViewAnalytics}
+            />
 
-          <UserAchievementsCard achievements={recentAchievements} />
+            <UserAchievementsCard achievements={recentAchievements} />
+          </div>
         </div>
       </div>
-  </div>
     </div>
   );
 };
@@ -176,4 +178,3 @@ export const UserOverview: React.FC = () => {
 
 
 
- 

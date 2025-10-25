@@ -53,7 +53,7 @@ const AdminRecentActivity: React.FC = () => (
       {activities.map((activity, idx) => (
         <div key={idx} className="flex gap-3">
           <div
-            className={`w-8 h-8 rounded flex items-center justify-center flex-shrink-0 ${
+            className={`w-8 h-8 rounded flex items-center justify-center   ${
               activity.type === "user" ? "bg-yellow-100" : "bg-purple-100"
             }`} 
           >

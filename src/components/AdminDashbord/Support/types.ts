@@ -1,44 +1,37 @@
-export enum Status {
-  Open = 'Open',
-  InProgress = 'In Progress',
-  Resolved = 'Resolved',
-}
-
-export enum Priority {
-  Low = 'Low',
-  Medium = 'Medium',
-  High = 'High',
-}
-
-export interface User {
-  name: string;
-  email: string;
-  avatar: string;
-}
-
-export interface Message {
-  id: number;
-  sender: string;
-  role: string;
-  timestamp: string;
-  content: string;
-  attachment?: string;
-}
-
-export interface TicketConversation {
-  ticketId: string;
-  messages: Message[];
-}
-
 export interface Ticket {
   id: string;
   subject: string;
-  user: User;
-  priority: Priority;
-  status: Status;
-  category: string;
+  user: string;
+  email: string;
+  priority: 'High' | 'Medium' | 'Low';
+  category: 'Billing' | 'Technical' | 'Account';
   lastUpdate: string;
   responses: number;
-  created: string;
-  assignee: string;
+  status?: string;
+  created?: string;
+  assignedTo?: string;
+  conversation?: Message[];
+}
+
+export interface Message {
+  id: string;
+  sender: string;
+  content: string;
+  time: string;
+  isSupport?: boolean;
+}
+
+export interface TeamMember {
+  id: string;
+  name: string;
+  role: string;
+  online: boolean;
+}
+
+export interface KnowledgeArticle {
+  id: string;
+  title: string;
+  category: string;
+  lastUpdate: string;
+  views: number;
 }

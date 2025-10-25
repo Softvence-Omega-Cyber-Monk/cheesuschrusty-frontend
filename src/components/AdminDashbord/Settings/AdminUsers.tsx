@@ -20,8 +20,8 @@ const UserCard: React.FC<{ user: AdminUser }> = ({ user }) => (
     </div>
     <div className="flex items-center space-x-4 w-full md:w-auto">
       <p className="text-sm text-slate-500 ">Last active: {user.lastActive}</p>
-      <button className="text-sm font-medium text-slate-600 bg-white hover:bg-slate-50 border border-slate-300 rounded-md px-3 py-1.5 transition">Edit</button>
-      <button className="text-sm font-medium text-slate-600 bg-white hover:bg-slate-50 border border-slate-300 rounded-md px-3 py-1.5 transition">Remove</button>
+      <button className="text-sm font-medium cursor-pointer text-slate-600 bg-white hover:bg-slate-50 border border-slate-300 rounded-md px-3 py-1.5 transition">Edit</button>
+      <button className="text-sm font-medium cursor-pointer text-slate-600 bg-white hover:bg-slate-50 border border-slate-300 rounded-md px-3 py-1.5 transition">Remove</button>
     </div>
   </div>
 );

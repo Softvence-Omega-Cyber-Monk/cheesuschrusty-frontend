@@ -26,9 +26,10 @@ import UnlockProCard from "@/components/FreeUserDashbord/Overview/UnlockProCard"
  
 const StatCard: React.FC<any> = ({ title, value, icon }) => {
   return (
-    <div className="bg-white p-4 rounded-xl shadow-md flex flex-col justify-between">
+    <div className="bg-white dark:dark:bg-[linear-gradient(180deg,#34495E_0%,#2C3E50_100%)]
+ p-4 rounded-xl shadow-md flex flex-col justify-between">
       <div className="flex justify-between items-start mb-2">
-        <p className="text-base text-[#A7A7A7]">{title}</p>
+        <p className="text-base text-[#A7A7A7] dark:text-gray-900">{title}</p>
         <span className="text-indigo-500 ">{icon}</span>
       </div>
       <p className="text-3xl font-semibold text-gray-800">{value}</p>
@@ -45,8 +46,8 @@ const DailyGoalProgress: React.FC<any> = ({ currentMinutes, totalMinutes, timeLe
                 <div className="flex gap-3 items-center">
                      <img  className="w-8 h-8" src={tatgeticon} alt="" />
                     <div>
-                        <p className="text-base font-semibold text-[#111827]">Daily Goal Progress</p>
-                        <p className="text-sm text-[#585858]">{currentMinutes} of {totalMinutes} minutes completed</p>
+                        <p className="text-base font-semibold text-[#111827] dark:text-gray-200">Daily Goal Progress</p>
+                        <p className="text-sm text-[#585858] dark:text-gray-50">{currentMinutes} of {totalMinutes} minutes completed</p>
                     </div>
                 </div>
                 <div className="text-right">
@@ -71,7 +72,7 @@ const { role } = userData ? JSON.parse(userData) : {};
 console.log(role)
 
   return (
-  <div className={`${bgColor} rounded-xl p-4 shadow-sm`}>
+  <div className={`${bgColor}  rounded-xl p-4 shadow-sm`}>
     <div className="flex items-start justify-between mb-4">
       <div className="flex items-center gap-3">
         <div className={`${iconBg} rounded-lg p-3 flex items-center justify-center`}>
@@ -210,8 +211,8 @@ console.log(role)
     <div className="min-h-screen   p-6">
       <div className="mx-auto  "> {/* Added max-width for better centering */}
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">Practice Italian</h1>
-          <p className="text-gray-600">Choose a skill to practice and improve your Italian proficiency</p>
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-200 mb-2">Practice Italian</h1>
+          <p className="text-gray-600 dark:text-gray-100">Choose a skill to practice and improve your Italian proficiency</p>
         </div>
 
         {/* 1. Daily Goal Progress - Passing props */}

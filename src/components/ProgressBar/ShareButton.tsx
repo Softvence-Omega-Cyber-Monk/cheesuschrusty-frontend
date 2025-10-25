@@ -59,31 +59,31 @@ export const ShareButton: React.FC = () => {
         <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-xl shadow-lg z-50 p-2 animate-fade-in">
           <button
             onClick={() => handleShare("native")}
-            className="w-full flex items-center gap-2 px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-md"
+            className="w-full flex cursor-pointer items-center gap-2 px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-md"
           >
             <Share2 className="w-4 h-4 text-blue-500" /> Native Share
           </button>
           <button
             onClick={() => handleShare("copy")}
-            className="w-full flex items-center gap-2 px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-md"
+            className="w-full flex cursor-pointer items-center gap-2 px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-md"
           >
             <Link className="w-4 h-4 text-gray-500" /> Copy Link
           </button>
           <button
             onClick={() => handleShare("twitter")}
-            className="w-full flex items-center gap-2 px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-md"
+            className="w-full flex cursor-pointer items-center gap-2 px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-md"
           >
             <Twitter className="w-4 h-4 text-sky-500" /> Twitter
           </button>
           <button
             onClick={() => handleShare("facebook")}
-            className="w-full flex items-center gap-2 px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-md"
+            className="w-full flex cursor-pointer items-center gap-2 px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-md"
           >
             <Facebook className="w-4 h-4 text-blue-600" /> Facebook
           </button>
           <button
             onClick={() => handleShare("whatsapp")}
-            className="w-full flex items-center gap-2 px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-md"
+            className="w-full flex cursor-pointer items-center gap-2 px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-md"
           >
             <MessageCircle className="w-4 h-4 text-green-500" /> WhatsApp
           </button>

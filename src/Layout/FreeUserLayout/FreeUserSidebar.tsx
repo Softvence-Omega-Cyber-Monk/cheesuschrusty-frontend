@@ -127,7 +127,7 @@ export const FreeUserSidebar: React.FC<SidebarProps> = ({
                 <div className="hidden lg:block border-t border-[#C6C8CB] p-3">
                     <button
                         onClick={() => setIsCollapsed(!isCollapsed)}
-                        className="flex items-center justify-center w-full gap-2 px-3 py-2 rounded-lg bg-white text-gray-700 hover:bg-gray-100 transition-all duration-200"
+                        className="flex items-center cursor-pointer justify-center w-full gap-2 px-3 py-2 rounded-lg bg-white text-gray-700 hover:bg-gray-100 transition-all duration-200"
                     >
                         {isCollapsed ? (
                             <MdOutlineKeyboardDoubleArrowRight className="text-3xl" />

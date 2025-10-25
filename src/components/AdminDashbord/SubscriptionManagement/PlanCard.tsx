@@ -34,7 +34,7 @@ const PlanCard: React.FC<PlanCardProps> = ({ plan }) => {
       </div>
 
       <div className="mt-8">
-        <button className="w-full sm:w-auto px-6 py-2 border border-gray-300 rounded-lg text-gray-700 font-semibold hover:bg-gray-100 transition-colors">
+        <button className="w-full cursor-pointer sm:w-auto px-6 py-2 border border-gray-300 rounded-lg text-gray-700 font-semibold hover:bg-gray-100 transition-colors">
           Edit Plan
         </button>
       </div>
