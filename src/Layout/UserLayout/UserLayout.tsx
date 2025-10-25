@@ -11,7 +11,7 @@ alert("clicked")
 
   }
   return (
-    <div className="flex h-screen  bg-[#F5F5F5]">
+    <div className="flex h-screen  bg-[#F5F5F5] dark:bg-[#191919]">
       <UserSidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
 
       <div className="flex-1 flex flex-col overflow-hidden relative">
@@ -19,7 +19,7 @@ alert("clicked")
           <div className="p-2">
             <button
               onClick={() => setSidebarOpen(true)}
-              className="w-8 h-8 bg-gray-900 text-white cursor-pointer rounded-full cursor-pointer flex items-center justify-center"
+              className="w-8 h-8 bg-gray-900 text-white cursor-pointer rounded-full   flex items-center justify-center"
             >
               ☰
             </button>

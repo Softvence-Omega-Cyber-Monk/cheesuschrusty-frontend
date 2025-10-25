@@ -36,7 +36,7 @@ export const UserSidebar: React.FC<SidebarProps> = ({
 
   return (
     <div
-      className={`relative flex flex-col bg-[#EBEBEB]   border-r border-[#C6C8CB] transition-all duration-300 ease-in-out ${
+      className={`relative flex flex-col bg-[#EBEBEB]  dark:border-r-[#536580]    border-r border-r-[#b9b6b6] transition-all duration-300 ease-in-out  dark:bg-gray-900 ${
         sidebarOpen ? (isCollapsed ? "w-20" : "w-70") : "w-0 overflow-hidden"
       }`}
     >
@@ -56,7 +56,7 @@ export const UserSidebar: React.FC<SidebarProps> = ({
       {sidebarOpen && (
       <div className="px-3">
           <div
-          className={`flex items-center gap-3 border-b border-b-[#C6C8CB] transition-all duration-300 ${
+          className={`flex items-center gap-3 border-b dark:border-b-[#536580] border-b-[#b9b6b6] transition-all duration-300 ${
             isCollapsed ? "justify-center px-2 py-5" : "px-6 py-6"
           }`}
         >
@@ -66,7 +66,7 @@ export const UserSidebar: React.FC<SidebarProps> = ({
             className={`transition-all duration-300 ${isCollapsed ? "w-10" : "w-11"}`}
           />
           {!isCollapsed && (
-            <h1 className="font-bold text-2xl text-[#111827]">B1 Italian</h1>
+            <h1 className="font-bold text-2xl text-[#111827] dark:text-gray-200">B1 Italian</h1>
           )}
         </div>
       </div>
@@ -81,10 +81,10 @@ export const UserSidebar: React.FC<SidebarProps> = ({
               <Link
                 key={item.path}
                 to={item.path}
-                className={`group flex font-semibold  items-center gap-3 mb-2 px-4 py-3 rounded-lg transition-all duration-200 ${
+                className={`group flex font-semibold   items-center gap-3 mb-2 px-4 py-3 rounded-lg transition-all duration-200 ${
                   isActive
-                    ? "bg-[#111827] text-white"
-                    : "text-[#5c5b5b] hover:bg-[#111827] hover:text-white"
+                    ? "bg-[#111827] dark:text-[#111827] dark:bg-[#AFC7FF] text-white"
+                    : "text-[#686565] dark:text-gray-200  hover:bg-[#111827] hover:text-white"
                 } ${isCollapsed ? "justify-center px-2" : ""}`}
               >
                 <img

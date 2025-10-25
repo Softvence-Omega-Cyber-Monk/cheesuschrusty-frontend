@@ -106,10 +106,10 @@ const UserReadingPractice: React.FC = () => {
         <div className="  mx-auto px-6 py-4">
           <button
             onClick={() => navigate("/user/practice")}
-            className="flex border p-3 cursor-pointer rounded-2xl items-center gap-2 text-gray-700 hover:text-gray-900 mb-4"
+            className="flex border p-3 cursor-pointer rounded-2xl dark:text-gray-200 items-center gap-2 text-gray-700 hover:text-gray-900 mb-4"
           >
             <ChevronLeft className="w-6 h-6" />
-            <span className="text-base font-semibold">Back To Practice</span>
+            <span className="text-base font-semibold ">Back To Practice</span>
           </button>
 
 <Header  title="Reading Practice" subtitle="Improve your Italian reading comprehension" />

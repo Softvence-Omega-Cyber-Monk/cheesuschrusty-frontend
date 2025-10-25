@@ -23,7 +23,7 @@ const AdminStatsCards: React.FC = () => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6">
       {stats.map((item, idx) => (
-<div key={idx} className="bg-white p-5 rounded-xl shadow-xl border border-gray-100">
+<div key={idx} className="bg-white dark:text-gray-200 p-5 rounded-xl shadow-xl border border-gray-100">
           <div className="flex items-center justify-between mb-2">
             <span className="text-gray-500 font-medium text-base">{item.label}</span>
             <img

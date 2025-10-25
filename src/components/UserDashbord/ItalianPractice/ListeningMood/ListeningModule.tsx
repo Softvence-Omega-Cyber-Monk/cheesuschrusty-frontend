@@ -37,13 +37,13 @@ const ListeningModule: React.FC = () => {
         {currentStep !== 'complete' && (
           <>
             {/* Header */}
-            <button
-              onClick={() => navigate("/user/practice")}
-              className="flex items-center gap-2 text-gray-700 cursor-pointer hover:text-gray-900 mb-4"
-            >
-              <ChevronLeft className="w-4 h-4" />
-              <span className="text-sm">Back To Practice</span>
-            </button>
+             <button
+            onClick={() => navigate("/user/practice")}
+            className="flex border p-3 cursor-pointer rounded-2xl   items-center gap-2 text-gray-700 hover:text-gray-900 mb-4"
+          >
+            <ChevronLeft className="w-6 h-6" />
+            <span className="text-base font-semibold ">Back To Practice</span>
+          </button>
 
             {/* Title */}
             <div className="mb-8">

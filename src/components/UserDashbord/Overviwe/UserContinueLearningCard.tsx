@@ -23,15 +23,15 @@ const UserContinueLearningCard: React.FC<ContinueLearningCardProps> = ({
   onButtonClick,img
 }) => {
   return (
-    <div className=" p-8 bg-white border border-[#BBD2FF] rounded-xl shadow-lg flex items-center justify-between  mx-auto bg-[linear-gradient(180deg,rgba(202,210,244,0.10)_0%,rgba(102,126,234,0.10)_100%)] "  >
+<div className="p-8   border border-[#BBD2FF] dark:bg-[linear-gradient(180deg,rgba(202,210,244,0.10)_0%,rgba(102,126,234,0.10)_100%)] rounded-xl shadow-lg flex items-center justify-between mx-auto">
       {/* Content Section (Text and Button) */}
       <div className="flex flex-col">
         {/* Title */}
-        <h2 className="text-2xl font-bold text-[#333] mb-2">
+        <h2 className="text-2xl dark:text-gray-200 font-bold text-[#333] mb-2">
           {title}
         </h2>
         {/* Goal/Progress Text */}
-        <p className="text-xl text-[#585858] mb-4">
+        <p className="text-xl text-[#585858] dark:text-gray-100 mb-4">
           {goalText}
         </p>
         {/* Action Button */}

@@ -7,8 +7,8 @@ interface StatCardProps {
 }
 
 const StatCard: React.FC<StatCardProps> = ({ title, value, icon }) => {
-  return (
-    <div className="bg-white p-6 rounded-xl shadow-sm flex justify-between items-center">
+  return ( 
+    <div className="bg-white     p-6 rounded-xl shadow-sm flex justify-between items-start">
       <div>
         <p className="text-sm font-medium text-slate-500">{title}</p>
         <p className="text-3xl font-bold text-slate-900 mt-1">{value}</p>
