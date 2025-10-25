@@ -76,7 +76,7 @@ export const UserOverview: React.FC = () => {
     <div className="p-6    mx-auto font-sans   min-h-screen">
       <Header title={"Welcome back, Marco! 👋"} subtitle={"Ready to continue your Italian learning journey?"} />
       <div className=" flex flex-col mt-8 gap-10">
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
+        <div className="grid  sm:grid-cols-4 gap-6">
           <UserStatCard
             title="Minutes Studied"
             icon={Clock}
@@ -131,7 +131,7 @@ dark:bg-[linear-gradient(180deg,#34495E_0%,#2C3E50_100%)] rounded-xl shadow-md p
               <p className="text-gray-600 mb-6 dark:text-gray-200">
                 Track your progress across different skills
               </p>
-              <div className="grid grid-cols-2 gap-6">
+              <div className="grid md:grid-cols-2 gap-6">
                 {practiceAreas.map((area) => (
                   <UserPracticeAreaCard
                     key={area.name}

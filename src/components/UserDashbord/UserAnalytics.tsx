@@ -210,7 +210,7 @@ export const UserAnalytics: React.FC = () => {
             <p className="text-gray-600 mb-8">Track your progress and achievements in Italian learning</p>
 
             {/* --- TOP SUMMARY CARDS --- */}
-            <div className="grid grid-cols-4 gap-4 mb-10">
+            <div className="grid md:grid-cols-4 gap-4 mb-10">
                 <SummaryCard 
                     title="This Week" 
                     value="175m" 
@@ -239,10 +239,10 @@ export const UserAnalytics: React.FC = () => {
             </div>
             {/* ------------------------- */}
 
-            <div className="grid grid-cols-12 gap-6">
+            <div className="grid md:grid-cols-12 gap-6">
                 
                 {/* --- LEFT COLUMN (Weekly Performance & Skill Progress) --- */}
-                <div className="col-span-8 space-y-6">
+                <div className="col-span-8 space-y-6 ">
                     
                     {/* Weekly Performance */}
                     <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
@@ -272,7 +272,7 @@ export const UserAnalytics: React.FC = () => {
                         <p className="text-gray-600 text-sm mb-6">
                             Your improvement in each skill area
                         </p>
-                        <div className="grid grid-cols-2 gap-4">
+                        <div className="grid md:grid-cols-2 gap-4">
                             <SkillProgressCard
                                 skill="Reading"
                                 icon={<BookA className="w-6 h-6 text-white" />}
@@ -310,10 +310,10 @@ export const UserAnalytics: React.FC = () => {
                 </div>
 
                 {/* --- RIGHT COLUMN (Achievements & Sessions) --- */}
-                <div className="col-span-4 space-y-6">
+                <div className="col-span-4 space-y- l">
                     
                     {/* Recent Achievements */}
-                    <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+                    <div className="bg-white p-6 rounded-xl  shadow-sm border border-gray-200">
                         <h2 className="text-xl font-bold text-gray-900 mb-4">
                             Recent Achievements
                         </h2>

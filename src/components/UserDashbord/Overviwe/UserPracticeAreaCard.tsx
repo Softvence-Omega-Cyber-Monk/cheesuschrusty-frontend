@@ -23,7 +23,7 @@ export const UserPracticeAreaCard: React.FC<PracticeAreaCardProps> = ({
       <div className="flex items-center gap-4 mb-6">
         <div className={`p-3 rounded-xl ${iconColor} bg-opacity-10`}>
           {
-            typeof Icon === 'string' ? <img className='w-12' src={Icon} alt={name} /> : <Icon className="w-6 h-6 " />
+            typeof Icon === 'string' ? <img className='w-12 bg-gray-300 rounded-4xl' src={Icon} alt={name} /> : <Icon className="w-6 h-6  " />
           }
 
         </div>

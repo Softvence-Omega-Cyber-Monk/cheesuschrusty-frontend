@@ -78,22 +78,53 @@ export const UserSidebar: React.FC<SidebarProps> = ({
           {menuItems.map((item) => {
             const isActive = location.pathname === item.path;
             return (
-              <Link
-                key={item.path}
-                to={item.path}
-                className={`group flex font-semibold   items-center gap-3 mb-2 px-4 py-3 rounded-lg transition-all duration-200 ${
-                  isActive
-                    ? "bg-[#111827] dark:text-[#111827] dark:bg-[#AFC7FF] text-white"
-                    : "text-[#686565] dark:text-gray-200  hover:bg-[#111827] hover:text-white"
-                } ${isCollapsed ? "justify-center px-2" : ""}`}
-              >
-                <img
-                  src={item.icon}
-                  alt={item.label}
-                  className="w-6 h-6 transition-transform duration-200 group-hover:scale-110"
-                />
-                {!isCollapsed && <span>{item.label}</span>}
-              </Link>
+              // <Link
+              //   key={item.path}
+              //   to={item.path}
+              //   className={`group flex font-semibold   items-center gap-3 mb-2 px-4 py-3 rounded-lg transition-all duration-200 ${
+              //     isActive
+              //       ? "bg-[#111827] dark:text-[#111827] dark:bg-[#AFC7FF] text-white"
+              //       : "text-[#686565] dark:text-gray-200  hover:bg-[#111827] hover:text-white"
+              //   } ${isCollapsed ? "justify-center px-2" : ""}`}
+              // >
+              //   <img
+              //     src={item.icon}
+              //     alt={item.label}
+              //     className="w-6 h-6 transition-transform duration-200 group-hover:scale-110"
+              //   />
+              //   {!isCollapsed && <span>{item.label}</span>}
+              // </Link>
+
+
+
+
+<Link
+  key={item.path}
+  to={item.path}
+  className={`group flex font-semibold items-center gap-3 mb-2 px-4 py-3 rounded-lg transition-all duration-200 ${
+    isActive
+      ? "bg-[#111827] dark:text-[#111827] dark:bg-[#AFC7FF] text-white"
+      : "text-[#686565] dark:text-gray-200  hover:bg-[#111827] hover:text-white"
+  } ${isCollapsed ? "justify-center px-2" : ""}`}
+  onClick={() => {
+    if (window.innerWidth < 1024) { // less than lg
+      setSidebarOpen(false);
+    }
+  }}
+>
+  <img
+    src={item.icon}
+    alt={item.label}
+    className="w-6 h-6 transition-transform duration-200 group-hover:scale-110"
+  />
+  {!isCollapsed && <span>{item.label}</span>}
+</Link>
+
+
+
+
+
+
             );
           })}
         </nav>
