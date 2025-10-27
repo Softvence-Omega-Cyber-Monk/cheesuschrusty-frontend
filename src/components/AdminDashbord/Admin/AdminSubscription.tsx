@@ -48,16 +48,16 @@ function AdminSubscription() {
   };
 
   return (
-    <div className="  min-h-screen font-sans text-gray-800">
+    <div className="  min-h-screen font-sans text-gray-800 dark:bg-gray-900 dark:text-gray-200">
       <div className="container mx-auto  pt-6  ">
         <header className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8">
           <div>
-            <h1 className="text-3xl font-bold text-gray-900">Content Management</h1>
-            <p className="text-gray-600 mt-1">Welcome back! Here's what's happening with your platform today.</p>
+            <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-200">Content Management</h1>
+            <p className="text-gray-600 mt-1 dark:text-gray-400">Welcome back! Here's what's happening with your platform today.</p>
           </div>
           <button
             onClick={() => setIsModalOpen(true)}
-            className="mt-4 sm:mt-0 flex items-center cursor-pointer justify-center px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 transition-colors duration-200"
+            className="mt-4 sm:mt-0 flex items-center cursor-pointer justify-center px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 transition-colors duration-200 dark:bg-blue-700 dark:hover:bg-blue-600"
           >
             <PlusIcon />
             Add New Plan

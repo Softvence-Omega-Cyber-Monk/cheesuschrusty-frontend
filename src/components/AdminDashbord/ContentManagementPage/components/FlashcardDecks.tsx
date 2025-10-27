@@ -50,8 +50,8 @@ const FlashcardDecks: React.FC = () => {
     <div>
       <div className="flex justify-between items-center mb-4">
         <div>
-          <h2 className="text-2xl font-bold text-slate-900">Flashcard Decks</h2>
-          <p className="text-slate-500 mt-1">Manage your Italian learning flashcard collections</p>
+          <h2 className="text-2xl font-bold text-slate-900 dark:text-gray-200">Flashcard Decks</h2>
+          <p className="text-slate-500 mt-1 dark:text-gray-400">Manage your Italian learning flashcard collections</p>
         </div>
         <button onClick={() => setIsModalOpen(true)} className="bg-blue-600 cursor-pointer text-white font-semibold px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors flex items-center gap-2 shadow-sm hover:shadow-md">
           <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clipRule="evenodd" /></svg>

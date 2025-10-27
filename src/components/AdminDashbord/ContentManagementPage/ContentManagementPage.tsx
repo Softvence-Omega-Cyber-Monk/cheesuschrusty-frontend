@@ -26,17 +26,17 @@ const ContentManagementPage: React.FC = () => {
   const getTabClass = (tab: Tab) => {
     const baseClasses = 'py-2 px-4 font-semibold transition-all duration-200 ease-in-out rounded-lg';
     if (activeTab === tab) {
-      return `${baseClasses} bg-white text-blue-600 shadow-md`;
+      return `${baseClasses} bg-white text-blue-600 shadow-md dark:bg-blue-600 dark:text-white`;
     }
-    return `${baseClasses} text-slate-600 hover:text-slate-800`;
+    return `${baseClasses} text-slate-600 hover:text-slate-800 dark:text-gray-400 dark:hover:text-gray-200`;
   };
 
   return (
-    <div className="min-h-screen   text-slate-800 p-4 sm:p-6 lg:p-8">
+    <div className="min-h-screen   text-slate-800 p-4 sm:p-6 lg:p-8 dark:bg-gray-900 dark:text-gray-200">
       <div className="  mx-auto">
         <header className="mb-8">
-          <h1 className="text-3xl font-bold text-slate-900">Content Management</h1>
-          <p className="text-slate-500 mt-1">Welcome back! Here's what's happening with your platform today.</p>
+          <h1 className="text-3xl font-bold text-slate-900 dark:text-gray-200">Content Management </h1>
+          <p className="text-slate-500 mt-1 dark:text-gray-400">Welcome back! Here's what's happening with your platform today.</p>
         </header>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
@@ -47,7 +47,7 @@ const ContentManagementPage: React.FC = () => {
         </div>
 
         <main>
-          <div className="bg-slate-200/60 p-1 rounded-xl inline-flex items-center mb-6">
+          <div className="bg-slate-200/60 p-1 rounded-xl inline-flex items-center mb-6 dark:bg-gray-700">
             <button  onClick={() => setActiveTab('flashcards')} className={` cursor-pointer  ${getTabClass('flashcards')}`}>
               Flashcard Decks
             </button>

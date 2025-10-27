@@ -6,7 +6,7 @@ import SubscriptionBreakdown from './AdminSubscriptionBreakdown';
 import Header from '@/components/Header/Header';
 
 const AdminOverview: React.FC = () => (
-  <div className="p-6 flex flex-col gap-10">
+  <div className="p-6 flex flex-col gap-10 dark:text-gray-200 dark:bg-gray-900">
 
     <Header title={"Admin Dashboard"} subtitle={"   Welcome back! Here's what's happening with your platform today."} />
 

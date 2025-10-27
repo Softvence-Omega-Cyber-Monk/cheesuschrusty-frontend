@@ -25,20 +25,20 @@ const flashcardData = [
 const LearningProgressView: React.FC = () => {
   return (
     <div className="space-y-8">
-      <div className="bg-white p-6 rounded-xl shadow-sm">
-        <h3 className="text-lg font-semibold text-gray-800">Study Time Distribution</h3>
-        <p className="text-sm text-gray-500 mb-6">Average daily study time across user segments</p>
+      <div className="bg-white p-6 rounded-xl shadow-sm dark:bg-gray-800">
+        <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200">Study Time Distribution</h3>
+        <p className="text-sm text-gray-500 mb-6 dark:text-gray-400">Average daily study time across user segments</p>
         <div style={{ width: '100%', height: 300 }}>
           <ResponsiveContainer>
             <LineChart data={studyTimeData}>
               <CartesianGrid strokeDasharray="3 3" vertical={false} />
-              <XAxis dataKey="name" tick={{ fontSize: 12 }} stroke="#9ca3af" />
-              <YAxis tick={{ fontSize: 12 }} stroke="#9ca3af" />
+              <YAxis tick={{ fontSize: 12, fill: '#A0AEC0' }} stroke="#A0AEC0" />
               <Tooltip
                 contentStyle={{
-                  backgroundColor: 'white',
-                  border: '1px solid #e5e7eb',
-                  borderRadius: '0.5rem'
+                  backgroundColor: '#374151',
+                  border: '1px solid #4b5563',
+                  borderRadius: '0.5rem',
+                  color: '#e5e7eb'
                 }}
               />
               <Line type="monotone" dataKey="time" stroke="#8b5cf6" strokeWidth={2} dot={{ r: 4, fill: '#8b5cf6' }} activeDot={{ r: 6 }} />
@@ -47,9 +47,9 @@ const LearningProgressView: React.FC = () => {
         </div>
       </div>
       
-      <div className="bg-white p-6 rounded-xl shadow-sm">
-        <h3 className="text-lg font-semibold text-gray-800">Flashcard Review Trends</h3>
-        <p className="text-sm text-gray-500 mb-6">Daily flashcard reviews and learning activity</p>
+      <div className="bg-white p-6 rounded-xl shadow-sm dark:bg-gray-800">
+        <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200">Flashcard Review Trends</h3>
+        <p className="text-sm text-gray-500 mb-6 dark:text-gray-400">Daily flashcard reviews and learning activity</p>
         <div style={{ width: '100%', height: 300 }}>
             <ResponsiveContainer>
                 <AreaChart data={flashcardData}>
@@ -60,12 +60,13 @@ const LearningProgressView: React.FC = () => {
                         </linearGradient>
                     </defs>
                     <CartesianGrid strokeDasharray="3 3" vertical={false} />
-                    <XAxis dataKey="name" tick={{ fontSize: 12 }} stroke="#9ca3af" />
-                    <YAxis tick={{ fontSize: 12 }} stroke="#9ca3af" />
+                    <XAxis dataKey="name" tick={{ fontSize: 12, fill: '#A0AEC0' }} stroke="#A0AEC0" />
+                    <YAxis tick={{ fontSize: 12, fill: '#A0AEC0' }} stroke="#A0AEC0" />
                     <Tooltip contentStyle={{
-                        backgroundColor: 'white',
-                        border: '1px solid #e5e7eb',
-                        borderRadius: '0.5rem'
+                        backgroundColor: '#374151',
+                        border: '1px solid #4b5563',
+                        borderRadius: '0.5rem',
+                        color: '#e5e7eb'
                     }}/>
                     <Area type="monotone" dataKey="reviews" stroke="#14b8a6" fillOpacity={1} fill="url(#colorReviews)" />
                 </AreaChart>

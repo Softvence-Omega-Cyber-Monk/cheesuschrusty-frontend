@@ -14,9 +14,9 @@ const retentionData = [
 const UserRetentionView: React.FC = () => {
   return (
     <div className="space-y-8">
-      <div className="bg-white p-6 rounded-xl shadow-sm">
-        <h3 className="text-lg font-semibold text-gray-800">User Retention Analysis</h3>
-        <p className="text-sm text-gray-500 mb-6">User retention rates over time (cohort analysis)</p>
+      <div className="bg-white p-6 rounded-xl shadow-sm dark:bg-gray-800">
+        <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200">User Retention Analysis</h3>
+        <p className="text-sm text-gray-500 mb-6 dark:text-gray-400">User retention rates over time (cohort analysis)</p>
         <div style={{ width: '100%', height: 350 }}>
           <ResponsiveContainer>
             <LineChart
@@ -29,13 +29,14 @@ const UserRetentionView: React.FC = () => {
               }}
             >
               <CartesianGrid strokeDasharray="3 3" vertical={false} />
-              <XAxis dataKey="name" tick={{ fontSize: 12 }} stroke="#9ca3af" />
-              <YAxis domain={[0, 100]} tick={{ fontSize: 12 }} stroke="#9ca3af" />
+              <XAxis dataKey="name" tick={{ fontSize: 12, fill: '#A0AEC0' }} stroke="#A0AEC0" />
+              <YAxis domain={[0, 100]} tick={{ fontSize: 12, fill: '#A0AEC0' }} stroke="#A0AEC0" />
               <Tooltip
                  contentStyle={{
-                    backgroundColor: 'white',
-                    border: '1px solid #e5e7eb',
-                    borderRadius: '0.5rem'
+                    backgroundColor: '#374151',
+                    border: '1px solid #4b5563',
+                    borderRadius: '0.5rem',
+                    color: '#e5e7eb'
                   }}
                   formatter={(value: number) => [`${value}%`, 'Retention']}
               />
@@ -45,9 +46,9 @@ const UserRetentionView: React.FC = () => {
         </div>
       </div>
 
-      <div className="bg-white p-6 rounded-xl shadow-sm">
-        <h3 className="text-lg font-semibold text-gray-800">Key Insights</h3>
-        <ul className="mt-4 space-y-2 text-gray-600 list-disc list-inside">
+      <div className="bg-white p-6 rounded-xl shadow-sm dark:bg-gray-800">
+        <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200">Key Insights</h3>
+        <ul className="mt-4 space-y-2 text-gray-600 list-disc list-inside dark:text-gray-400">
             <li>85% of users remain active after the first week</li>
             <li>54% retention rate at the 4-week mark</li>
             <li>Strong long-term retention with 38% active after 12 weeks</li>

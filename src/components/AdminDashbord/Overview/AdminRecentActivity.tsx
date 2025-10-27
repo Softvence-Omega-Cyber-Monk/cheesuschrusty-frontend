@@ -43,10 +43,10 @@ const activities: Activity[] = [
 ];
 
 const AdminRecentActivity: React.FC = () => (
-  <div className="bg-white p-6 rounded-lg  ">
+  <div className="bg-white p-6 rounded-lg dark:bg-gray-800">
     <div className="flex items-center justify-between mb-4">
-      <h2 className="text-2xl font-semibold">Recent Activity</h2>
-      <button className="text-blue-500 text-sm cursor-pointer">View all</button>
+      <h2 className="text-2xl font-semibold dark:text-gray-200">Recent Activity</h2>
+      <button className="text-blue-500 text-sm cursor-pointer dark:text-blue-400">View all</button>
     </div>
 
     <div className="space-y-5 mt-6">
@@ -64,9 +64,9 @@ const AdminRecentActivity: React.FC = () => (
           </div>
 
           <div className="flex-1">
-            <div className="font-medium text-xl">{activity.title}</div>
-            <div className="text-sm text-gray-500">{activity.desc}</div>
-            <div className="text-xs text-gray-400">{activity.time}</div>
+            <div className="font-medium text-xl dark:text-gray-200">{activity.title}</div>
+            <div className="text-sm text-gray-500 dark:text-gray-400">{activity.desc}</div>
+            <div className="text-xs text-gray-400 dark:text-gray-500">{activity.time}</div>
           </div>
         </div>
       ))}

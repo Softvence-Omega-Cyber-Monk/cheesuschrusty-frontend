@@ -25,34 +25,39 @@ export const TicketDetailView: React.FC<TicketDetailViewProps> = ({
   onBackToDashboard,
 }) => {
   return (
-    <div className="min-h-screen   font-sans flex flex-col">
+    <div className="min-h-screen font-sans flex flex-col bg-gray-50 dark:bg-gray-950 text-gray-900 dark:text-gray-100 transition-colors">
       {/* Detail Header */}
-      <div className="  px-8 py-4  ">
+      <div className="px-8 py-4 border-b border-gray-200 dark:border-gray-800">
         <div className="flex items-center justify-between">
           <button
             onClick={onBackToDashboard}
-            className="flex cursor-pointer items-center text-gray-600 hover:text-gray-800 transition font-medium"
+            className="flex items-center text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-gray-100 transition font-medium"
           >
             <ArrowLeft size={20} className="mr-2" />
             User Management
           </button>
+
           <button
             onClick={onMarkAsResolved}
-            className={`bg-blue-600 text-white cursor-pointer px-4 py-2 rounded-lg flex items-center gap-2 hover:bg-blue-700 transition font-medium ${
-              ticket.status === "Resolved" ? "opacity-50 cursor-not-allowed bg-green-600" : ""
-            }`}
             disabled={ticket.status === "Resolved"}
+            className={`flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition ${
+              ticket.status === "Resolved"
+                ? "bg-green-600 text-white opacity-50 cursor-not-allowed"
+                : "bg-blue-600 text-white hover:bg-blue-700 dark:bg-blue-700 dark:hover:bg-blue-600"
+            }`}
           >
-            {ticket.status === "Resolved" ? <CheckCircle size={18} /> : null}
+            {ticket.status === "Resolved" && <CheckCircle size={18} />}
             {ticket.status === "Resolved" ? "Resolved" : "Mark As Resolved"}
           </button>
         </div>
       </div>
 
       {/* Ticket Title */}
-      <div className="px-8 py-4  ">
-        <h1 className="text-2xl font-semibold text-gray-900">Ticket {ticket.id}</h1>
-        <p className="text-lg text-gray-700 mt-1">{ticket.subject}</p>
+      <div className="px-8 py-4 border-b border-gray-200 dark:border-gray-800">
+        <h1 className="text-2xl font-semibold text-gray-900 dark:text-gray-100">
+          Ticket {ticket.id}
+        </h1>
+        <p className="text-lg text-gray-700 dark:text-gray-300 mt-1">{ticket.subject}</p>
       </div>
 
       {/* Main Content Area */}
