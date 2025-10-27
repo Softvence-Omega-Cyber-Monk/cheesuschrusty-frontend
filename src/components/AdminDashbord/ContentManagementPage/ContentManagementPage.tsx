@@ -1,116 +1,68 @@
-
-// ContentManagementPage.tsx
 import React, { useState } from 'react';
-import StatCard from './StatCard';
-import CreateContentModal from './CreateContentModal';
-import FlashcardsTabContent from './FlashcardsTabContent';
-import {
-  mockStats,
-  mockDecks,
-   
-  ContentItem,
-  Difficulty,
-} from './types';
+import StatCard from './components/StatCard';
+import FlashcardDecks from './components/FlashcardDecks';
+import Lessons from './components/Lessons';
+import PhraseOfTheDay from './components/PhraseOfTheDay';
+import { BookIcon, LessonIcon, FlashcardIcon, ViewIcon } from './components/icons';
 
-type ActiveTab = 'Flashcard Decks' | 'Lessons' | 'Phrase of the Day';
+type Tab = 'flashcards' | 'lessons' | 'phrase';
 
 const ContentManagementPage: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<ActiveTab>('Flashcard Decks');
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [decks, setDecks] = useState<ContentItem[]>(mockDecks);
+  const [activeTab, setActiveTab] = useState<Tab>('flashcards');
 
-  const openDeckModal = () => setIsModalOpen(true);
-  const closeModal = () => setIsModalOpen(false);
-
-  const handleCreateContent = (data: { title: string; description: string; difficulty: Difficulty }) => {
-    const newDeck: ContentItem = {
-      id: Date.now().toString(),
-      title: data.title,
-      description: data.description,
-      cards: 0,
-      difficulty: data.difficulty,
-      category: 'Vocabulary',
-      status: 'Drafted',
-      lastModified: new Date().toLocaleDateString('en-GB'),
-    };
-    setDecks([newDeck, ...decks]);
-    closeModal();
+  const renderContent = () => {
+    switch (activeTab) {
+      case 'flashcards':
+        return <FlashcardDecks />;
+      case 'lessons':
+        return <Lessons />;
+      case 'phrase':
+        return <PhraseOfTheDay />;
+      default:
+        return <FlashcardDecks />;
+    }
   };
 
-  const tabs: ActiveTab[] = ['Flashcard Decks', 'Lessons', 'Phrase of the Day'];
+  const getTabClass = (tab: Tab) => {
+    const baseClasses = 'py-2 px-4 font-semibold transition-all duration-200 ease-in-out rounded-lg';
+    if (activeTab === tab) {
+      return `${baseClasses} bg-white text-blue-600 shadow-md dark:bg-blue-600 dark:text-white`;
+    }
+    return `${baseClasses} text-slate-600 hover:text-slate-800 dark:text-gray-400 dark:hover:text-gray-200`;
+  };
 
   return (
-    <div className="p-8">
-      <header className="mb-6">
-        <h1 className="text-3xl font-bold">Content Management</h1>
-      </header>
+    <div className="min-h-screen   text-slate-800 p-4 sm:p-6 lg:p-8 dark:bg-gray-900 dark:text-gray-200">
+      <div className="  mx-auto">
+        <header className="mb-8">
+          <h1 className="text-3xl font-bold text-slate-900 dark:text-gray-200">Content Management </h1>
+          <p className="text-slate-500 mt-1 dark:text-gray-400">Welcome back! Here's what's happening with your platform today.</p>
+        </header>
 
-      <div className="grid grid-cols-4 gap-6 mb-8">
-       <StatCard
-  title="Total Flashcard Decks"
-  value={mockStats.totalDecks}
-  icon={<span className="text-xl">📚</span>}
-  iconColor="text-blue-600"
-/>
-<StatCard
-  title="Published Lessons"
-  value={mockStats.publishedLessons}
-  icon={<span className="text-xl">✅</span>}
-  iconColor="text-green-600"
-/>
-<StatCard
-  title="Total Flashcards"
-  value={mockStats.totalFlashcards}
-  icon={<span className="text-xl">🎴</span>}
-  iconColor="text-yellow-600"
-/>
-<StatCard
-  title="Content Views"
-  value={mockStats.contentViews}
-  icon={<span className="text-xl">👁️</span>}
-  iconColor="text-red-600"
-/>
-
-      </div>
-
-      <div className="bg-white p-6 rounded-xl shadow-md border border-gray-100">
-        <div className="flex border-b border-gray-200 mb-6">
-          {tabs.map((tab) => (
-            <button
-              key={tab}
-              onClick={() => setActiveTab(tab)}
-              className={`px-4 py-2 text-sm cursor-pointer font-medium ${activeTab === tab ? 'text-blue-600 border-b-2 border-blue-600' : 'text-gray-500'}`}
-            >
-              {tab}
-            </button>
-          ))}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+          <StatCard title="Total Flashcard Decks" value="127" icon={<BookIcon />} />
+          <StatCard title="Published Lessons" value="43" icon={<LessonIcon />} />
+          <StatCard title="Total Flashcards" value="3,284" icon={<FlashcardIcon />} />
+          <StatCard title="Content Views" value="45,231" icon={<ViewIcon />} />
         </div>
 
-        {activeTab === 'Flashcard Decks' && (
-          <FlashcardsTabContent decks={decks} onOpenCreateModal={openDeckModal} />
-        )}
-
-        {activeTab === 'Lessons' && <div>Lessons management here</div>}
-        {activeTab === 'Phrase of the Day' && <div>Phrase of the Day content here</div>}
+        <main>
+          <div className="bg-slate-200/60 p-1 rounded-xl inline-flex items-center mb-6 dark:bg-gray-700">
+            <button  onClick={() => setActiveTab('flashcards')} className={` cursor-pointer  ${getTabClass('flashcards')}`}>
+              Flashcard Decks
+            </button>
+            <button onClick={() => setActiveTab('lessons')} className={`cursor-pointer ${getTabClass('lessons')}`}>
+              Lessons
+            </button>
+            <button onClick={() => setActiveTab('phrase')} className={`cursor-pointer ${getTabClass('phrase')}`}>
+              Phrase of the Day
+            </button>
+          </div>
+          {renderContent()}
+        </main>
       </div>
-
-      {isModalOpen && (
-        <CreateContentModal
-          isOpen={isModalOpen}
-          onClose={closeModal}
-          onSubmit={handleCreateContent}
-        />
-      )}
     </div>
   );
 };
 
 export default ContentManagementPage;
-
-
-
-
-
-
-
- 

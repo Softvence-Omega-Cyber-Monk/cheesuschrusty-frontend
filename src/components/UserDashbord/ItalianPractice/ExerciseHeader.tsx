@@ -53,9 +53,9 @@ const ExerciseHeader: React.FC<ExerciseHeaderProps> = ({
           {/* <img src={icon} alt="" /> */}
 
           <div>
-            <h2 className="text-lg font-semibold text-gray-900">{title}</h2>
+            <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-200">{title}</h2>
             {description && (
-              <p className="text-sm text-gray-600">{description}</p>
+              <p className="text-sm text-gray-600 dark:text-gray-200">{description}</p>
             )}
           </div>
         </div>

@@ -76,9 +76,9 @@ const ReadingExerciseComplete: React.FC<ReadingExerciseCompleteProps> = ({ answe
             >
               <div className="flex items-start gap-2 mb-2">
                 {answer.isCorrect ? (
-                  <IoCheckmarkDoneSharp className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
+                  <IoCheckmarkDoneSharp className="w-5 h-5 text-green-500  mt-0.5" />
                 ) : (
-                  <GiCrossedAirFlows className="w-5 h-5 text-red-500 flex-shrink-0 mt-0.5" />
+                  <GiCrossedAirFlows className="w-5 h-5 text-red-500   mt-0.5" />
                 )}
                 <p className="text-base font-medium text-gray-800">{answer.question}</p>
               </div>

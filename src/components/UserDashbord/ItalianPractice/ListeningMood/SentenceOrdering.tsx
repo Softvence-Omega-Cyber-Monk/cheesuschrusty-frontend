@@ -70,7 +70,7 @@ const SentenceOrdering: React.FC<SentenceOrderingProps> = ({ continueCallback })
                   onClick={() => handleOrderedSentenceClick(sentence, index)}
                   className="flex items-start gap-3 p-4 bg-blue-50 border border-blue-200 rounded-lg cursor-pointer hover:bg-blue-100 transition-colors"
                 >
-                  <span className="flex-shrink-0 w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-medium">
+                  <span className="  w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-medium">
                     {index + 1}
                   </span>
                   <p className="text-gray-800 flex-1">{sentence.text}</p>

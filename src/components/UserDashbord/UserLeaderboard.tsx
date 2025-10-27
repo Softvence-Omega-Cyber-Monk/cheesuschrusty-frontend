@@ -1,6 +1,8 @@
 import React from 'react';
-import { Flame, Star, Share2,  ChevronDown, BookOpen, Volume2, Edit, Mic, Trophy } from 'lucide-react';
-
+import { Flame, Star,   BookOpen, Volume2,   Trophy } from 'lucide-react';
+import { FaHeadphonesAlt } from "react-icons/fa";
+import { FaPenFancy } from "react-icons/fa6";
+ 
 // --- Type Definitions ---
 
 /**
@@ -36,12 +38,14 @@ const skillData: {
   name: string;
   value: number;
   color: string;
-  icon: React.ElementType;
+  icon: React.ElementType; 
+  iconcolor:string
 }[] = [
-  { name: 'Reading', value: 847, color: 'bg-blue-500', icon: BookOpen },
-  { name: 'Listening', value: 847, color: 'bg-green-500', icon: Volume2 },
-  { name: 'Writing', value: 847, color: 'bg-yellow-500', icon: Edit },
-  { name: 'Speaking', value: 847, color: 'bg-red-500', icon: Mic },
+    { name: "Reading", value: 847, color: 'bg-black', icon: BookOpen, iconcolor: "text-[#0B5FFF]" },
+  { name: "Listening", value: 920, color: 'bg-black', icon: FaHeadphonesAlt, iconcolor: "text-[#FF6E51]" },
+  { name: "Writing", value: 790, color: 'bg-black', icon: FaPenFancy, iconcolor: "text-[#0E9F6E]" },
+  { name: "Speaking", value: 860, color: 'bg-black', icon: Volume2, iconcolor: "text-[#C535FE]" },
+ 
 ];
 
 const quickStats = {
@@ -99,23 +103,26 @@ const LeaderboardRow: React.FC<{ leader: Leader }> = ({ leader }) => {
         {avatarUrl}
       </div>
       
-      <div className="flex-1 min-w-0">
-        <div className="font-semibold text-gray-800 truncate">
+     <div className='flex flex-1 min-w-0 flex-col gap-3'>
+       <div className="flex-1 flex gap-2 min-w-0">
+        <div className="font-semibold text-gray-800 text-xl truncate">
           {name}
         </div>
+         <span className="text-xs border border-gray-300 font-medium bg-gray-200 text-gray-700 px-2 py-1 rounded-lg  ">
+          {badge}
+        </span>
       </div>
 
       <div className="flex items-center space-x-2 mr-4">
-        <span className="text-xs font-medium bg-gray-200 text-gray-700 px-2 py-0.5 rounded-full">
-          {badge}
-        </span>
+       
         <div className="flex items-center text-sm text-gray-500">
           <Flame className="w-4 h-4 text-orange-500 mr-0.5" />
           <span className="font-medium text-xs">{streak} day streak</span>
         </div>
       </div>
+     </div>
       
-      <div className="text-right font-bold text-gray-900 w-16">
+      <div className="text-right font-semibold text-xl text-gray-900 w-16">
         {points}
         <span className="text-xs text-gray-500 font-normal block">Points</span>
       </div>
@@ -123,15 +130,57 @@ const LeaderboardRow: React.FC<{ leader: Leader }> = ({ leader }) => {
   );
 };
 
-/**
- * Reusable component for the main leaderboard table section.
- */
+ 
+
+
+
 const LeaderboardTable: React.FC<{ leaders: Leader[] }> = ({ leaders }) => {
   const timePeriods = ['Daily', 'Weekly', 'Monthly', 'All Time'];
   const [activeTab, setActiveTab] = React.useState('All Time');
+  const [filteredLeaders, setFilteredLeaders] = React.useState<Leader[]>(leaders);
+
+  // Mock different leaderboard filters
+  React.useEffect(() => {
+    let newData: Leader[] = [];
+
+    switch (activeTab) {
+      case 'Daily':
+        newData = [...leaders]
+          .sort(() => Math.random() - 0.5)
+          .slice(0, 10)
+          .map((l, i) => ({ ...l, points: Math.floor(Math.random() * 500 + 100), rank: i + 1 }));
+        break;
+      case 'Weekly':
+        newData = [...leaders]
+          .sort(() => Math.random() - 0.5)
+          .slice(0, 10)
+          .map((l, i) => ({ ...l, points: Math.floor(Math.random() * 1500 + 500), rank: i + 1 }));
+        break;
+      case 'Monthly':
+        newData = [...leaders]
+          .sort(() => Math.random() - 0.5)
+          .slice(0, 10)
+          .map((l, i) => ({ ...l, points: Math.floor(Math.random() * 3000 + 1000), rank: i + 1 }));
+        break;
+      case 'All Time':
+      default:
+        newData = [...leaders];
+        break;
+    }
+
+    // Set the top 3
+    newData = newData.map((leader, index) => ({
+      ...leader,
+      rank: index + 1,
+      isTopThree: index < 3,
+    }));
+
+    setFilteredLeaders(newData);
+  }, [activeTab, leaders]);
 
   return (
     <div className="bg-white rounded-xl shadow-sm">
+      {/* Tabs Header */}
       <div className="flex justify-between items-center p-4 border-b border-gray-100">
         <div className="flex space-x-1 bg-gray-100 p-1 rounded-lg">
           {timePeriods.map((period) => (
@@ -148,20 +197,29 @@ const LeaderboardTable: React.FC<{ leaders: Leader[] }> = ({ leaders }) => {
             </button>
           ))}
         </div>
-        <div className="flex items-center text-sm text-gray-600">
-          All Time <ChevronDown className="w-4 h-4 ml-1" />
-        </div>
+        {/* <div className="flex items-center text-sm text-gray-600">
+          {activeTab} <ChevronDown className="w-4 h-4 ml-1" />
+        </div> */}
       </div>
 
+      {/* Leaderboard Body */}
       <div className="p-2">
-        <h3 className="text-lg font-semibold text-gray-800 px-2 py-1">Top 10 Learners</h3>
-        {leaders.slice(0, 10).map((leader) => (
+        <h3 className="text-lg font-semibold text-gray-800 px-2 py-1">
+          Top 10 Learners ({activeTab})
+        </h3>
+        {filteredLeaders.map((leader) => (
           <LeaderboardRow key={leader.id} leader={leader} />
         ))}
       </div>
     </div>
   );
 };
+
+
+
+
+
+
 
 /**
  * Renders the user's current rank and stats banner.
@@ -212,28 +270,44 @@ const UserStatusBanner: React.FC = () => {
 /**
  * Renders the skill progress section.
  */
+ 
+import { ProgressBar } from '../ProgressBar/ProgressBar';
+import { ShareButton } from '../ProgressBar/ShareButton';
+ 
 const SkillProgress: React.FC = () => (
   <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
     <h3 className="text-xl font-semibold text-gray-800 mb-4">Your Skill</h3>
-    {skillData.map((skill, index) => (
+
+   <div className=' flex flex-col gap-3'> 
+     {skillData.map((skill, index) => (
       <div key={index} className="mb-4">
-        <div className="flex justify-between items-center mb-1">
-          <div className="flex items-center text-gray-700 font-medium">
-            <skill.icon className="w-4 h-4 mr-1 text-gray-500" />
-            {skill.name}
+        {/* Header: skill icon, name, and value */}
+        <div className="flex  justify-between items-center mb-2">
+          <div className="flex gap-2 items-center text-gray-700 font-medium">
+      <skill.icon className={`w-5 h-5 ${skill.iconcolor}`} />     
+           <h3  className='text-sm'>  {skill.name}</h3>
           </div>
-          <span className="text-sm font-semibold text-gray-900">{skill.value}</span>
+          <span className="text-sm mb-2 font-semibold text-gray-900">{skill.value}</span>
         </div>
-        <div className="w-full bg-gray-200 rounded-full h-2">
-          <div
-            className={`h-2 rounded-full ${skill.color}`}
-            style={{ width: `${skill.value / 10}%` }} // Simplified percentage for visualization
-          ></div>
-        </div>
+
+        {/* Replace manual progress bar with ProgressBar */}
+        <ProgressBar
+          current={skill.value}
+          total={10} // Assuming skill.value is out of 10
+          color={skill.color}
+          progress={80}
+          // showPercentage={true}
+          rounded="rounded-full"
+          className="h-2"
+        />
       </div>
     ))}
+   </div>
   </div>
 );
+
+export default SkillProgress;
+
 
 
 /**
@@ -261,17 +335,19 @@ const QuickStats: React.FC = () => (
 
 export const UserLeaderboard: React.FC = () => {
   return (
-    <div className="min-h-screen bg-gray-50 p-8">
+    <div className="min-h-screen   p-8">
       {/* Header */}
       <header className="flex justify-between items-center mb-6">
         <div>
           <h1 className="text-3xl font-extrabold text-gray-900">Pro Leader Board</h1>
           <p className="text-gray-600 mt-1">Compete with premium learners worldwide</p>
         </div>
-        <button className="flex items-center space-x-2 bg-white cursor-pointer text-gray-700 border border-gray-300 px-4 py-2 rounded-lg shadow-sm hover:bg-gray-100 transition-colors">
+        {/* <button className="flex items-center space-x-2 bg-white cursor-pointer text-gray-700 border border-gray-300 px-4 py-2 rounded-lg shadow-sm hover:bg-gray-100 transition-colors">
           <Share2 className="w-5 h-5" />
           <span className="font-semibold">Share Progress</span>
-        </button>
+        </button> */}
+ <ShareButton/>
+        
       </header>
       
       {/* User Status Banner */}

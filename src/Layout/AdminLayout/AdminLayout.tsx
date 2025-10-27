@@ -56,9 +56,10 @@ alert("clicked")
   onThemeClick={handleclick}
 />
         {/* Main content area */}
-        <div className="flex-1 overflow-auto p-4">
-          <Outlet /> {/* ✅ renders nested route content here */}
-        </div>
+       <div className="flex-1 overflow-auto p-4 bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors">
+  <Outlet />
+</div>
+
       </div>
     </div>
   );

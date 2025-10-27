@@ -28,7 +28,7 @@ const RatingButton: React.FC<RatingButtonProps> = ({
   colorClasses,
 }) => (
   <button
-    className={`p-4 cursor-pointer rounded-xl text-center flex flex-col items-center justify-center transition-shadow hover:shadow-md ${colorClasses}`}
+    className={`p-4   rounded-xl text-center flex flex-col items-center justify-center transition-shadow hover:shadow-md ${colorClasses}`}
   >
     {icon}
     <p className="font-bold text-lg mt-2 mb-1">{label}</p>
@@ -111,7 +111,7 @@ export const FlashcardReviewSession: React.FC<FlashcardReviewSessionProps> = ({
           </p>
           <button
             onClick={onContinue}
-            className="px-6 py-3 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors"
+            className="px-6 py-3 bg-blue-600 cursor-pointer text-white rounded-lg font-medium hover:bg-blue-700 transition-colors"
           >
             Return to Dashboard
           </button>
@@ -138,7 +138,7 @@ export const FlashcardReviewSession: React.FC<FlashcardReviewSessionProps> = ({
             <button
               onClick={handlePreviousCard}
               disabled={isFirstCard}
-              className={`absolute left-0 p-3 bg-white rounded-full shadow-md text-gray-600 transition-colors z-10 
+              className={`absolute left-0 p-3 cursor-pointer bg-white rounded-full shadow-md text-gray-600 transition-colors z-10 
                   ${
                     isFirstCard
                       ? "opacity-50 cursor-not-allowed"
@@ -171,7 +171,7 @@ export const FlashcardReviewSession: React.FC<FlashcardReviewSessionProps> = ({
               <div className="flex items-center justify-center mt-10">
                 <button
                   onClick={handleSpeak}
-                  className="flex items-center text-gray-700 hover:text-indigo-600 transition-colors"
+                  className="flex items-center cursor-pointer text-gray-700 hover:text-indigo-600 transition-colors"
                 >
                   <Volume2 size={24} className="mr-2 text-indigo-500" />
                   <span className="text-sm">Click to hear pronunciation</span>
@@ -182,7 +182,7 @@ export const FlashcardReviewSession: React.FC<FlashcardReviewSessionProps> = ({
             <button
               onClick={handleNextCard}
               disabled={isLastCard}
-              className={`absolute right-0 p-3 bg-white rounded-full shadow-md text-gray-600 transition-colors z-10
+              className={`absolute right-0 p-3 cursor-pointer bg-white rounded-full shadow-md text-gray-600 transition-colors z-10
                   ${
                     isLastCard
                       ? "opacity-50 cursor-not-allowed"
@@ -234,7 +234,7 @@ export const FlashcardReviewSession: React.FC<FlashcardReviewSessionProps> = ({
               <button
                 onClick={handlePreviousCard}
                 disabled={isFirstCard}
-                className={`px-8 py-3 bg-white border border-gray-300 text-gray-700 font-medium rounded-lg transition-colors ${
+                className={`px-8 py-3 bg-white border cursor-pointer border-gray-300 text-gray-700 font-medium rounded-lg transition-colors ${
                   isFirstCard
                     ? "opacity-50 cursor-not-allowed"
                     : "hover:bg-gray-100"
@@ -244,7 +244,7 @@ export const FlashcardReviewSession: React.FC<FlashcardReviewSessionProps> = ({
               </button>
               <button
                 onClick={handleNextCard}
-                className="px-8 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors"
+                className="px-8 py-3 bg-blue-600 cursor-pointer text-white font-medium rounded-lg hover:bg-blue-700 transition-colors"
               >
                 {isLastCard ? "Finish Session" : "Next Card"}
               </button>
@@ -306,7 +306,7 @@ export const FlashcardReviewSession: React.FC<FlashcardReviewSessionProps> = ({
               {/* Toggle Pause/Resume Button */}
               <button
                 onClick={togglePause}
-                className={`w-full py-3 font-medium rounded-lg flex items-center justify-center transition-colors ${
+                className={`w-full py-3 cursor-pointer font-medium rounded-lg flex items-center justify-center transition-colors ${
                   paused
                     ? "bg-green-600 hover:bg-green-700 text-white"
                     : "bg-blue-600 hover:bg-blue-700 text-white"
@@ -325,7 +325,7 @@ export const FlashcardReviewSession: React.FC<FlashcardReviewSessionProps> = ({
 
               <button
                 onClick={handleEnd}
-                className="w-full py-3 bg-red-600 text-white font-medium rounded-lg hover:bg-red-700 transition-colors flex items-center justify-center"
+                className="w-full py-3 bg-red-600 cursor-pointer text-white font-medium rounded-lg hover:bg-red-700 transition-colors flex items-center justify-center"
               >
                 <X size={20} className="mr-2" /> End Session
               </button>

@@ -83,10 +83,10 @@ const AdminSidebar: React.FC<AdminSidebarProps> = ({
               <Link
                 key={item.path}
                 to={item.path}
-                className={`group flex items-center gap-3 mb-2 px-4 py-3 rounded-lg transition-all duration-200 ${
+                className={`group flex fonts items-center gap-3 mb-2 px-4 py-3 rounded-lg transition-all duration-200 ${
                   isActive
                     ? "bg-[#111827] text-white"
-                    : "text-[#7E7E7E] hover:bg-[#111827] hover:text-white"
+                    : "text-[#5e5e5e] hover:bg-[#111827] hover:text-white"
                 } ${isCollapsed ? "justify-center px-2" : ""}`}
               >
                 <img

@@ -33,22 +33,22 @@ const TopicCard: React.FC<TopicCardProps> = ({
       }
     >
       {/* Card content */}
-      <div className="bg-white p-5 rounded-xl shadow-sm border border-gray-200 flex flex-col cursor-pointer">
-        <h3 className="text-lg font-bold text-gray-900">{title}</h3>
+      <div className="bg-white p-5 rounded-xl shadow-sm border border-gray-200 flex flex-col dark:bg-gray-900">
+        <h3 className="text-lg font-bold text-gray-600  dark:text-gray-200">{title}</h3>
 
-        <div className="flex justify-between text-sm mt-3 mb-4 text-gray-600">
-          <p>Total Cards</p>
-          <span className="font-semibold text-gray-800">{totalCards}</span>
+        <div className="flex justify-between text-sm mt-3 mb-4 text-gray-600 dark:text-gray-200">
+          <p className="dark:text-gray-200">Total Cards</p>
+          <span className="font-semibold text-gray-800 dark:text-gray-200">{totalCards}</span>
         </div>
 
         <div className="flex justify-between text-sm mb-2">
-          <p>Mastered</p>
-          <span className="font-semibold text-green-600">{mastered} (59%)</span>
+          <p className="dark:text-gray-200">Mastered</p>
+          <span className="font-semibold text-green-600 dark:text-gray-200">{mastered} (59%)</span>
         </div>
 
         <div className="flex justify-between text-sm mb-4">
-          <p>Due</p>
-          <span className="font-semibold text-red-600">{due}</span>
+          <p className="dark:text-gray-200">Due</p>
+          <span className="font-semibold text-red-600 dark:text-gray-200">{due}</span>
         </div>
 
         <div className="flex space-x-2 mt-auto pt-2">
@@ -122,7 +122,7 @@ export const FlashcardDashboard: React.FC<FlashcardDashboardProps> = ({
   };
 
   return (
-    <div className="mx-auto p-6">
+    <div className="mx-auto p-6 ">
       <h1 className="text-3xl font-bold text-gray-900 mb-2">
         Advance Flashcard
       </h1>
@@ -156,7 +156,7 @@ export const FlashcardDashboard: React.FC<FlashcardDashboardProps> = ({
           <button
             onClick={goToPrevPage}
             disabled={currentPage === 1}
-            className={`px-4 py-2 rounded-lg border text-sm ${
+            className={`px-4 py-2 cursor-pointer rounded-lg border text-sm ${
               currentPage === 1
                 ? "text-gray-400 border-gray-200 cursor-not-allowed"
                 : "text-blue-600 border-blue-300 hover:bg-blue-50"
@@ -170,7 +170,7 @@ export const FlashcardDashboard: React.FC<FlashcardDashboardProps> = ({
           <button
             onClick={goToNextPage}
             disabled={currentPage === totalPages}
-            className={`px-4 py-2 rounded-lg border text-sm ${
+            className={`px-4 py-2 rounded-lg cursor-pointer border text-sm ${
               currentPage === totalPages
                 ? "text-gray-400 border-gray-200 cursor-not-allowed"
                 : "text-blue-600 border-blue-300 hover:bg-blue-50"

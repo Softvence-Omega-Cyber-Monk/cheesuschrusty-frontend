@@ -69,8 +69,8 @@ const weeklyStats = [
     <div className="p-4 sm:p-6 md:p-8   min-h-screen font-sans">
       
       {/* --- Header Section --- */}
-      <h1 className="text-3xl font-semibold text-gray-800">Welcome, Marco!</h1>
-      <p className="text-gray-500 mb-6">Start your B1 certification journey</p>
+      <h1 className="text-3xl font-semibold text-gray-800 dark:text-gray-200">Welcome, Marco!</h1>
+      <p className="text-gray-500 mb-6 dark:text-gray-400">Start your B1 certification journey</p>
       
       {/* --- Top Row of Cards (Grid) --- */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
@@ -106,12 +106,12 @@ const weeklyStats = [
         />
 
         {/* Unlock Pro Card */}
-        <div className="p-4 rounded-xl shadow-custom bg-white border border-yellow-200 border-dashed flex flex-col justify-center">
+        <div className="p-4 rounded-xl shadow-custom bg-white border border-yellow-200 border-dashed flex flex-col justify-center dark:bg-gray-800 dark:text-gray-200">
           <div className="flex items-center mb-1">
             <span className="text-xl mr-2 text-yellow-500" role="img" aria-label="crown">👑</span>
-            <h3 className="text-sm font-semibold text-gray-800">Unlock Pro</h3>
+            <h3 className="text-sm font-semibold text-gray-800 dark:text-gray-200">Unlock Pro</h3>
           </div>
-          <p className="text-xs text-gray-500 mb-2">Unlimited practice, advanced analytics, and personalized feedback</p>
+          <p className="text-xs text-gray-500 mb-2 dark:text-gray-400">Unlimited practice, advanced analytics, and personalized feedback</p>
           <button className="text-blue-600 font-medium text-sm text-left hover:text-blue-800 transition-colors">
             Try 7 Days Free
           </button>
@@ -124,9 +124,9 @@ const weeklyStats = [
         {/* Left Column: Practice Areas */}
         <div className="lg:col-span-2">
          
-            <div className="bg-white rounded-xl shadow-md p-8">
-      <h2 className="text-xl font-semibold text-gray-900 mb-4">Practice Areas</h2>
-      <p className="text-gray-600 mb-6">
+            <div className="bg-white rounded-xl shadow-md p-8 dark:bg-gray-800 dark:text-gray-200">
+      <h2 className="text-xl font-semibold text-gray-900 mb-4 dark:text-gray-200">Practice Areas</h2>
+      <p className="text-gray-600 mb-6 dark:text-gray-400">
         Track your progress across different skills
       </p>
 

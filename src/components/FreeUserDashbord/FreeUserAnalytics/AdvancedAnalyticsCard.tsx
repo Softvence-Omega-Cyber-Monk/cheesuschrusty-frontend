@@ -25,7 +25,7 @@ const AdvancedAnalyticsCard: React.FC = () => {
 
       {/* Upgrade Button */}
       <button 
-        className="flex items-center px-6 py-3 font-semibold rounded-full 
+        className="flex items-center px-6 py-3 font-semibold cursor-pointer rounded-full 
                    bg-yellow-500 text-indigo-900 shadow-lg 
                    hover:bg-yellow-400 hover:shadow-xl transition-all duration-200"
         onClick={() => console.log('Upgrade To Pro clicked')}

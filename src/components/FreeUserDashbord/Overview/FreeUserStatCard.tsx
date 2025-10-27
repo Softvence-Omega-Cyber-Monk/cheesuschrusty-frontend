@@ -11,7 +11,7 @@ interface StatCardProps {
 }
 
 const FreeUserStatCard: React.FC<StatCardProps> = ({ icon, title, value, subValue, iconBgColor, iconTextColor }) => (
-  <div className="bg-white p-5 rounded-xl shadow-custom flex items-center justify-between min-h-[96px]">
+  <div className="bg-white p-5 rounded-xl shadow-custom flex items-center justify-between min-h-[100px]">
     <div>
       <h3 className="text-sm text-gray-500 font-medium mb-1">{title}</h3>
       <p className="text-xl font-semibold text-gray-800">{value}</p>

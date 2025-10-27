@@ -17,7 +17,7 @@ const SubscriptionCard: React.FC = () => {
         <p className="text-sm text-indigo-700 mb-3">
           Unlimited practice, advanced analytics, and personalized feedback
         </p>
-        <button className="bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-4 rounded-lg text-sm transition duration-150">
+        <button className="bg-indigo-600 cursor-pointer hover:bg-indigo-700 text-white font-medium py-2 px-4 rounded-lg text-sm transition duration-150">
           Try 7 Days Free
         </button>
       </div>

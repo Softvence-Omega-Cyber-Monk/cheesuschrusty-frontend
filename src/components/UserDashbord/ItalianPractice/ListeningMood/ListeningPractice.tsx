@@ -78,12 +78,12 @@ const ListeningPractice: React.FC<ListeningPracticeProps> = ({ continueCallback 
         {phase !== 'complete' && (
           <>
             <button
-              onClick={() => navigate("/user/practice")}
-              className="flex border p-3 cursor-pointer rounded-2xl items-center gap-2 text-gray-700 hover:text-gray-900 mb-4"
-            >
-              <ChevronLeft className="w-6 h-6" />
-              <span className="text-base font-semibold">Back To Practice</span>
-            </button>
+            onClick={() => navigate("/user/practice")}
+            className="flex border p-3 cursor-pointer rounded-2xl dark:text-gray-200 items-center gap-2 text-gray-700 hover:text-gray-900 mb-4"
+          >
+            <ChevronLeft className="w-6 h-6" />
+            <span className="text-base font-semibold ">Back To Practice</span>
+          </button>
 
             <Header title="Listening Practice" subtitle="Improve your Italian listening comprehension" />
 
@@ -140,7 +140,7 @@ const ListeningPractice: React.FC<ListeningPracticeProps> = ({ continueCallback 
                     <button
                       onClick={handleNextQuestion}
                       disabled={!questions[currentQuestion].selectedAnswer}
-                      className={`px-6 py-3 rounded-lg font-medium flex items-center gap-2 transition-colors cursor-pointer ${
+                      className={`px-6 py-3 rounded-lg font-medium  flex items-center gap-2 transition-colors cursor-pointer ${
                         !questions[currentQuestion].selectedAnswer
                           ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
                           : 'bg-blue-600 text-white hover:bg-blue-700'

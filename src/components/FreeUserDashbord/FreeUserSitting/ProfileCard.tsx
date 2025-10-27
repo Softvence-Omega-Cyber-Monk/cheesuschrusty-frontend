@@ -13,7 +13,7 @@ const ProfileCard: React.FC = () => {
           </h2>
           <p className="text-sm text-gray-500">Update your personal information and learning profile</p>
         </div>
-        <button className="flex items-center text-indigo-500 hover:text-indigo-600 font-medium text-sm">
+        <button className="flex items-center cursor-pointer text-indigo-500 hover:text-indigo-600 font-medium text-sm">
           <PencilSquareIcon className="w-4 h-4 mr-1" />
           Edit
         </button>
