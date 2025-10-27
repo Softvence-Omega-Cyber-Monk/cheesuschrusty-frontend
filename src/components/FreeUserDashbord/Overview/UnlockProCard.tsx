@@ -1,19 +1,13 @@
 // UnlockProCard.tsx
 import React from 'react';
 
-// 1. Define the TypeScript interface for the component's props
 interface UnlockProCardProps {
-  // Title (e.g., "Unlock Pro")
-  title: string;
-  // Description/Feature List
-  description: string;
-  // Text for the call-to-action button (e.g., "Try 7 Days Free")
-  buttonText: string;
-  // Optional: Function to call when the button is clicked
-  onButtonClick?: () => void; 
+  title: string; // Title (e.g., "Unlock Pro")
+  description: string; // Description/Feature List
+  buttonText: string; // Text for the call-to-action button (e.g., "Try 7 Days Free")
+  onButtonClick?: () => void; // Optional: Function to call when the button is clicked
 }
 
-// 2. Use the interface to type the component and destructure the props
 const UnlockProCard: React.FC<UnlockProCardProps> = ({ 
   title, 
   description, 
@@ -21,17 +15,7 @@ const UnlockProCard: React.FC<UnlockProCardProps> = ({
   onButtonClick 
 }) => {
   return (
-    <div className="
-      p-6 
-      sm:p-8 
-      bg-gray-50 
-      rounded-xl 
-      shadow-md 
-       
-      mx-auto 
-      border border-gray-100
-    ">
-      
+    <div className="p-6 sm:p-8 bg-gray-50 rounded-xl shadow-md mx-auto border border-gray-100 dark:bg-gray-800 dark:text-gray-100 dark:border-gray-600">
       {/* --- Card Content --- */}
       <div className="mb-6">
         <div className="flex items-center mb-1">
@@ -40,29 +24,27 @@ const UnlockProCard: React.FC<UnlockProCardProps> = ({
             👑
           </span>
           {/* Dynamically display the title */}
-          <h2 className="text-xl font-semibold text-gray-800">
+          <h2 className="text-xl font-semibold text-gray-800 dark:text-gray-100">
             {title}
           </h2>
         </div>
         
         {/* Dynamically display the description */}
-        <p className="text-sm text-gray-600 ml-9">
+        <p className="text-sm text-gray-600 ml-9 dark:text-gray-300">
           {description}
         </p>
       </div>
 
       {/* --- Gradient Button --- */}
       <button 
-        className="
-          bg-blue-600 cursor-pointer hover:bg-blue-700 text-white font-medium py-2.5 px-4 rounded-lg transition-colors inline-block
-        " style={{ background: "linear-gradient(180deg, #667EEA 0%, #764BA2 100%)" }}
-        // Use the optional onButtonClick function
+        className="bg-blue-600 cursor-pointer hover:bg-blue-700 text-white font-medium py-2.5 px-4 rounded-lg transition-colors inline-block"
+        style={{ background: "linear-gradient(180deg, #667EEA 0%, #764BA2 100%)" }}
         onClick={onButtonClick} 
+        aria-label="Unlock Pro Access"
       >
         {/* Dynamically display the button text */}
         {buttonText}
       </button>
-
     </div>
   );
 };

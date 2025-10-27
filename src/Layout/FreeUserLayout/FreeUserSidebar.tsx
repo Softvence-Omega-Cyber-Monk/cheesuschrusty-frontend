@@ -47,7 +47,7 @@ export const FreeUserSidebar: React.FC<SidebarProps> = ({
 
     return (
         <div
-            className={`relative flex flex-col bg-[#EBEBEB] border-r border-[#C6C8CB] transition-all duration-300 ease-in-out 
+            className={`relative flex flex-col bg-[#EBEBEB]  border-r border-[#302f2f] transition-all duration-300 ease-in-out dark:bg-[#100413]
         ${sidebarOpen
                     ? isCollapsed
                         ? "w-20"
@@ -71,7 +71,7 @@ export const FreeUserSidebar: React.FC<SidebarProps> = ({
             {sidebarOpen && (
                 <div className="px-3">
                     <div
-                        className={`flex items-center gap-3 border-b border-b-[#C6C8CB] transition-all duration-300 
+                        className={`flex items-center gap-3 border-b border-b-[#252525] transition-all duration-300 
               ${isCollapsed ? "justify-center px-2 py-5" : "px-6 py-6"}`}
                     >
                         <img
@@ -80,7 +80,7 @@ export const FreeUserSidebar: React.FC<SidebarProps> = ({
                             className={`transition-all duration-300 ${isCollapsed ? "w-10" : "w-11"}`}
                         />
                         {!isCollapsed && (
-                            <h1 className="font-bold text-2xl text-[#111827]">B1 Italian</h1>
+                            <h1 className="font-bold text-2xl text-[#111827] dark:text-white">B1 Italian</h1>
                         )}
                     </div>
                 </div>
@@ -127,7 +127,7 @@ export const FreeUserSidebar: React.FC<SidebarProps> = ({
                 <div className="hidden lg:block border-t border-[#C6C8CB] p-3">
                     <button
                         onClick={() => setIsCollapsed(!isCollapsed)}
-                        className="flex items-center cursor-pointer justify-center w-full gap-2 px-3 py-2 rounded-lg bg-white text-gray-700 hover:bg-gray-100 transition-all duration-200"
+                        className="flex items-center cursor-pointer justify-center w-full gap-2 px-3 py-2 rounded-lg bg-white dark:bg-[#474747] dark:text-white text-gray-700 hover:bg-gray-100 transition-all duration-200"
                     >
                         {isCollapsed ? (
                             <MdOutlineKeyboardDoubleArrowRight className="text-3xl" />
