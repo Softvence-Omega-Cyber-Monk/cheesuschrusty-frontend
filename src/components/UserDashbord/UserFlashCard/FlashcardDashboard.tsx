@@ -156,11 +156,10 @@ export const FlashcardDashboard: React.FC<FlashcardDashboardProps> = ({
           <button
             onClick={goToPrevPage}
             disabled={currentPage === 1}
-            className={`px-4 py-2 cursor-pointer rounded-lg border text-sm ${
-              currentPage === 1
+            className={`px-4 py-2 cursor-pointer rounded-lg border text-sm ${currentPage === 1
                 ? "text-gray-400 border-gray-200 cursor-not-allowed"
                 : "text-blue-600 border-blue-300 hover:bg-blue-50"
-            }`}
+              }`}
           >
             Previous
           </button>
@@ -170,11 +169,10 @@ export const FlashcardDashboard: React.FC<FlashcardDashboardProps> = ({
           <button
             onClick={goToNextPage}
             disabled={currentPage === totalPages}
-            className={`px-4 py-2 rounded-lg cursor-pointer border text-sm ${
-              currentPage === totalPages
+            className={`px-4 py-2 rounded-lg cursor-pointer border text-sm ${currentPage === totalPages
                 ? "text-gray-400 border-gray-200 cursor-not-allowed"
                 : "text-blue-600 border-blue-300 hover:bg-blue-50"
-            }`}
+              }`}
           >
             Next
           </button>
@@ -189,24 +187,25 @@ export const FlashcardDashboard: React.FC<FlashcardDashboardProps> = ({
         Review your study progress and performance.
       </p>
 
-      <div className="grid grid-cols-4 gap-6">
-        <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700">
           <div className="text-3xl font-bold text-indigo-600 mb-1">3</div>
-          <p className="text-sm text-gray-600">Number of Sessions Completed</p>
+          <p className="text-sm text-gray-600 dark:text-gray-300">Number of Sessions Completed</p>
         </div>
-        <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+        <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700">
           <div className="text-3xl font-bold text-red-600 mb-1">123</div>
-          <p className="text-sm text-gray-600">Total Cards Studied</p>
+          <p className="text-sm text-gray-600 dark:text-gray-300">Total Cards Studied</p>
         </div>
-        <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+        <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700">
           <div className="text-3xl font-bold text-green-600 mb-1">22</div>
-          <p className="text-sm text-gray-600">Average Score</p>
+          <p className="text-sm text-gray-600 dark:text-gray-300">Average Score</p>
         </div>
-        <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+        <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700">
           <div className="text-3xl font-bold text-indigo-600 mb-1">86%</div>
-          <p className="text-sm text-gray-600">Success Rate</p>
+          <p className="text-sm text-gray-600 dark:text-gray-300">Success Rate</p>
         </div>
       </div>
+
     </div>
   );
 };
@@ -365,7 +364,7 @@ export const FlashcardDashboard: React.FC<FlashcardDashboardProps> = ({
 //         </div>
 //       </div>
 //     </div>
-//   ); 
+//   );
 // };
 
 
@@ -376,4 +375,3 @@ export const FlashcardDashboard: React.FC<FlashcardDashboardProps> = ({
 
 
 
- 

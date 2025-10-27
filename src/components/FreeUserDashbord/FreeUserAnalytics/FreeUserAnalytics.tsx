@@ -1,20 +1,19 @@
 import React from 'react';
-  import { Clock, Target, BookOpen } from 'lucide-react'; // Icons for the top cards
+import { Clock, Target, BookOpen } from 'lucide-react'; // Icons for the top cards
 import StatDisplayCard from './StatDisplayCard';
- import FreeUserAdvancedAnalyticsCard from '../Overview/FreeUserAdvancedAnalyticsCard';
-  
+import FreeUserAdvancedAnalyticsCard from '../Overview/FreeUserAdvancedAnalyticsCard';
 
 const FreeUserAnalytics: React.FC = () => {
   return (
-    <div className="min-h-screen   p-8 sm:p-12">
-      <div className="  mx-auto">
-        
+    <div className="min-h-screen p-8 sm:p-12 bg-gray-50 dark:bg-gray-900">
+      <div className="mx-auto">
+
         {/* Header Section */}
         <header className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900">
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">
             Analytics
           </h1>
-          <p className="text-gray-500 mt-1">
+          <p className="text-gray-500 mt-1 dark:text-gray-400">
             Track your progress and achievements in Italian learning
           </p>
         </header>
@@ -39,7 +38,7 @@ const FreeUserAnalytics: React.FC = () => {
         </section>
 
         {/* Advanced Analytics Section */}
-        <FreeUserAdvancedAnalyticsCard/>
+        <FreeUserAdvancedAnalyticsCard />
 
       </div>
     </div>
@@ -47,6 +46,3 @@ const FreeUserAnalytics: React.FC = () => {
 };
 
 export default FreeUserAnalytics;
-
-// To render this page, you would typically use:
-// ReactDOM.render(<FreeUserAnalytics />, document.getElementById('root'));
