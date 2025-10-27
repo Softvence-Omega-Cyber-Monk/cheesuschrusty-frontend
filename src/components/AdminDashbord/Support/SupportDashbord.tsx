@@ -1,8 +1,5 @@
- 
-
-
 import React, { useState } from 'react';
-import { ChevronLeft, ChevronRight, Plus, Filter,   Calendar, Star,   Send, ArrowLeft, Paperclip, CheckCircle } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Plus, Filter, Calendar, Star, Send, ArrowLeft, Paperclip, CheckCircle } from 'lucide-react';
 
 // --- INTERFACES ---
 
@@ -32,7 +29,6 @@ interface Ticket {
   categoryDetail?: string;
   assignee?: string;
   conversation?: Message[];
-  
 }
 
 interface KnowledgeArticle {
@@ -58,10 +54,6 @@ type PageType = 'dashboard' | 'detail';
 type TabType = 'allTickets' | 'knowledgeBase' | 'teamManagement';
 
 // --- INITIAL DATA ---
-// NOTE: I've corrected the structure of the initialTickets to better match the displayed table data
-// by making the first 5 entries reflect the table in image_6ccd06.png
-
-
 
 const initialTickets: Ticket[] = [
     { id: 'TICK-001', subject: 'Cannot access Pro features after payment', responses: 3, user: 'Marco Rossi', email: 'marco.rossi@email.com', priority: 'High', category: 'In Progress', lastUpdate: '29/09/2025', 
@@ -71,12 +63,10 @@ const initialTickets: Ticket[] = [
         { sender: 'Anna Verdi', role: 'Support', time: '2024-09-29 14:45', message: 'Hi Marco, thank you for contacting us. I can see your payment was processed successfully. Let me check your account status and subscription details. I\'ll get back to you within the next hour with a solution.' }
       ]
     },
-    // The table shows TICK-001 with 3 responses and Low/Resolved/In Progress/Open categories
     { id: 'TICK-001', subject: 'Cannot access Pro features after payment', responses: 3, user: 'Marco Rossi', email: 'marco.rossi@email.com', priority: 'Low', category: 'In Progress', lastUpdate: '29/09/2025' },
     { id: 'TICK-001', subject: 'Cannot access Pro features after payment', responses: 3, user: 'Marco Rossi', email: 'marco.rossi@email.com', priority: 'Low', category: 'Resolved', lastUpdate: '29/09/2025' },
     { id: 'TICK-001', subject: 'Cannot access Pro features after payment', responses: 3, user: 'Marco Rossi', email: 'marco.rossi@email.com', priority: 'Medium', category: 'In Progress', lastUpdate: '29/09/2025' },
     { id: 'TICK-001', subject: 'Cannot access Pro features after payment', responses: 3, user: 'Marco Rossi', email: 'marco.rossi@email.com', priority: 'Medium', category: 'Open', lastUpdate: '29/09/2025' },
-    // Other tickets for data population
     { id: 'TICK-006', subject: 'Flashcard deck is loading incorrectly', responses: 1, user: 'Giulia Bianchi', email: 'giulia.bianchi@email.com', priority: 'Medium', category: 'Open', lastUpdate: '30/09/2025' },
     { id: 'TICK-007', subject: 'Request for a new feature: verb conjugation practice', responses: 0, user: 'Luca Esposito', email: 'luca.esposito@email.com', priority: 'Low', category: 'Resolved', lastUpdate: '01/10/2025' },
     { id: 'TICK-008', subject: 'Mobile app crashing on Android 14', responses: 4, user: 'Sofia Ricci', email: 'sofia.ricci@email.com', priority: 'High', category: 'In Progress', lastUpdate: '01/10/2025' },
@@ -94,7 +84,6 @@ const teamMembers: TeamMember[] = [
     { id: 'TM-02', name: 'Marco Gialli', role: 'Billing Specialist', email: 'marco.g@corp.com', ticketsResolved: 82, status: 'Busy', avgRating: 4.5 },
     { id: 'TM-03', name: 'Sofia Ricci', role: 'Technical Support', email: 'sofia.r@corp.com', ticketsResolved: 110, status: 'Online', avgRating: 4.7 },
 ];
-
 
 // --- UTILITY COMPONENTS ---
 
@@ -114,15 +103,27 @@ const PriorityTag: React.FC<{ priority: string }> = ({ priority }) => {
 };
 
 const CategoryTag: React.FC<{ category: string }> = ({ category }) => {
-    let colorClass;
+    let colorClass, darkColorClass;
     switch (category) {
-        case 'In Progress': colorClass = 'text-blue-600 bg-blue-100/70'; break;
-        case 'Resolved': colorClass = 'text-green-600 bg-green-100/70'; break;
-        case 'Open': colorClass = 'text-pink-600 bg-pink-100/70'; break;
-        default: colorClass = 'text-gray-600 bg-gray-100/70'; break;
+        case 'In Progress': 
+            colorClass = 'text-blue-600 bg-blue-100/70';
+            darkColorClass = 'dark:text-blue-300 dark:bg-blue-900/50';
+            break;
+        case 'Resolved': 
+            colorClass = 'text-green-600 bg-green-100/70';
+            darkColorClass = 'dark:text-green-300 dark:bg-green-900/50';
+            break;
+        case 'Open': 
+            colorClass = 'text-pink-600 bg-pink-100/70';
+            darkColorClass = 'dark:text-pink-300 dark:bg-pink-900/50';
+            break;
+        default: 
+            colorClass = 'text-gray-600 bg-gray-100/70';
+            darkColorClass = 'dark:text-gray-300 dark:bg-gray-700/50';
+            break;
     }
     return (
-        <span className={`${colorClass} px-3 py-1 rounded-full text-xs font-medium`}>
+        <span className={`${colorClass} ${darkColorClass} px-3 py-1 rounded-full text-xs font-medium`}>
             {category}
         </span>
     );
@@ -132,14 +133,19 @@ const CategoryTag: React.FC<{ category: string }> = ({ category }) => {
 
 const SupportDashboard: React.FC = () => {
     const [currentPage, setCurrentPage] = useState<PageType>('dashboard');
-    const [selectedTicket, setSelectedTicket] = useState<Ticket | null>(initialTickets[0]); // Default to TICK-001 for detail view
+    const [selectedTicket, setSelectedTicket] = useState<Ticket | null>(initialTickets[0]);
     const [messageInput, setMessageInput] = useState<string>('');
     const [activeTab, setActiveTab] = useState<TabType>('allTickets');
     const [tickets, setTickets] = useState<Ticket[]>(initialTickets);
-    const [knowledgeArticles,  ] = useState<KnowledgeArticle[]>(initialKnowledgeArticles);
+    const [knowledgeArticles] = useState<KnowledgeArticle[]>(initialKnowledgeArticles);
+    const [darkMode, setDarkMode] = useState<boolean>(false);
 
-    // --- Helper Functions ---
+    // Toggle dark mode
+    const toggleDarkMode = () => {
+        setDarkMode(!darkMode);
+    };
 
+    // Helper Functions
     const handleViewTicket = (ticket: Ticket): void => {
         setSelectedTicket(ticket);
         setCurrentPage('detail');
@@ -150,42 +156,6 @@ const SupportDashboard: React.FC = () => {
         setSelectedTicket(null);
         setMessageInput('');
     };
-
-    // const handleCreateNewTicket = (): void => {
-    //     const newTicketId = `TICK-${(tickets.length + 1).toString().padStart(3, '0')}`;
-    //     const currentTime = new Date().toLocaleString('en-US', { year: 'numeric', month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit' }).replace(',', '');
-    //     const currentDate = new Date().toLocaleDateString('en-GB');
-
-    //     const newTicket: Ticket = {
-    //         id: newTicketId,
-    //         subject: 'New manually created ticket',
-    //         responses: 0,
-    //         user: 'System Agent',
-    //         email: 'agent.create@corp.com',
-    //         priority: 'Medium',
-    //         category: 'Open',
-    //         lastUpdate: currentDate,
-    //         status: 'Open',
-    //         joined: new Date().toLocaleDateString('en-US'),
-    //         subscription: 'Basic',
-    //         created: currentTime,
-    //         lastUpdateTime: currentTime,
-    //         categoryDetail: 'General',
-    //         assignee: 'Unassigned',
-    //         conversation: [
-    //             {
-    //                 sender: 'System Agent',
-    //                 role: 'Support',
-    //                 time: new Date().toTimeString().substring(0, 5),
-    //                 message: `Ticket ${newTicketId} created manually. Awaiting user details.`,
-    //             }
-    //         ]
-    //     };
-
-    //     // Add the new ticket to the state and automatically view it
-    //     setTickets(prevTickets => [newTicket, ...prevTickets]);
-    //     handleViewTicket(newTicket);
-    // };
 
     const handleSendMessage = (): void => {
         if (messageInput.trim() === '' || !selectedTicket) return;
@@ -199,7 +169,7 @@ const SupportDashboard: React.FC = () => {
         };
 
         const updatedTickets = tickets.map(t => 
-            t.id === selectedTicket.id && t.lastUpdate === selectedTicket.lastUpdate // Use a more robust check for the row/ticket instance
+            t.id === selectedTicket.id && t.lastUpdate === selectedTicket.lastUpdate
                 ? {
                     ...t,
                     conversation: [...(t.conversation || []), newMessage],
@@ -211,32 +181,31 @@ const SupportDashboard: React.FC = () => {
         );
 
         setTickets(updatedTickets);
-        // Find the newly updated ticket to keep the detail view in sync
         const updatedSelectedTicket = updatedTickets.find(t => 
             t.id === selectedTicket.id && 
-            t.lastUpdate !== selectedTicket.lastUpdate // Assuming only the most recent one changed
+            t.lastUpdate !== selectedTicket.lastUpdate
         ) || selectedTicket; 
         
         setSelectedTicket(updatedSelectedTicket);
         setMessageInput('');
     };
 
-  
     const handleMarkAsResolved = (): void => {
-    if (!selectedTicket) return;
+        if (!selectedTicket) return;
 
-    const updatedTickets = tickets.map(t =>
-        t.id === selectedTicket.id && t.lastUpdate === selectedTicket.lastUpdate
-            ? ({
-                  ...t,
-                  status: 'Resolved', // Assuming 'Resolved' is a valid status string
-                  category: 'Resolved', // Assuming 'Resolved' is a valid category string
-              } as Ticket) // <-- Type Assertion added here
-            : t
-    );
-    setTickets(updatedTickets);
-    setSelectedTicket(prev => prev ? { ...prev, status: 'Resolved', category: 'Resolved' } : null);
-};
+        const updatedTickets = tickets.map(t =>
+            t.id === selectedTicket.id && t.lastUpdate === selectedTicket.lastUpdate
+                ? ({
+                      ...t,
+                      status: 'Resolved',
+                      category: 'Resolved',
+                  } as Ticket)
+                : t
+        );
+        setTickets(updatedTickets);
+        setSelectedTicket(prev => prev ? { ...prev, status: 'Resolved', category: 'Resolved' } : null);
+    };
+
     const getStatusColor = (status: string): string => {
         switch (status) {
             case 'Online': return 'bg-green-500';
@@ -246,46 +215,62 @@ const SupportDashboard: React.FC = () => {
         }
     };
 
+    // Dark mode classes
+    const bgClass = darkMode ? 'dark:bg-gray-900' : 'bg-gray-50';
+    const textClass = darkMode ? 'dark:text-white' : 'text-gray-900';
+    const cardBgClass = darkMode ? 'dark:bg-gray-800' : 'bg-white';
+    const borderClass = darkMode ? 'dark:border-gray-700' : 'border-gray-200';
+    const inputBgClass = darkMode ? 'dark:bg-gray-700 dark:border-gray-600' : 'bg-white border-gray-300';
 
-    // --- Tab Content Rendering ---
-
+    // Tab Content Rendering
     const renderActiveTabContent = () => {
+        const tableHeaderClass = darkMode 
+            ? 'dark:bg-gray-800 dark:border-gray-700 dark:text-gray-300' 
+            : 'bg-gray-50 border-gray-200 text-gray-500';
+        
+        const tableRowClass = darkMode 
+            ? 'dark:border-gray-700 dark:hover:bg-gray-700' 
+            : 'border-gray-200 hover:bg-gray-50';
+        
+        const tableTextClass = darkMode 
+            ? 'dark:text-gray-300' 
+            : 'text-gray-900';
+
         switch (activeTab) {
             case 'allTickets':
                 return (
-                    // Tickets Table
                     <div className="overflow-x-auto">
-                        <table className="min-w-full divide-y divide-gray-200">
-                            <thead className="bg-gray-50 border-b">
+                        <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                            <thead className={tableHeaderClass}>
                                 <tr>
-                                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500">Ticket ID</th>
-                                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500">Subject</th>
-                                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500">User</th>
-                                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500">Priority</th>
-                                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500">Category</th>
-                                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500">Last Update</th>
-                                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500">Action</th>
+                                    <th className="px-6 py-3 text-left text-xs font-medium">Ticket ID</th>
+                                    <th className="px-6 py-3 text-left text-xs font-medium">Subject</th>
+                                    <th className="px-6 py-3 text-left text-xs font-medium">User</th>
+                                    <th className="px-6 py-3 text-left text-xs font-medium">Priority</th>
+                                    <th className="px-6 py-3 text-left text-xs font-medium">Category</th>
+                                    <th className="px-6 py-3 text-left text-xs font-medium">Last Update</th>
+                                    <th className="px-6 py-3 text-left text-xs font-medium">Action</th>
                                 </tr>
                             </thead>
-                            <tbody className="divide-y divide-gray-200">
+                            <tbody className={`divide-y divide-gray-200 dark:divide-gray-700 ${darkMode ? 'dark:bg-gray-800' : 'bg-white'}`}>
                                 {tickets.map((ticket: Ticket, index: number) => (
-                                    <tr key={index} className="hover:bg-gray-50 cursor-pointer" onClick={() => handleViewTicket(ticket)}>
-                                        <td className="px-6 py-4 text-sm font-medium text-gray-900">{ticket.id}</td>
+                                    <tr key={index} className={`${tableRowClass} cursor-pointer`} onClick={() => handleViewTicket(ticket)}>
+                                        <td className={`px-6 py-4 text-sm font-medium ${tableTextClass}`}>{ticket.id}</td>
                                         <td className="px-6 py-4">
-                                            <div className="text-sm font-medium text-gray-900">{ticket.subject}</div>
-                                            <div className="text-xs text-gray-500">{ticket.responses} replies</div>
+                                            <div className={`text-sm font-medium ${tableTextClass}`}>{ticket.subject}</div>
+                                            <div className="text-xs text-gray-500 dark:text-gray-400">{ticket.responses} replies</div>
                                         </td>
                                         <td className="px-6 py-4">
-                                            <div className="text-sm text-gray-900">{ticket.user}</div>
-                                            <div className="text-xs text-gray-500">{ticket.email}</div>
+                                            <div className={`text-sm ${tableTextClass}`}>{ticket.user}</div>
+                                            <div className="text-xs text-gray-500 dark:text-gray-400">{ticket.email}</div>
                                         </td>
                                         <td className="px-6 py-4"><PriorityTag priority={ticket.priority} /></td>
                                         <td className="px-6 py-4"><CategoryTag category={ticket.category} /></td>
-                                        <td className="px-6 py-4 text-sm text-gray-500">{ticket.lastUpdate}</td>
+                                        <td className="px-6 py-4 text-sm text-gray-500 dark:text-gray-400">{ticket.lastUpdate}</td>
                                         <td className="px-6 py-4">
                                             <button 
                                                 onClick={(e) => { e.stopPropagation(); handleViewTicket(ticket); }}
-                                                className="text-sm text-blue-600 underline hover:text-blue-800 transition font-medium"
+                                                className="text-sm text-blue-600 dark:text-blue-400 underline hover:text-blue-800 dark:hover:text-blue-300 transition font-medium"
                                             >
                                                 View
                                             </button>
@@ -299,32 +284,31 @@ const SupportDashboard: React.FC = () => {
 
             case 'knowledgeBase':
                 return (
-                    // Knowledge Base Table (Simplified for space)
                     <div className="overflow-x-auto">
-                         <table className="min-w-full divide-y divide-gray-200">
-                            <thead className="bg-gray-50 border-b">
+                        <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                            <thead className={tableHeaderClass}>
                                 <tr>
-                                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500">ID</th>
-                                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500">Title</th>
-                                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500">Category</th>
-                                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500">Views</th>
-                                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500">Last Edited</th>
-                                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500">Author</th>
+                                    <th className="px-6 py-3 text-left text-xs font-medium">ID</th>
+                                    <th className="px-6 py-3 text-left text-xs font-medium">Title</th>
+                                    <th className="px-6 py-3 text-left text-xs font-medium">Category</th>
+                                    <th className="px-6 py-3 text-left text-xs font-medium">Views</th>
+                                    <th className="px-6 py-3 text-left text-xs font-medium">Last Edited</th>
+                                    <th className="px-6 py-3 text-left text-xs font-medium">Author</th>
                                 </tr>
                             </thead>
-                            <tbody className="divide-y divide-gray-200">
+                            <tbody className={`divide-y divide-gray-200 dark:divide-gray-700 ${darkMode ? 'dark:bg-gray-800' : 'bg-white'}`}>
                                 {knowledgeArticles.map((article: KnowledgeArticle, index: number) => (
-                                    <tr key={index} className="hover:bg-gray-50 cursor-pointer">
-                                        <td className="px-6 py-4 text-sm font-medium text-gray-900">{article.id}</td>
-                                        <td className="px-6 py-4 text-sm font-medium text-gray-900">{article.title}</td>
+                                    <tr key={index} className={`${tableRowClass} cursor-pointer`}>
+                                        <td className={`px-6 py-4 text-sm font-medium ${tableTextClass}`}>{article.id}</td>
+                                        <td className={`px-6 py-4 text-sm font-medium ${tableTextClass}`}>{article.title}</td>
                                         <td className="px-6 py-4">
-                                            <span className="text-purple-600 bg-purple-100/70 px-3 py-1 rounded-full text-xs font-medium">
+                                            <span className="text-purple-600 bg-purple-100/70 dark:text-purple-300 dark:bg-purple-900/50 px-3 py-1 rounded-full text-xs font-medium">
                                                 {article.category}
                                             </span>
                                         </td>
-                                        <td className="px-6 py-4 text-sm text-gray-500">{article.views.toLocaleString()}</td>
-                                        <td className="px-6 py-4 text-sm text-gray-500">{article.lastEdited}</td>
-                                        <td className="px-6 py-4 text-sm text-gray-900">{article.author}</td>
+                                        <td className={`px-6 py-4 text-sm ${tableTextClass}`}>{article.views.toLocaleString()}</td>
+                                        <td className={`px-6 py-4 text-sm ${tableTextClass}`}>{article.lastEdited}</td>
+                                        <td className={`px-6 py-4 text-sm ${tableTextClass}`}>{article.author}</td>
                                     </tr>
                                 ))}
                             </tbody>
@@ -334,34 +318,33 @@ const SupportDashboard: React.FC = () => {
 
             case 'teamManagement':
                 return (
-                    // Team Management Table (Simplified for space)
                     <div className="overflow-x-auto">
-                         <table className="min-w-full divide-y divide-gray-200">
-                            <thead className="bg-gray-50 border-b">
+                        <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                            <thead className={tableHeaderClass}>
                                 <tr>
-                                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500">Member</th>
-                                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500">Role</th>
-                                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500">Tickets Resolved</th>
-                                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500">Avg. Rating</th>
-                                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500">Status</th>
+                                    <th className="px-6 py-3 text-left text-xs font-medium">Member</th>
+                                    <th className="px-6 py-3 text-left text-xs font-medium">Role</th>
+                                    <th className="px-6 py-3 text-left text-xs font-medium">Tickets Resolved</th>
+                                    <th className="px-6 py-3 text-left text-xs font-medium">Avg. Rating</th>
+                                    <th className="px-6 py-3 text-left text-xs font-medium">Status</th>
                                 </tr>
                             </thead>
-                            <tbody className="divide-y divide-gray-200">
+                            <tbody className={`divide-y divide-gray-200 dark:divide-gray-700 ${darkMode ? 'dark:bg-gray-800' : 'bg-white'}`}>
                                 {teamMembers.map((member: TeamMember, index: number) => (
-                                    <tr key={index} className="hover:bg-gray-50 cursor-pointer">
+                                    <tr key={index} className={`${tableRowClass} cursor-pointer`}>
                                         <td className="px-6 py-4">
-                                            <div className="text-sm font-medium text-gray-900">{member.name}</div>
-                                            <div className="text-xs text-gray-500">{member.email}</div>
+                                            <div className={`text-sm font-medium ${tableTextClass}`}>{member.name}</div>
+                                            <div className="text-xs text-gray-500 dark:text-gray-400">{member.email}</div>
                                         </td>
-                                        <td className="px-6 py-4 text-sm text-gray-900">{member.role}</td>
-                                        <td className="px-6 py-4 text-sm text-gray-500">{member.ticketsResolved}</td>
-                                        <td className="px-6 py-4 text-sm font-medium text-gray-900 flex items-center gap-1">
+                                        <td className={`px-6 py-4 text-sm ${tableTextClass}`}>{member.role}</td>
+                                        <td className={`px-6 py-4 text-sm ${tableTextClass}`}>{member.ticketsResolved}</td>
+                                        <td className={`px-6 py-4 text-sm font-medium ${tableTextClass} flex items-center gap-1`}>
                                             <Star size={14} className="text-yellow-400 fill-yellow-400" />
                                             {member.avgRating.toFixed(1)}
                                         </td>
                                         <td className="px-6 py-4">
                                             <span className={`h-2 w-2 rounded-full inline-block mr-2 ${getStatusColor(member.status)}`}></span>
-                                            <span className="text-sm text-gray-900">{member.status}</span>
+                                            <span className={`text-sm ${tableTextClass}`}>{member.status}</span>
                                         </td>
                                     </tr>
                                 ))}
@@ -375,27 +358,30 @@ const SupportDashboard: React.FC = () => {
         }
     };
 
-
     // --- DASHBOARD PAGE RENDER ---
     if (currentPage === 'dashboard') {
         return (
-            <div className="min-h-screen   font-sans">
+            <div className={`min-h-screen ${bgClass} ${textClass} font-sans transition-colors duration-200`}>
                 {/* Header */}
-                <div className="  px-8 py-6">
+                <div className={`px-8 py-6 ${cardBgClass} shadow-sm`}>
                     <div className="flex justify-between items-center">
                         <div>
-                            <h1 className="text-3xl font-bold text-gray-900">Content Management</h1>
-                            <p className="text-sm text-gray-500 mt-1">Welcome back! Here's what's happening with your platform today.</p>
+                            <h1 className="text-3xl font-bold">Content Management</h1>
+                            <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">Welcome back! Here's what's happening with your platform today.</p>
                         </div>
-                        {/* The image shows an 'Add New Plan' button in the header */}
-                        <button 
-                            // Using handleCreateNewArticle to represent "Add New Plan" / "New Article" for demonstration
-                            
-                            className="bg-blue-600 text-white px-4 py-2 rounded-lg flex items-center gap-2 hover:bg-blue-700 transition font-medium"
-                        >
-                            <Plus size={18} />
-                            Add New Plan
-                        </button>
+                        <div className="flex items-center gap-4">
+                            {/* Dark Mode Toggle */}
+                            <button 
+                                onClick={toggleDarkMode}
+                                className="p-2 rounded-lg bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition"
+                            >
+                                {darkMode ? '🌙' : '☀️'}
+                            </button>
+                            <button className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg flex items-center gap-2 transition font-medium">
+                                <Plus size={18} />
+                                Add New Plan
+                            </button>
+                        </div>
                     </div>
                 </div>
 
@@ -403,24 +389,24 @@ const SupportDashboard: React.FC = () => {
                 <div className="px-8 py-6">
                     <div className="grid grid-cols-5 gap-4">
                         {/* Stat Cards */}
-                        <div className="bg-white p-6 rounded-lg shadow-sm">
-                            <p className="text-md text-gray-600 mb-1">Total Tickets</p>
+                        <div className={`${cardBgClass} p-6 rounded-lg shadow-sm border ${borderClass}`}>
+                            <p className="text-md text-gray-600 dark:text-gray-400 mb-1">Total Tickets</p>
                             <p className="text-4xl font-semibold">{tickets.length}</p>
                         </div>
-                        <div className="bg-white p-6 rounded-lg shadow-sm">
-                            <p className="text-md text-gray-600 mb-1">Open Tickets</p>
+                        <div className={`${cardBgClass} p-6 rounded-lg shadow-sm border ${borderClass}`}>
+                            <p className="text-md text-gray-600 dark:text-gray-400 mb-1">Open Tickets</p>
                             <p className="text-4xl font-semibold">{tickets.filter(t => t.category === 'Open' || t.category === 'In Progress').length}</p>
                         </div>
-                        <div className="bg-white p-6 rounded-lg shadow-sm">
-                            <p className="text-md text-gray-600 mb-1">Resolved Today</p>
+                        <div className={`${cardBgClass} p-6 rounded-lg shadow-sm border ${borderClass}`}>
+                            <p className="text-md text-gray-600 dark:text-gray-400 mb-1">Resolved Today</p>
                             <p className="text-4xl font-semibold">8</p>
                         </div>
-                        <div className="bg-white p-6 rounded-lg shadow-sm">
-                            <p className="text-md text-gray-600 mb-1">Avg Response Time</p>
+                        <div className={`${cardBgClass} p-6 rounded-lg shadow-sm border ${borderClass}`}>
+                            <p className="text-md text-gray-600 dark:text-gray-400 mb-1">Avg Response Time</p>
                             <p className="text-4xl font-semibold">2.4 Hours</p>
                         </div>
-                        <div className="bg-white p-6 rounded-lg shadow-sm">
-                            <p className="text-md text-gray-600 mb-1">Satisfaction</p>
+                        <div className={`${cardBgClass} p-6 rounded-lg shadow-sm border ${borderClass}`}>
+                            <p className="text-md text-gray-600 dark:text-gray-400 mb-1">Satisfaction</p>
                             <p className="text-4xl font-semibold">4.6/5</p>
                         </div>
                     </div>
@@ -428,14 +414,16 @@ const SupportDashboard: React.FC = () => {
 
                 {/* Main Content Card */}
                 <div className="px-8 pb-8">
-                    <div className="  rounded-xl ">
+                    <div className={`rounded-xl ${cardBgClass} shadow-lg border ${borderClass}`}>
                         {/* Tabs Bar */}
                         <div className="p-4 rounded-t-xl flex justify-between items-center">
-                            <div className="flex gap-2  p-2 bg-gray-200 rounded-lg inline-flex">
+                            <div className={`flex gap-2 p-2 ${darkMode ? 'dark:bg-gray-700' : 'bg-gray-200'} rounded-lg`}>
                                 <button
                                     onClick={() => setActiveTab('allTickets')}
                                     className={`px-4 py-2 text-sm font-medium cursor-pointer rounded-md transition ${
-                                        activeTab === 'allTickets' ? 'bg-white shadow-md text-gray-800' : 'text-gray-600 hover:bg-gray-50'
+                                        activeTab === 'allTickets' 
+                                            ? `${darkMode ? 'dark:bg-gray-600 dark:text-white' : 'bg-white shadow-md text-gray-800'}` 
+                                            : `${darkMode ? 'dark:text-gray-300 dark:hover:bg-gray-600' : 'text-gray-600 hover:bg-gray-50'}`
                                     }`}
                                 >
                                     All Tickets
@@ -443,7 +431,9 @@ const SupportDashboard: React.FC = () => {
                                 <button
                                     onClick={() => setActiveTab('knowledgeBase')}
                                     className={`px-4 py-2 cursor-pointer text-sm font-medium rounded-md transition ${
-                                        activeTab === 'knowledgeBase' ? 'bg-white shadow-md text-gray-800' : 'text-gray-600 hover:bg-gray-50'
+                                        activeTab === 'knowledgeBase' 
+                                            ? `${darkMode ? 'dark:bg-gray-600 dark:text-white' : 'bg-white shadow-md text-gray-800'}` 
+                                            : `${darkMode ? 'dark:text-gray-300 dark:hover:bg-gray-600' : 'text-gray-600 hover:bg-gray-50'}`
                                     }`}
                                 >
                                     Knowledge Base
@@ -451,7 +441,9 @@ const SupportDashboard: React.FC = () => {
                                 <button
                                     onClick={() => setActiveTab('teamManagement')}
                                     className={`px-4 py-2 cursor-pointer text-sm font-medium rounded-md transition ${
-                                        activeTab === 'teamManagement' ? 'bg-white shadow-md text-gray-800' : 'text-gray-600 hover:bg-gray-50'
+                                        activeTab === 'teamManagement' 
+                                            ? `${darkMode ? 'dark:bg-gray-600 dark:text-white' : 'bg-white shadow-md text-gray-800'}` 
+                                            : `${darkMode ? 'dark:text-gray-300 dark:hover:bg-gray-600' : 'text-gray-600 hover:bg-gray-50'}`
                                     }`}
                                 >
                                     Team Management
@@ -459,22 +451,23 @@ const SupportDashboard: React.FC = () => {
                             </div>
                         </div>
 
-                        {/* Flashcard Decks Section (Replicating the visual block from the image) */}
-                        <div className="px-6 py-5   flex justify-between items-center">
+                        {/* Flashcard Decks Section */}
+                        <div className="px-6 py-5 flex justify-between items-center border-b dark:border-gray-700">
                             <div>
-                                <h2 className="text-lg font-semibold text-gray-900">Flashcard Decks</h2>
-                                <p className="text-sm text-gray-500 mt-1">Manage your Italian learning flashcard collections</p>
+                                <h2 className="text-lg font-semibold">Flashcard Decks</h2>
+                                <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">Manage your Italian learning flashcard collections</p>
                             </div>
                             <div className="flex gap-3">
-                                <button className="border cursor-pointer border-gray-300 text-gray-700 px-4 py-2 rounded-lg flex items-center gap-2 hover:bg-gray-50 transition font-medium">
+                                <button className={`border ${borderClass} text-gray-700 dark:text-gray-300 px-4 py-2 rounded-lg flex items-center gap-2 hover:bg-gray-50 dark:hover:bg-gray-700 transition font-medium`}>
                                     <Filter size={18} />
-                                  <select name="" id=""> Priority</select>
-                                  <option value="">high</option>
+                                    <select className={`bg-transparent ${darkMode ? 'dark:bg-gray-800' : ''}`}>
+                                        <option>Priority</option>
+                                        <option>High</option>
+                                        <option>Medium</option>
+                                        <option>Low</option>
+                                    </select>
                                 </button>
-                                <button 
-                                    
-                                    className="bg-blue-600 cursor-pointer text-white px-4 py-2 rounded-lg flex items-center gap-2 hover:bg-blue-700 transition font-medium"
-                                >
+                                <button className="bg-blue-600 cursor-pointer text-white px-4 py-2 rounded-lg flex items-center gap-2 hover:bg-blue-700 transition font-medium">
                                     <Plus size={18} />
                                     Create Ticket
                                 </button>
@@ -485,17 +478,17 @@ const SupportDashboard: React.FC = () => {
                         {renderActiveTabContent()}
 
                         {/* Pagination */}
-                        <div className="px-6 py-4 border-t flex justify-between items-center">
-                            <p className="text-sm text-gray-600">Showing 1 to 10 of 24 orders</p>
+                        <div className={`px-6 py-4 border-t ${borderClass} flex justify-between items-center`}>
+                            <p className="text-sm text-gray-600 dark:text-gray-400">Showing 1 to 10 of 24 orders</p>
                             <div className="flex gap-1 items-center">
-                                <button className="p-2 cursor-pointer hover:bg-gray-100 rounded-lg border border-gray-200">
+                                <button className={`p-2 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg border ${borderClass}`}>
                                     <ChevronLeft size={18} className="text-gray-400" />
                                 </button>
-                                <button className=" cursor-pointer px-3 py-1 bg-blue-600 text-white rounded-lg text-sm font-medium shadow-md">1</button>
-                                <button className=" cursor-pointer px-3 py-1 hover:bg-gray-100 rounded-lg text-sm text-gray-600">2</button>
-                                <button className=" cursor-pointer px-3 py-1 hover:bg-gray-100 rounded-lg text-sm text-gray-600">3</button>
-                                <button className=" cursor-pointer p-2 hover:bg-gray-100 rounded-lg border border-gray-200">
-                                    <ChevronRight size={18} className="text-gray-600" />
+                                <button className="cursor-pointer px-3 py-1 bg-blue-600 text-white rounded-lg text-sm font-medium shadow-md">1</button>
+                                <button className={`cursor-pointer px-3 py-1 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg text-sm ${darkMode ? 'dark:text-gray-300' : 'text-gray-600'}`}>2</button>
+                                <button className={`cursor-pointer px-3 py-1 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg text-sm ${darkMode ? 'dark:text-gray-300' : 'text-gray-600'}`}>3</button>
+                                <button className={`p-2 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg border ${borderClass}`}>
+                                    <ChevronRight size={18} className="text-gray-600 dark:text-gray-400" />
                                 </button>
                             </div>
                         </div>
@@ -505,35 +498,42 @@ const SupportDashboard: React.FC = () => {
         );
     }
 
-
     // --- TICKET DETAIL PAGE RENDER ---
     if (currentPage === 'detail' && selectedTicket) {
         const ticket = selectedTicket;
 
         return (
-            <div className="min-h-screen bg-gray-50 font-sans flex flex-col">
+            <div className={`min-h-screen ${bgClass} ${textClass} font-sans flex flex-col transition-colors duration-200`}>
                 {/* Detail Header */}
-                <div className="bg-white px-8 py-4 border-b shadow-sm">
+                <div className={`px-8 py-4 border-b ${borderClass} ${cardBgClass} shadow-sm`}>
                     <div className="flex items-center justify-between">
-                        <button onClick={handleBackToDashboard} className="flex  cursor-pointer items-center text-gray-600 hover:text-gray-800 transition font-medium">
+                        <button onClick={handleBackToDashboard} className={`flex cursor-pointer items-center ${darkMode ? 'dark:text-gray-300 dark:hover:text-white' : 'text-gray-600 hover:text-gray-800'} transition font-medium`}>
                             <ArrowLeft size={20} className="mr-2" />
                             User Management
                         </button>
-                        <button 
-                            onClick={handleMarkAsResolved}
-                            className={`bg-blue-600 text-white  cursor-pointer px-4 py-2 rounded-lg flex items-center gap-2 hover:bg-blue-700 transition font-medium ${ticket.status === 'Resolved' ? 'opacity-50 cursor-not-allowed bg-green-600' : ''}`}
-                            disabled={ticket.status === 'Resolved'}
-                        >
-                            {ticket.status === 'Resolved' ? <CheckCircle size={18} /> : null}
-                            {ticket.status === 'Resolved' ? 'Resolved' : 'Mark As Resolved'}
-                        </button>
+                        <div className="flex items-center gap-4">
+                            <button 
+                                onClick={toggleDarkMode}
+                                className="p-2 rounded-lg bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition"
+                            >
+                                {darkMode ? '🌙' : '☀️'}
+                            </button>
+                            <button 
+                                onClick={handleMarkAsResolved}
+                                className={`bg-blue-600 text-white cursor-pointer px-4 py-2 rounded-lg flex items-center gap-2 hover:bg-blue-700 transition font-medium ${ticket.status === 'Resolved' ? 'opacity-50 cursor-not-allowed bg-green-600' : ''}`}
+                                disabled={ticket.status === 'Resolved'}
+                            >
+                                {ticket.status === 'Resolved' ? <CheckCircle size={18} /> : null}
+                                {ticket.status === 'Resolved' ? 'Resolved' : 'Mark As Resolved'}
+                            </button>
+                        </div>
                     </div>
                 </div>
 
                 {/* Ticket Title */}
-                <div className="px-8 py-4 bg-white border-b">
-                    <h1 className="text-2xl font-semibold text-gray-900">Ticket {ticket.id}</h1>
-                    <p className="text-lg text-gray-700 mt-1">{ticket.subject}</p>
+                <div className={`px-8 py-4 ${cardBgClass} border-b ${borderClass}`}>
+                    <h1 className="text-2xl font-semibold">Ticket {ticket.id}</h1>
+                    <p className="text-lg text-gray-700 dark:text-gray-300 mt-1">{ticket.subject}</p>
                 </div>
 
                 {/* Main Content Area */}
@@ -541,10 +541,10 @@ const SupportDashboard: React.FC = () => {
                     <div className="flex h-full gap-8">
                         
                         {/* Conversation Panel (Left) */}
-                        <div className="flex-1 bg-white rounded-lg shadow-lg flex flex-col min-h-full">
-                            <div className="p-6 border-b">
-                                <h2 className="text-xl font-semibold text-gray-900">Conversation</h2>
-                                <p className="text-sm text-gray-500">Messages between user and support team</p>
+                        <div className={`flex-1 ${cardBgClass} rounded-lg shadow-lg flex flex-col min-h-full border ${borderClass}`}>
+                            <div className="p-6 border-b dark:border-gray-700">
+                                <h2 className="text-xl font-semibold">Conversation</h2>
+                                <p className="text-sm text-gray-500 dark:text-gray-400">Messages between user and support team</p>
                             </div>
                             
                             {/* Messages */}
@@ -552,17 +552,25 @@ const SupportDashboard: React.FC = () => {
                                 {(ticket.conversation || []).map((msg, index) => (
                                     <div key={index} className={`flex ${msg.role === 'User' ? 'justify-start' : 'justify-end'}`}>
                                         <div className={`flex items-start max-w-xl ${msg.role === 'User' ? 'flex-row' : 'flex-row-reverse'}`}>
-                                            <div className={`h-10 w-10 rounded-full bg-gray-200 flex-shrink-0 flex items-center justify-center text-sm font-bold text-gray-600 ${msg.role === 'User' ? 'mr-3' : 'ml-3'}`}>
+                                            <div className={`h-10 w-10 rounded-full ${darkMode ? 'dark:bg-gray-600' : 'bg-gray-200'} flex items-center justify-center text-sm font-bold ${darkMode ? 'dark:text-gray-300' : 'text-gray-600'} ${msg.role === 'User' ? 'mr-3' : 'ml-3'}`}>
                                                 {msg.sender.split(' ').map(n => n[0]).join('')}
                                             </div>
                                             <div className="flex flex-col">
-                                                <div className={`text-xs text-gray-500 mb-1 ${msg.role === 'User' ? 'text-left' : 'text-right'}`}>
-                                                    <span className="font-semibold text-gray-800">{msg.sender}</span> · {msg.role} · {msg.time.substring(msg.time.lastIndexOf(' ') + 1)}
+                                                <div className={`text-xs ${darkMode ? 'dark:text-gray-400' : 'text-gray-500'} mb-1 ${msg.role === 'User' ? 'text-left' : 'text-right'}`}>
+                                                    <span className={`font-semibold ${darkMode ? 'dark:text-gray-300' : 'text-gray-800'}`}>{msg.sender}</span> · {msg.role} · {msg.time.substring(msg.time.lastIndexOf(' ') + 1)}
                                                 </div>
-                                                <div className={`p-4 rounded-xl shadow-sm ${msg.role === 'User' ? 'bg-gray-100 text-gray-800 rounded-tl-none' : 'bg-blue-600 text-white rounded-tr-none'}`}>
+                                                <div className={`p-4 rounded-xl shadow-sm ${
+                                                    msg.role === 'User' 
+                                                        ? `${darkMode ? 'dark:bg-gray-700 dark:text-gray-300' : 'bg-gray-100 text-gray-800'} rounded-tl-none` 
+                                                        : 'bg-blue-600 text-white rounded-tr-none'
+                                                }`}>
                                                     <p className="text-sm whitespace-pre-wrap">{msg.message}</p>
                                                     {msg.attachment && (
-                                                        <a href="#" className={`flex items-center mt-2 text-xs font-medium underline ${msg.role === 'User' ? 'text-blue-600' : 'text-blue-200'}`}>
+                                                        <a href="#" className={`flex items-center mt-2 text-xs font-medium underline ${
+                                                            msg.role === 'User' 
+                                                                ? 'text-blue-600 dark:text-blue-400' 
+                                                                : 'text-blue-200'
+                                                        }`}>
                                                             <Paperclip size={12} className="mr-1" />
                                                             {msg.attachment}
                                                         </a>
@@ -575,14 +583,14 @@ const SupportDashboard: React.FC = () => {
                             </div>
 
                             {/* Reply Input */}
-                            <div className="p-6 border-t bg-gray-50">
+                            <div className={`p-6 border-t ${darkMode ? 'dark:border-gray-700 dark:bg-gray-700' : 'bg-gray-50 border-gray-200'}`}>
                                 <div className="relative">
                                     <textarea
                                         value={messageInput}
                                         onChange={(e) => setMessageInput(e.target.value)}
                                         placeholder="Write your message here"
                                         rows={3}
-                                        className="w-full p-3 pr-16 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 resize-none"
+                                        className={`w-full p-3 pr-16 border rounded-lg focus:ring-blue-500 focus:border-blue-500 resize-none ${inputBgClass} ${textClass}`}
                                     />
                                     <button
                                         onClick={handleSendMessage}
@@ -600,49 +608,49 @@ const SupportDashboard: React.FC = () => {
                         <div className="w-80 space-y-6">
                             
                             {/* User Information */}
-                            <div className="bg-white rounded-lg shadow-lg p-6">
-                                <h2 className="text-lg font-semibold text-gray-900 border-b pb-3 mb-4">User Information</h2>
+                            <div className={`${cardBgClass} rounded-lg shadow-lg p-6 border ${borderClass}`}>
+                                <h2 className="text-lg font-semibold border-b dark:border-gray-700 pb-3 mb-4">User Information</h2>
                                 <div className="flex items-center mb-4">
-                                    <div className="h-12 w-12 rounded-full bg-blue-100 flex items-center justify-center mr-3 text-blue-600 font-bold text-lg">
+                                    <div className="h-12 w-12 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center mr-3 text-blue-600 dark:text-blue-300 font-bold text-lg">
                                         {ticket.user[0]}
                                     </div>
                                     <div>
-                                        <p className="font-medium text-gray-900">{ticket.user}</p>
-                                        <p className="text-sm text-gray-500">{ticket.email}</p>
+                                        <p className="font-medium">{ticket.user}</p>
+                                        <p className="text-sm text-gray-500 dark:text-gray-400">{ticket.email}</p>
                                     </div>
                                 </div>
-                                <div className="space-y-3 text-sm text-gray-700">
-                                    <p className="flex items-center"><Calendar size={16} className="mr-2 text-gray-400" /> **Joined:** {ticket.joined || 'N/A'}</p>
-                                    <p className="flex items-center"><Star size={16} className="mr-2 text-gray-400" /> **Subscription:** <span className="font-medium ml-1 text-green-600">{ticket.subscription || 'Basic'}</span></p>
+                                <div className="space-y-3 text-sm text-gray-700 dark:text-gray-300">
+                                    <p className="flex items-center"><Calendar size={16} className="mr-2 text-gray-400" /> <span className="text-gray-500 dark:text-gray-400">Joined:</span> <span className="font-medium ml-1">{ticket.joined || 'N/A'}</span></p>
+                                    <p className="flex items-center"><Star size={16} className="mr-2 text-gray-400" /> <span className="text-gray-500 dark:text-gray-400">Subscription:</span> <span className="font-medium ml-1 text-green-600 dark:text-green-400">{ticket.subscription || 'Basic'}</span></p>
                                 </div>
                             </div>
 
                             {/* Ticket Details */}
-                            <div className="bg-white rounded-lg shadow-lg p-6">
-                                <h2 className="text-lg font-semibold text-gray-900 border-b pb-3 mb-4">Ticket Details</h2>
-                                <div className="space-y-3 text-sm text-gray-700">
+                            <div className={`${cardBgClass} rounded-lg shadow-lg p-6 border ${borderClass}`}>
+                                <h2 className="text-lg font-semibold border-b dark:border-gray-700 pb-3 mb-4">Ticket Details</h2>
+                                <div className="space-y-3 text-sm text-gray-700 dark:text-gray-300">
                                     <div className="flex justify-between items-center">
-                                        <span className="text-gray-500">Status</span>
+                                        <span className="text-gray-500 dark:text-gray-400">Status</span>
                                         <CategoryTag category={ticket.status || 'N/A'} />
                                     </div>
                                     <div className="flex justify-between items-center">
-                                        <span className="text-gray-500">Priority</span>
+                                        <span className="text-gray-500 dark:text-gray-400">Priority</span>
                                         <PriorityTag priority={ticket.priority} />
                                     </div>
                                     <p className="flex justify-between items-center">
-                                        <span className="text-gray-500">Assignee</span>
+                                        <span className="text-gray-500 dark:text-gray-400">Assignee</span>
                                         <span className="font-medium">{ticket.assignee || 'Unassigned'}</span>
                                     </p>
                                     <p className="flex justify-between items-center">
-                                        <span className="text-gray-500">Created</span>
+                                        <span className="text-gray-500 dark:text-gray-400">Created</span>
                                         <span className="font-medium">{ticket.created || 'N/A'}</span>
                                     </p>
                                     <p className="flex justify-between items-center">
-                                        <span className="text-gray-500">Last Update</span>
+                                        <span className="text-gray-500 dark:text-gray-400">Last Update</span>
                                         <span className="font-medium">{ticket.lastUpdateTime || 'N/A'}</span>
                                     </p>
                                     <p className="flex justify-between items-center">
-                                        <span className="text-gray-500">Category</span>
+                                        <span className="text-gray-500 dark:text-gray-400">Category</span>
                                         <span className="font-medium">{ticket.categoryDetail || 'N/A'}</span>
                                     </p>
                                 </div>
@@ -655,18 +663,13 @@ const SupportDashboard: React.FC = () => {
     }
 
     return (
-        <div className="p-10 text-center">
+        <div className={`p-10 text-center ${bgClass} ${textClass}`}>
             Loading Dashboard...
         </div>
     );
 };
 
 export default SupportDashboard;
-
-
-
-
-
 
 
 

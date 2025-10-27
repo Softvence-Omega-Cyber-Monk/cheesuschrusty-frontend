@@ -13,3 +13,4 @@ const SidebarUserInfo: React.FC<{ ticket: Ticket }> = ({ ticket }) => (
 );
 
 export default SidebarUserInfo;
+

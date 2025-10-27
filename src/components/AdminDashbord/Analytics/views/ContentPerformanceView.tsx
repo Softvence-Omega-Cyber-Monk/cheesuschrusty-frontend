@@ -13,9 +13,9 @@ const contentPerformanceData = [
 
 const ContentPerformanceView: React.FC = () => {
   return (
-    <div className="bg-white p-6 rounded-xl shadow-sm">
-      <h3 className="text-lg font-semibold text-gray-800">Content Performance</h3>
-      <p className="text-sm text-gray-500 mb-6">Views, completion rates, and ratings for top content</p>
+    <div className="bg-white p-6 rounded-xl shadow-sm dark:bg-gray-800">
+      <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200">Content Performance</h3>
+      <p className="text-sm text-gray-500 mb-6 dark:text-gray-400">Views, completion rates, and ratings for top content</p>
       <div style={{ width: '100%', height: 400 }}>
         <ResponsiveContainer>
           <BarChart
@@ -28,13 +28,14 @@ const ContentPerformanceView: React.FC = () => {
             }}
           >
             <CartesianGrid strokeDasharray="3 3" vertical={false} />
-            <XAxis dataKey="name" tick={{ fontSize: 12 }} stroke="#9ca3af" />
-            <YAxis tick={{ fontSize: 12 }} stroke="#9ca3af" />
+            <XAxis dataKey="name" tick={{ fontSize: 12, fill: '#A0AEC0' }} stroke="#A0AEC0" />
+            <YAxis tick={{ fontSize: 12, fill: '#A0AEC0' }} stroke="#A0AEC0" />
             <Tooltip
                 contentStyle={{ 
-                    backgroundColor: 'white', 
-                    border: '1px solid #e5e7eb',
-                    borderRadius: '0.5rem'
+                    backgroundColor: '#374151', 
+                    border: '1px solid #4b5563',
+                    borderRadius: '0.5rem',
+                    color: '#e5e7eb'
                 }}
             />
             <Legend wrapperStyle={{fontSize: "14px"}} />

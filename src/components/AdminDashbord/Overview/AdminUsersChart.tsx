@@ -61,8 +61,8 @@ const CustomTooltip = ({ active, payload, label }: any) => {
   if (active && payload && payload.length) {
     const formatValue = (value: number) => `${(value / 1000).toFixed(0)}k`;
     return (
-      <div className="bg-white p-2 border border-gray-200 shadow-lg text-sm rounded-lg">
-        <p className="font-semibold mb-1 text-[#484848]">{label}</p>
+      <div className="bg-white p-2 border border-gray-200 shadow-lg text-sm rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200">
+        <p className="font-semibold mb-1 text-[#484848] dark:text-gray-300">{label}</p>
         {payload.map((entry: any) => (
           <p key={entry.name} style={{ color: entry.stroke }}>
             {`${entry.name}: `}
@@ -93,24 +93,24 @@ const AdminUsersChart: React.FC = () => {
     };
 
     return (
-        <div className="  p-6 rounded-lg mb-6 border border-gray-100  ">
+        <div className="p-6 rounded-lg mb-6 border border-gray-100 dark:bg-gray-800 dark:border-gray-700">
             <div className="flex items-center justify-between mb-4">
-                <h2 className="text-2xl font-bold text-gray-800">Users Overview</h2>
+                <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-200">Users Overview</h2>
                 
                 <div className="flex items-center gap-6">
                     {/* Legend */}
                     <div className="flex items-center gap-4">
                         <div className="w-6 h-6 rounded-full" style={{ backgroundColor: TOTAL_USERS_COLOR }}></div>
-                        <span className="text-base text-[#484848] font-semibold   ">Total Users</span>
+                        <span className="text-base text-[#484848] font-semibold dark:text-gray-300">Total Users</span>
                     </div>
                     <div className="flex items-center gap-4">
                         <div className="w-6 h-6  rounded-full" style={{ backgroundColor: NEW_USERS_COLOR }}></div>
-                        <span className="text-base font-semibold text-[#484848]">New Users</span>
+                        <span className="text-base font-semibold text-[#484848] dark:text-gray-300">New Users</span>
                     </div>
                     
                     {/* 4. Update the select element to control state */}
                     <select 
-                        className="text-xl ml-50 bg-white border border-gray-300 hover:cursor-pointer rounded-lg px-3 py-1   focus:outline-none appearance-none pr-6"
+                        className="text-xl ml-50 bg-white border border-gray-300 hover:cursor-pointer rounded-lg px-3 py-1   focus:outline-none appearance-none pr-6 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200"
                         value={selectedPeriod}
                         onChange={handlePeriodChange} // Attach the handler
                     >
@@ -145,13 +145,13 @@ const AdminUsersChart: React.FC = () => {
                         axisLine={false} 
                         tickLine={false} 
                         // padding={{ left: 20, right: 20 }}
-                        tick={{ fontSize: 12, fill: '#888888' }}
+                        tick={{ fontSize: 12, fill: '#A0AEC0' }}
                     />
                     <YAxis 
                         axisLine={false} 
                         tickLine={false} 
                         tickFormatter={formatYAxisTick}
-                        tick={{ fontSize: 14, fill: '#888888' }}
+                        tick={{ fontSize: 14, fill: '#A0AEC0' }}
                         domain={[0, 'dataMax + 5000']}
                     />
                     

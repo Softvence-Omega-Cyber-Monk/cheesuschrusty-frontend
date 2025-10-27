@@ -10,30 +10,27 @@ interface TabsBarProps {
 
 export const TabsBar: React.FC<TabsBarProps> = ({ activeTab, onTabChange }) => {
   return (
-    <div className="p-4 rounded-t-xl flex justify-between items-center">
-      <div className="flex gap-2 p-2 bg-gray-200 rounded-lg inline-flex">
+    <div className="p-4 rounded-t-xl flex justify-between items-center dark:bg-gray-800">
+      <div className="flex gap-2 p-2 bg-gray-200 rounded-lg inline-flex dark:bg-gray-700">
         <button
           onClick={() => onTabChange("allTickets")}
           className={`px-4 py-2 text-sm font-medium cursor-pointer rounded-md transition ${
-            activeTab === "allTickets" ? "bg-white shadow-md text-gray-800" : "text-gray-600 hover:bg-gray-50"
-          }`}
-        >
+            activeTab === "allTickets" ? "bg-white shadow-md text-gray-800 dark:bg-blue-600 dark:text-white" : "text-gray-600 hover:bg-gray-50 dark:text-gray-300 dark:hover:bg-gray-600"
+          }`}        >
           All Tickets
         </button>
         <button
           onClick={() => onTabChange("knowledgeBase")}
           className={`px-4 py-2 cursor-pointer text-sm font-medium rounded-md transition ${
-            activeTab === "knowledgeBase" ? "bg-white shadow-md text-gray-800" : "text-gray-600 hover:bg-gray-50"
-          }`}
-        >
+            activeTab === "knowledgeBase" ? "bg-white shadow-md text-gray-800 dark:bg-blue-600 dark:text-white" : "text-gray-600 hover:bg-gray-50 dark:text-gray-300 dark:hover:bg-gray-600"
+          }`}        >
           Knowledge Base
         </button>
         <button
           onClick={() => onTabChange("teamManagement")}
           className={`px-4 py-2 cursor-pointer text-sm font-medium rounded-md transition ${
-            activeTab === "teamManagement" ? "bg-white shadow-md text-gray-800" : "text-gray-600 hover:bg-gray-50"
-          }`}
-        >
+            activeTab === "teamManagement" ? "bg-white shadow-md text-gray-800 dark:bg-blue-600 dark:text-white" : "text-gray-600 hover:bg-gray-50 dark:text-gray-300 dark:hover:bg-gray-600"
+          }`}        >
           Team Management
         </button>
       </div>

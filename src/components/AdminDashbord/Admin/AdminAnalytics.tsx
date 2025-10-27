@@ -38,11 +38,11 @@ const App: React.FC = () => {
   ], []);
 
   return (
-    <div className="min-h-screen p-6  text-gray-800  ">
+    <div className="min-h-screen p-6  text-gray-800 dark:bg-gray-900 dark:text-gray-200">
       <div className="  mx-auto">
         <header className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900">Analytics</h1>
-          <p className="text-gray-500 mt-1">Welcome back! Here's what's happening with your platform today.</p>
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-200">Analytics</h1>
+          <p className="text-gray-500 mt-1 dark:text-gray-400">Welcome back! Here's what's happening with your platform today.</p>
         </header>
 
         <main>
@@ -52,7 +52,7 @@ const App: React.FC = () => {
             ))}
           </div>
 
-          <div className="bg-white rounded-lg shadow-sm p-2 mb-8 inline-flex items-center space-x-1">
+          <div className="bg-white rounded-lg shadow-sm p-2 mb-8 inline-flex items-center space-x-1 dark:bg-gray-800">
             {tabs.map(tab => (
               <TabButton
                 key={tab}

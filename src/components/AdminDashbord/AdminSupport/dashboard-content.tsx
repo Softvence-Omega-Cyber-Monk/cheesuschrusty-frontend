@@ -1,21 +1,21 @@
-import { useState } from "react"
-import { Filter, Plus } from "lucide-react"
-import type { TabType, Ticket, KnowledgeArticle, TeamMember } from "./types"
-import { TabsBar } from "./tabs-bar"
-import { TicketsTable } from "./tickets-table"
-import { KnowledgeBaseTable } from "./knowledge-base-table"
-import { TeamManagementTable } from "./team-management-table"
-import { Pagination } from "./pagination"
-import { Modal } from "./modal"
+import { useState } from "react";
+import { Filter, Plus } from "lucide-react";
+import type { TabType, Ticket, KnowledgeArticle, TeamMember } from "./types";
+import { TabsBar } from "./tabs-bar";
+import { TicketsTable } from "./tickets-table";
+import { KnowledgeBaseTable } from "./knowledge-base-table";
+import { TeamManagementTable } from "./team-management-table";
+import { Pagination } from "./pagination";
+import { Modal } from "./modal";
 
 interface DashboardContentProps {
-  activeTab: TabType
-  onTabChange: (tab: TabType) => void
-  tickets: Ticket[]
-  knowledgeArticles: KnowledgeArticle[]
-  teamMembers: TeamMember[]
-  onViewTicket: (ticket: Ticket) => void
-  onAddTicket: (ticket: Ticket) => void
+  activeTab: TabType;
+  onTabChange: (tab: TabType) => void;
+  tickets: Ticket[];
+  knowledgeArticles: KnowledgeArticle[];
+  teamMembers: TeamMember[];
+  onViewTicket: (ticket: Ticket) => void;
+  onAddTicket: (ticket: Ticket) => void;
 }
 
 export const DashboardContent: React.FC<DashboardContentProps> = ({
@@ -27,22 +27,22 @@ export const DashboardContent: React.FC<DashboardContentProps> = ({
   onViewTicket,
   onAddTicket,
 }) => {
-  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [newTicket, setNewTicket] = useState({
     subject: "",
     user: "",
     email: "",
     priority: "Low",
     category: "Open",
-  })
+  });
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    const { name, value } = e.target
-    setNewTicket((prev) => ({ ...prev, [name]: value }))
-  }
+    const { name, value } = e.target;
+    setNewTicket((prev) => ({ ...prev, [name]: value }));
+  };
 
   const handleAddTicket = () => {
-    if (!newTicket.subject || !newTicket.user || !newTicket.email) return
+    if (!newTicket.subject || !newTicket.user || !newTicket.email) return;
 
     const ticket: Ticket = {
       id: `TICK-${Math.floor(Math.random() * 1000)}`,
@@ -53,41 +53,46 @@ export const DashboardContent: React.FC<DashboardContentProps> = ({
       category: newTicket.category as "Open" | "In Progress" | "Resolved",
       responses: 0,
       lastUpdate: new Date().toLocaleDateString("en-GB"),
-    }
+    };
 
-    onAddTicket(ticket)
-    setIsModalOpen(false)
-    setNewTicket({ subject: "", user: "", email: "", priority: "Low", category: "Open" })
-  }
+    onAddTicket(ticket);
+    setIsModalOpen(false);
+    setNewTicket({ subject: "", user: "", email: "", priority: "Low", category: "Open" });
+  };
 
   const renderActiveTabContent = () => {
     switch (activeTab) {
       case "allTickets":
-        return <TicketsTable tickets={tickets} onViewTicket={onViewTicket} />
+        return <TicketsTable tickets={tickets} onViewTicket={onViewTicket} />;
       case "knowledgeBase":
-        return <KnowledgeBaseTable articles={knowledgeArticles} />
+        return <KnowledgeBaseTable articles={knowledgeArticles} />;
       case "teamManagement":
-        return <TeamManagementTable members={teamMembers} />
+        return <TeamManagementTable members={teamMembers} />;
       default:
-        return null
+        return null;
     }
-  }
+  };
 
   return (
-    <div className="px-8 pb-8">
+    <div className="px-8 pb-8 bg-gray-50 dark:bg-gray-950 min-h-screen transition-colors duration-300">
       <div className="rounded-xl">
         <TabsBar activeTab={activeTab} onTabChange={onTabChange} />
 
-        <div className="px-6 py-5 flex justify-between items-center">
+        {/* Header */}
+        <div className="px-6 py-5 flex justify-between items-center border-b border-gray-200 dark:border-gray-800">
           <div>
-            <h2 className="text-lg font-semibold text-gray-900">Flashcard Decks</h2>
-            <p className="text-sm text-gray-500 mt-1">Manage your Italian learning flashcard collections</p>
+            <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100">Flashcard Decks</h2>
+            <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
+              Manage your Italian learning flashcard collections
+            </p>
           </div>
+
           <div className="flex gap-3">
-            <button className="border border-gray-300 text-gray-700 px-4 py-2 rounded-lg flex items-center gap-2 hover:bg-gray-50 transition font-medium">
+            <button className="border border-gray-300 dark:border-gray-700 text-gray-700 dark:text-gray-200 px-4 py-2 rounded-lg flex items-center gap-2 hover:bg-gray-100 dark:hover:bg-gray-800 transition font-medium">
               <Filter size={18} />
               Filter
             </button>
+
             <button
               className="bg-blue-600 text-white px-4 py-2 rounded-lg flex items-center gap-2 hover:bg-blue-700 transition font-medium"
               onClick={() => setIsModalOpen(true)}
@@ -98,7 +103,11 @@ export const DashboardContent: React.FC<DashboardContentProps> = ({
           </div>
         </div>
 
-        {renderActiveTabContent()}
+        {/* Dynamic Content */}
+        <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-b-xl p-6 transition-colors duration-300">
+          {renderActiveTabContent()}
+        </div>
+
         <Pagination />
       </div>
 
@@ -111,7 +120,7 @@ export const DashboardContent: React.FC<DashboardContentProps> = ({
             placeholder="Subject"
             value={newTicket.subject}
             onChange={handleInputChange}
-            className="border border-gray-300 rounded-lg p-2 w-full"
+            className="border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 rounded-lg p-2 w-full transition-colors duration-300"
           />
           <input
             type="text"
@@ -119,7 +128,7 @@ export const DashboardContent: React.FC<DashboardContentProps> = ({
             placeholder="User Name"
             value={newTicket.user}
             onChange={handleInputChange}
-            className="border border-gray-300 rounded-lg p-2 w-full"
+            className="border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 rounded-lg p-2 w-full"
           />
           <input
             type="email"
@@ -127,13 +136,13 @@ export const DashboardContent: React.FC<DashboardContentProps> = ({
             placeholder="User Email"
             value={newTicket.email}
             onChange={handleInputChange}
-            className="border border-gray-300 rounded-lg p-2 w-full"
+            className="border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 rounded-lg p-2 w-full"
           />
           <select
             name="priority"
             value={newTicket.priority}
             onChange={handleInputChange}
-            className="border border-gray-300 rounded-lg p-2 w-full"
+            className="border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 rounded-lg p-2 w-full"
           >
             <option value="Low">Low</option>
             <option value="Medium">Medium</option>
@@ -143,7 +152,7 @@ export const DashboardContent: React.FC<DashboardContentProps> = ({
             name="category"
             value={newTicket.category}
             onChange={handleInputChange}
-            className="border border-gray-300 rounded-lg p-2 w-full"
+            className="border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 rounded-lg p-2 w-full"
           >
             <option value="Open">Open</option>
             <option value="In Progress">In Progress</option>
@@ -159,94 +168,5 @@ export const DashboardContent: React.FC<DashboardContentProps> = ({
         </div>
       </Modal>
     </div>
-  )
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-// import type React from "react"
-// import { Filter, Plus } from "lucide-react"
-// import type { TabType, Ticket, KnowledgeArticle, TeamMember } from "./types"
-// import { TabsBar } from "./tabs-bar"
-// import { TicketsTable } from "./tickets-table"
-// import { KnowledgeBaseTable } from "./knowledge-base-table"
-// import { TeamManagementTable } from "./team-management-table"
-// import { Pagination } from "./pagination"
-
-// interface DashboardContentProps {
-//   activeTab: TabType
-//   onTabChange: (tab: TabType) => void
-//   tickets: Ticket[]
-//   knowledgeArticles: KnowledgeArticle[]
-//   teamMembers: TeamMember[]
-//   onViewTicket: (ticket: Ticket) => void
-// }
-
-// export const DashboardContent: React.FC<DashboardContentProps> = ({
-//   activeTab,
-//   onTabChange,
-//   tickets,
-//   knowledgeArticles,
-//   teamMembers,
-//   onViewTicket,
-// }) => {
-//   const renderActiveTabContent = () => {
-//     switch (activeTab) {
-//       case "allTickets":
-//         return <TicketsTable tickets={tickets} onViewTicket={onViewTicket} />
-//       case "knowledgeBase":
-//         return <KnowledgeBaseTable articles={knowledgeArticles} />
-//       case "teamManagement":
-//         return <TeamManagementTable members={teamMembers} />
-//       default:
-//         return null
-//     }
-//   }
-
-//   return (
-//     <div className="px-8 pb-8">
-//       <div className="rounded-xl">
-//         {/* Tabs Bar */}
-//         <TabsBar activeTab={activeTab} onTabChange={onTabChange} />
-
-//         {/* Flashcard Decks Section */}
-//         <div className="px-6 py-5 flex justify-between items-center">
-//           <div>
-//             <h2 className="text-lg font-semibold text-gray-900">Flashcard Decks</h2>
-//             <p className="text-sm text-gray-500 mt-1">Manage your Italian learning flashcard collections</p>
-//           </div>
-//           <div className="flex gap-3">
-//             <button className="border cursor-pointer border-gray-300 text-gray-700 px-4 py-2 rounded-lg flex items-center gap-2 hover:bg-gray-50 transition font-medium">
-//               <Filter size={18} />
-//               <select name="" id="">
-//                 {" "}
-//                 Priority
-//               </select>
-//               <option value="">high</option>
-//             </button>
-//             <button className="bg-blue-600 cursor-pointer text-white px-4 py-2 rounded-lg flex items-center gap-2 hover:bg-blue-700 transition font-medium">
-//               <Plus size={18} />
-//               Create Ticket
-//             </button>
-//           </div>
-//         </div>
-
-//         {/* Dynamic Table Content */}
-//         {renderActiveTabContent()}
-
-//         {/* Pagination */}
-//         <Pagination />
-//       </div>
-//     </div>
-//   )
-// }
+  );
+};

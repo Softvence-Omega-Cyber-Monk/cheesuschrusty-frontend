@@ -11,7 +11,7 @@ export default function FreeUserLayout() {
 
     }
     return (
-        <div className="flex h-screen  bg-[#F5F5F5]">
+        <div className="flex h-screen  bg-[#F5F5F5] dark:bg-gray-900">
             <FreeUserSidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
 
             <div className="flex-1 flex flex-col overflow-hidden relative">
@@ -32,7 +32,7 @@ export default function FreeUserLayout() {
                     themeIcon={themeicon}
                     onThemeClick={handleclick}
                 />
-                <div className="flex-1 overflow-auto p-4">
+                <div className="flex-1 overflow-auto p-4 dark:text-gray-200">
                     <Outlet /> {/* ✅ This is where nested pages render */}
                 </div>
             </div>

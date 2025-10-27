@@ -28,8 +28,8 @@ const progressByLevelData = [
 const CustomTooltip = ({ active, payload, label }: any) => {
   if (active && payload && payload.length) {
     return (
-      <div className="bg-white p-2 border border-gray-200 rounded shadow-sm">
-        <p className="font-bold">{label}</p>
+      <div className="bg-white p-2 border border-gray-200 rounded shadow-sm dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200">
+        <p className="font-bold dark:text-gray-200">{label}</p>
         <p className="text-teal-500">{`Reviews: ${payload[0].value}`}</p>
         <p className="text-indigo-500">{`Study Time: ${payload[1].value}`}</p>
       </div>
@@ -41,9 +41,9 @@ const CustomTooltip = ({ active, payload, label }: any) => {
 const UserEngagementView: React.FC = () => {
   return (
     <div className="space-y-8">
-      <div className="bg-white p-6 rounded-xl shadow-sm">
-        <h3 className="text-lg font-semibold text-gray-800">Daily User Activity</h3>
-        <p className="text-sm text-gray-500 mb-6">Active users, study time, and flashcard reviews over the past week</p>
+      <div className="bg-white p-6 rounded-xl shadow-sm dark:bg-gray-800">
+        <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200">Daily User Activity</h3>
+        <p className="text-sm text-gray-500 mb-6 dark:text-gray-400">Active users, study time, and flashcard reviews over the past week</p>
         <div style={{ width: '100%', height: 300 }}>
           <ResponsiveContainer>
             <AreaChart data={dailyActivityData}>
@@ -58,8 +58,8 @@ const UserEngagementView: React.FC = () => {
                 </linearGradient>
               </defs>
               <CartesianGrid strokeDasharray="3 3" vertical={false} />
-              <XAxis dataKey="name" tick={{ fontSize: 12 }} stroke="#9ca3af" />
-              <YAxis tick={{ fontSize: 12 }} stroke="#9ca3af" />
+              <XAxis dataKey="name" tick={{ fontSize: 12, fill: '#A0AEC0' }} stroke="#A0AEC0" />
+              <YAxis tick={{ fontSize: 12, fill: '#A0AEC0' }} stroke="#A0AEC0" />
               <Tooltip content={<CustomTooltip />} />
               <Area type="monotone" dataKey="reviews" stroke="#14b8a6" fillOpacity={1} fill="url(#colorReviews)" stackId="1" />
               <Area type="monotone" dataKey="studyTime" stroke="#8b5cf6" fillOpacity={1} fill="url(#colorStudyTime)" stackId="1" />
@@ -69,9 +69,9 @@ const UserEngagementView: React.FC = () => {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
-        <div className="lg:col-span-2 bg-white p-6 rounded-xl shadow-sm">
-          <h3 className="text-lg font-semibold text-gray-800">Device Usage</h3>
-          <p className="text-sm text-gray-500 mb-4">How users access the platform</p>
+        <div className="lg:col-span-2 bg-white p-6 rounded-xl shadow-sm dark:bg-gray-800">
+          <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200">Device Usage</h3>
+          <p className="text-sm text-gray-500 mb-4 dark:text-gray-400">How users access the platform</p>
           <div style={{ width: '100%', height: 250 }} className="flex flex-col items-center">
             <ResponsiveContainer>
               <PieChart>
@@ -94,15 +94,15 @@ const UserEngagementView: React.FC = () => {
           </div>
         </div>
 
-        <div className="lg:col-span-3 bg-white p-6 rounded-xl shadow-sm">
-          <h3 className="text-lg font-semibold text-gray-800">Learning Progress by Level</h3>
-          <p className="text-sm text-gray-500 mb-6">User distribution and average progress</p>
+        <div className="lg:col-span-3 bg-white p-6 rounded-xl shadow-sm dark:bg-gray-800">
+          <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200">Learning Progress by Level</h3>
+          <p className="text-sm text-gray-500 mb-6 dark:text-gray-400">User distribution and average progress</p>
           <div style={{ width: '100%', height: 300 }}>
             <ResponsiveContainer>
               <BarChart data={progressByLevelData} margin={{ top: 5, right: 20, left: -10, bottom: 5 }}>
                 <CartesianGrid strokeDasharray="3 3" vertical={false} />
-                <XAxis dataKey="name" tick={{ fontSize: 12 }} stroke="#9ca3af" />
-                <YAxis tick={{ fontSize: 12 }} stroke="#9ca3af" />
+                <XAxis dataKey="name" tick={{ fontSize: 12, fill: '#A0AEC0' }} stroke="#A0AEC0" />
+                <YAxis tick={{ fontSize: 12, fill: '#A0AEC0' }} stroke="#A0AEC0" />
                 <Tooltip />
                 <Bar dataKey="users" fill="#8b5cf6" name="Users" />
                 <Bar dataKey="progress" fill="#14b8a6" name="Progress" />
