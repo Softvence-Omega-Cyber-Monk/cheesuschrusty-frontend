@@ -32,62 +32,94 @@ const PhraseOfTheDay: React.FC = () => {
       </div>
 
       <form onSubmit={handleSubmit} className="bg-white dark:bg-slate-800 p-8 rounded-xl shadow-sm space-y-6 max-w-2xl transition-colors">
-        <div>
-          <label htmlFor="italian" className="block text-sm font-medium text-slate-700 dark:text-slate-200">Italian</label>
-          <input
-            type="text"
-            id="italian"
-            name="italian"
-            value={phrase.italian}
-            onChange={handleChange}
-            className="mt-1 block w-full input dark:input-dark"
-          />
-        </div>
+       <div className="space-y-5 bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md transition-colors duration-300">
+  {/* Italian */}
+  <div>
+    <label
+      htmlFor="italian"
+      className="block text-sm font-medium text-slate-700 dark:text-slate-200 mb-1"
+    >
+      Italian
+    </label>
+    <input
+      type="text"
+      id="italian"
+      name="italian"
+      value={phrase.italian}
+      onChange={handleChange}
+      placeholder="Enter Italian phrase"
+      className="w-full rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder-gray-400 dark:placeholder-gray-500"
+    />
+  </div>
 
-        <div>
-          <label htmlFor="englishTranslation" className="block text-sm font-medium text-slate-700 dark:text-slate-200">English Translation</label>
-          <input
-            type="text"
-            id="englishTranslation"
-            name="englishTranslation"
-            value={phrase.englishTranslation}
-            onChange={handleChange}
-            className="mt-1 block w-full input dark:input-dark"
-          />
-        </div>
+  {/* English Translation */}
+  <div>
+    <label
+      htmlFor="englishTranslation"
+      className="block text-sm font-medium text-slate-700 dark:text-slate-200 mb-1"
+    >
+      English Translation
+    </label>
+    <input
+      type="text"
+      id="englishTranslation"
+      name="englishTranslation"
+      value={phrase.englishTranslation}
+      onChange={handleChange}
+      placeholder="Enter English translation"
+      className="w-full rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder-gray-400 dark:placeholder-gray-500"
+    />
+  </div>
 
-        <div>
-          <label htmlFor="pronunciation" className="block text-sm font-medium text-slate-700 dark:text-slate-200">Pronunciation</label>
-          <input
-            type="text"
-            id="pronunciation"
-            name="pronunciation"
-            value={phrase.pronunciation}
-            onChange={handleChange}
-            className="mt-1 block w-full input dark:input-dark"
-          />
-        </div>
+  {/* Pronunciation */}
+  <div>
+    <label
+      htmlFor="pronunciation"
+      className="block text-sm font-medium text-slate-700 dark:text-slate-200 mb-1"
+    >
+      Pronunciation
+    </label>
+    <input
+      type="text"
+      id="pronunciation"
+      name="pronunciation"
+      value={phrase.pronunciation}
+      onChange={handleChange}
+      placeholder="Enter pronunciation"
+      className="w-full rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder-gray-400 dark:placeholder-gray-500"
+    />
+  </div>
 
-        <div>
-          <label htmlFor="explanation" className="block text-sm font-medium text-slate-700 dark:text-slate-200">Explanation</label>
-          <textarea
-            id="explanation"
-            name="explanation"
-            value={phrase.explanation}
-            onChange={handleChange}
-            rows={3}
-            className="mt-1 block w-full input dark:input-dark"
-          />
-        </div>
+  {/* Explanation */}
+  <div>
+    <label
+      htmlFor="explanation"
+      className="block text-sm font-medium text-slate-700 dark:text-slate-200 mb-1"
+    >
+      Explanation
+    </label>
+    <textarea
+      id="explanation"
+      name="explanation"
+      value={phrase.explanation}
+      onChange={handleChange}
+      rows={3}
+      placeholder="Provide explanation"
+      className="w-full rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder-gray-400 dark:placeholder-gray-500"
+    />
+  </div>
 
-        <div>
-          <button
-            type="submit"
-            className="w-full cursor-pointer bg-blue-600 text-white font-semibold px-4 py-3 rounded-lg hover:bg-blue-700 transition-colors shadow-sm hover:shadow-md"
-          >
-            Update Today's Phrase
-          </button>
-        </div>
+  {/* Button */}
+  <div>
+    <button
+      type="submit"
+      className="w-full cursor-pointer bg-blue-600 text-white font-semibold px-4 py-3 rounded-lg hover:bg-blue-700 active:bg-blue-800 transition-colors duration-200 shadow-md"
+    >
+      Update Today's Phrase
+    </button>
+  </div>
+</div>
+
       </form>
 
       {/* Custom input styles with dark mode */}
@@ -102,19 +134,38 @@ const PhraseOfTheDay: React.FC = () => {
           background-color: white;
           color: #1e293b;
         }
+
         .input:focus {
           outline: none;
           border-color: #3B82F6;
           box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.4);
         }
+
+        /* light default for elements that also carry .input-dark */
         .input-dark {
-          background-color: #1e293b;
+          background-color: white;
+          color: #1e293b;
+          border-color: #cbd5e1;
+        }
+
+        /* dark-mode override when a parent has .dark (Tailwind dark class strategy) */
+        .dark .input-dark {
+          background-color: #0f1724; /* darker bg for inputs in dark mode */
           color: #f1f5f9;
           border-color: #334155;
         }
-        .input-dark:focus {
+
+        .dark .input-dark:focus {
           border-color: #3B82F6;
           box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.4);
+        }
+
+        .placeholder-gray-400::placeholder {
+          color: #cbd5e1;
+        }
+
+        .dark .placeholder-gray-500::placeholder {
+          color: #94a3b8;
         }
       `}</style>
     </div>

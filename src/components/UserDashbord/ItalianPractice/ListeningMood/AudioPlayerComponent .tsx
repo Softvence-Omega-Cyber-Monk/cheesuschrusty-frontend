@@ -117,132 +117,127 @@ export const AudioPlayerComponent: React.FC<AudioPlayerProps> = ({ src }) => {
   const volumePercent = (isMuted ? 0 : volume) * 100;
 
   return (
-    <div className="bg-white border border-gray-200 rounded-xl   p-6   mx-auto">
-      <audio ref={audioRef} src={src} preload="metadata" />
+   <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-6 mx-auto">
+  <audio ref={audioRef} src={src} preload="metadata" />
 
-      <div className="flex items-center justify-between mb-2">
-        <div className="flex items-center gap-2">
-          <Headphones className="w-4 h-4 text-gray-500" />
-          {/* <img src={imgmicrohead} alt="" /> */}
-          <span className="text-sm font-semibold text-gray-800">{title}</span>
-        </div>
-        <span className="text-xs text-gray-400">{formatTime(duration)}</span>
-      </div>
+  {/* Header */}
+  <div className="flex items-center justify-between mb-2">
+    <div className="flex items-center gap-2">
+      <Headphones className="w-4 h-4 text-gray-500 dark:text-gray-400" />
+      <span className="text-sm font-semibold text-gray-800 dark:text-gray-200">{title}</span>
+    </div>
+    <span className="text-xs text-gray-400 dark:text-gray-400">{formatTime(duration)}</span>
+  </div>
 
-      <div className="mb-6">
-        <input
-          type="range"
-          min={0}
-          max={duration}
-          value={currentTime}
-          onChange={handleSeek}
-          className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer range-slider-thumb-hidden"
-          style={{
-            //  background: `black`,
-            background: `linear-gradient(to right,  black 0%, black ${progressPercent}%, #e5e7eb ${progressPercent}%, #e5e7eb 100%)`,
-          }}
-        />
-        <div className="flex justify-between text-xs text-gray-500 mt-1">
-          <span>{formatTime(currentTime)}</span>
-          <span className="hidden"></span>
-        </div>
-      </div>
+  {/* Seek Bar */}
+  <div className="mb-6">
+    <input
+      type="range"
+      min={0}
+      max={duration}
+      value={currentTime}
+      onChange={handleSeek}
+      className="w-full h-2 rounded-lg appearance-none cursor-pointer range-slider-thumb-hidden"
+      style={{
+        background: `linear-gradient(to right, black 0%, black ${progressPercent}%, ${document.documentElement.classList.contains('dark') ? '#4B5563' : '#e5e7eb'} ${progressPercent}%, ${document.documentElement.classList.contains('dark') ? '#4B5563' : '#e5e7eb'} 100%)`,
+      }}
+    />
+    <div className="flex justify-between text-xs text-gray-500 dark:text-gray-400 mt-1">
+      <span>{formatTime(currentTime)}</span>
+      <span className="hidden"></span>
+    </div>
+  </div>
 
-      <div className="flex items-center justify-center gap-4 mb-8">
+  {/* Controls */}
+  <div className="flex items-center justify-center gap-4 mb-8">
+    <button
+      onClick={() => handleSkip(-5)}
+      className="w-10 h-10 flex items-center justify-center border rounded-full text-gray-700 dark:text-gray-200 border-gray-300 dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+      title="Skip Backward 5 seconds"
+    >
+      <SkipBack className="w-5 h-5" />
+    </button>
+
+    <button
+      onClick={handlePlayPause}
+      className="w-14 h-14 rounded-full flex items-center justify-center cursor-pointer transition-all shadow-md active:scale-95"
+      style={{ backgroundImage: "linear-gradient(180deg, #667EEA 0%, #764BA2 100%)" }}
+      title={isPlaying ? "Pause" : "Play"}
+    >
+      {isPlaying ? (
+        <Pause className="w-6 h-6 text-white" />
+      ) : (
+        <Play className="w-6 h-6 text-white ml-1" />
+      )}
+    </button>
+
+    <button
+      onClick={() => handleSkip(5)}
+      className="w-10 h-10 flex items-center justify-center border rounded-full text-gray-700 dark:text-gray-200 border-gray-300 dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+      title="Skip Forward 5 seconds"
+    >
+      <SkipForward className="w-5 h-5" />
+    </button>
+  </div>
+
+  {/* Speed & Volume */}
+  <div className="flex items-center justify-between gap-4">
+    {/* Speed */}
+    <div className="flex flex-col items-start min-w-[120px]">
+      <div className="text-xs font-medium text-gray-500 dark:text-gray-400 mb-1">Speed</div>
+      <div className="flex items-center gap-1">
         <button
-          onClick={() => handleSkip(-5)}
-          className="w-10   h-10 cursor-pointer flex items-center justify-center border rounded-full text-gray-700 hover:bg-gray-100 transition-colors"
-          title="Skip Backward 5 seconds"
+          onClick={() => handleSpeedChange(false)}
+          className="w-8 h-8 flex items-center justify-center border rounded text-sm text-gray-700 dark:text-gray-200 border-gray-300 dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+          disabled={speed <= 0.5}
         >
-          <SkipBack className="w-5 h-5" />
+          <span className="mb-0.5">-</span>
         </button>
-
-       <button
-  onClick={handlePlayPause}
-  className="w-14 h-14 rounded-full flex items-center justify-center cursor-pointer transition-all shadow-md active:scale-95"
-  style={{
-    backgroundImage: "linear-gradient(180deg, #667EEA 0%, #764BA2 100%)",
-  }}
-  title={isPlaying ? "Pause" : "Play"}
->
-  {isPlaying ? (
-    <Pause className="w-6 h-6 text-white" />
-  ) : (
-    <Play className="w-6 h-6 text-white ml-1" />
-  )}
-</button>
-
+        <div className="w-10 h-8 flex items-center justify-center border rounded font-medium text-sm text-gray-800 dark:text-gray-200 border-gray-300 dark:border-gray-600 bg-gray-100 dark:bg-gray-700">
+          {speed}x
+        </div>
         <button
-          onClick={() => handleSkip(5)}
-          className="w-10 h-10 flex items-center border justify-center rounded-full cursor-pointer text-gray-700 hover:bg-gray-100 transition-colors"
-          title="Skip Forward 5 seconds"
+          onClick={() => handleSpeedChange(true)}
+          className="w-8 h-8 flex items-center justify-center border rounded text-sm text-gray-700 dark:text-gray-200 border-gray-300 dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+          disabled={speed >= 3}
         >
-          <SkipForward className="w-5 h-5" />
-        </button>
-      </div>
-
-      <div className="flex items-center justify-between gap-4">
-        <div className="flex flex-col items-start min-w-[120px]">
-          <div className="text-xs font-medium text-gray-500 mb-1">Speed</div>
-          <div className="flex items-center gap-1">
-            <button
-              onClick={() => handleSpeedChange(false)}
-              className="w-8 cursor-pointer h-8 flex   items-center justify-center border border-gray-300 rounded text-sm text-gray-700 hover:bg-gray-100 transition-colors"
-              disabled={speed <= 0.5}
-            >
-              <span className="mb-0.5">-</span>
-            </button>
-            <div className="w-10 h-8 flex items-center justify-center bg-gray-100 border border-gray-300 rounded  font-medium text-sm text-gray-800">
-              {speed}x
-            </div>
-            <button
-              onClick={() => handleSpeedChange(true)}
-              className="w-8 h-8 flex items-center justify-center cursor-pointer border border-gray-300 rounded text-sm text-gray-700 hover:bg-gray-100  transition-colors"
-              disabled={speed >= 3}
-            >
-              +
-            </button>
-          </div>
-        </div>
-
-        <div className="flex-1 min-w-[150px] mx-4">
-          <div className="text-xs font-medium text-gray-500 mb-1">Volume</div>
-          <div className="flex items-center gap-2">
-            <button onClick={toggleMute} className="text-gray-600 cursor-pointer hover:text-gray-800" title={isMuted ? "Unmute" : "Mute"}>
-              {isMuted || volume === 0 ? <VolumeX className="w-5 h-5" /> : <Volume2 className="w-5 h-5" />}
-            </button>
-            <input
-              type="range"
-              min={0}
-              max={1}
-              step={0.01}
-              value={isMuted ? 0 : volume}
-              onChange={handleVolumeChange}
-              className="flex-1 h-1 bg-gray-300 rounded-lg appearance-none cursor-pointer"
-              style={{
-                background: `linear-gradient(to right,  black 0%,  black ${volumePercent}%, #e5e7eb ${volumePercent}%, #e5e7eb 100%)`
-              }}
-            />
-          </div>
-        </div>
-
-        <button className="px-4 py-2 cursor-pointer text-sm font-medium text-gray-700 border border-gray-300 rounded-lg hover:bg-gray-100 transition-colors whitespace-nowrap min-w-[150px] flex-grow-0">
-          Show Transcript
+          +
         </button>
       </div>
     </div>
+
+    {/* Volume */}
+    <div className="flex-1 min-w-[150px] mx-4">
+      <div className="text-xs font-medium text-gray-500 dark:text-gray-400 mb-1">Volume</div>
+      <div className="flex items-center gap-2">
+        <button
+          onClick={toggleMute}
+          className="text-gray-600 dark:text-gray-300 cursor-pointer hover:text-gray-800 dark:hover:text-gray-100 transition-colors"
+          title={isMuted ? "Unmute" : "Mute"}
+        >
+          {isMuted || volume === 0 ? <VolumeX className="w-5 h-5" /> : <Volume2 className="w-5 h-5" />}
+        </button>
+        <input
+          type="range"
+          min={0}
+          max={1}
+          step={0.01}
+          value={isMuted ? 0 : volume}
+          onChange={handleVolumeChange}
+          className="flex-1 h-1 rounded-lg appearance-none cursor-pointer"
+          style={{
+            background: `linear-gradient(to right, black 0%, black ${volumePercent}%, ${document.documentElement.classList.contains('dark') ? '#4B5563' : '#e5e7eb'} ${volumePercent}%, ${document.documentElement.classList.contains('dark') ? '#4B5563' : '#e5e7eb'} 100%)`,
+          }}
+        />
+      </div>
+    </div>
+
+    {/* Transcript */}
+    <button className="px-4 py-2 cursor-pointer text-sm font-medium text-gray-700 dark:text-gray-200 border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors whitespace-nowrap min-w-[150px]">
+      Show Transcript
+    </button>
+  </div>
+</div>
+
   );
 };
-
-
-
-
-
-
-
-
-
-
-
-
- 

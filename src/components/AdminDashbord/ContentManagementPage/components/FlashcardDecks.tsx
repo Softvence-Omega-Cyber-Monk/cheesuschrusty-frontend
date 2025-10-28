@@ -36,10 +36,10 @@ const FlashcardDecks: React.FC = () => {
   const handleCreateDeck = (newDeck: Omit<FlashcardDeck, 'id' | 'cards' | 'lastModified'>) => {
     const newId = Math.max(...decks.map(d => d.id)) + 1;
     const deck: FlashcardDeck = {
-        ...newDeck,
-        id: newId,
-        cards: 0,
-        lastModified: new Date().toLocaleDateString('en-GB')
+      ...newDeck,
+      id: newId,
+      cards: 0,
+      lastModified: new Date().toLocaleDateString('en-GB')
     }
     setDecks([deck, ...decks]);
   };
@@ -56,11 +56,10 @@ const FlashcardDecks: React.FC = () => {
           Create Deck
         </button>
       </div>
-
-      <div className="bg-white rounded-xl shadow-sm overflow-hidden">
+      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm overflow-hidden">
         <div className="overflow-x-auto">
-          <table className="w-full text-sm text-left text-slate-500 ">
-            <thead className="text-xs text-slate-700 uppercase bg-slate-50 tracking-wider">
+          <table className="w-full text-sm text-left text-slate-500 dark:text-gray-400">
+            <thead className="text-xs text-slate-700 dark:text-gray-200 uppercase bg-slate-50 dark:bg-gray-700 tracking-wider">
               <tr>
                 <th scope="col" className="px-6 py-3">Title</th>
                 <th scope="col" className="px-6 py-3">Cards</th>
@@ -73,10 +72,10 @@ const FlashcardDecks: React.FC = () => {
             </thead>
             <tbody>
               {decks.map((deck) => (
-                <tr key={deck.id} className="bg-white border-b border-slate-200 hover:bg-slate-50/70">
-                  <td className="px-6 py-4 font-medium text-slate-900">
+                <tr key={deck.id} className="bg-white dark:bg-gray-800 border-b border-slate-200 dark:border-gray-700 hover:bg-slate-50/70 dark:hover:bg-gray-700">
+                  <td className="px-6 py-4 font-medium text-slate-900 dark:text-gray-200">
                     <div>{deck.title}</div>
-                    <div className="text-xs text-slate-400 font-normal">{deck.description}</div>
+                    <div className="text-xs text-slate-400 font-normal dark:text-gray-400">{deck.description}</div>
                   </td>
                   <td className="px-6 py-4">{deck.cards}</td>
                   <td className="px-6 py-4"><DifficultyBadge difficulty={deck.difficulty} /></td>
@@ -85,9 +84,9 @@ const FlashcardDecks: React.FC = () => {
                   <td className="px-6 py-4">{deck.lastModified}</td>
                   <td className="px-6 py-4">
                     <div className="flex items-center space-x-3">
-                      <button className="text-slate-400 cursor-pointer hover:text-blue-600" aria-label="View"><EyeIcon /></button>
-                      <button className="text-slate-400 cursor-pointer hover:text-green-600" aria-label="Edit"><PencilIcon /></button>
-                      <button className="text-slate-400 cursor-pointer hover:text-red-600" aria-label="Delete"><BlockIcon /></button>
+                      <button className="text-slate-400 cursor-pointer hover:text-blue-600 dark:hover:text-blue-300" aria-label="View"><EyeIcon /></button>
+                      <button className="text-slate-400 cursor-pointer hover:text-green-600 dark:hover:text-green-300" aria-label="Edit"><PencilIcon /></button>
+                      <button className="text-slate-400 cursor-pointer hover:text-red-600 dark:hover:text-red-300" aria-label="Delete"><BlockIcon /></button>
                     </div>
                   </td>
                 </tr>
@@ -96,6 +95,7 @@ const FlashcardDecks: React.FC = () => {
           </table>
         </div>
       </div>
+
       <CreateDeckModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} onCreate={handleCreateDeck} />
     </div>
   );

@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Edit2, Ban } from 'lucide-react';
 
@@ -20,18 +19,18 @@ interface UserRowProps {
 
 const UserRow: React.FC<UserRowProps> = ({ user, avatarColor, onEdit }) => {
   return (
-    <tr className="hover:bg-gray-50">
+    <tr className="hover:bg-gray-50 dark:hover:bg-gray-700">
       <td className="px-6 py-4 whitespace-nowrap">
         <div className="flex items-center">
           <div className={`w-8 h-8 rounded-full ${avatarColor} flex items-center justify-center text-white font-semibold text-sm mr-3`}>
             {user.avatar}
           </div>
-          <span className="text-sm font-medium text-gray-900">{user.name}</span>
+          <span className="text-sm font-medium text-gray-900 dark:text-gray-100">{user.name}</span>
         </div>
       </td>
-      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{user.email}</td>
+      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">{user.email}</td>
       <td className="px-6 py-4 whitespace-nowrap">
-        <span className={`text-sm font-medium ${user.role === 'Pro' ? 'text-orange-500' : 'text-gray-600'}`}>
+        <span className={`text-sm font-medium ${user.role === 'Pro' ? 'text-orange-500' : 'text-gray-600'} dark:text-orange-400`}>
           {user.role}
         </span>
       </td>
@@ -39,18 +38,18 @@ const UserRow: React.FC<UserRowProps> = ({ user, avatarColor, onEdit }) => {
         <span
           className={`px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full ${
             user.status === 'Active' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
-          }`}
+          } `}
         >
           {user.status}
         </span>
       </td>
-      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{user.progress}%</td>
+      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">{user.progress}%</td>
       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
         <div className="flex items-center gap-2">
-          <button onClick={onEdit} className="text-blue-600 cursor-pointer hover:text-blue-800">
+          <button onClick={onEdit} className="text-blue-600 cursor-pointer hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-600">
             <Edit2 className="w-4 h-4" />
           </button>
-          <button className="text-red-600 cursor-pointer hover:text-red-800">
+          <button className="text-red-600 cursor-pointer hover:text-red-800 dark:text-red-400 dark:hover:text-red-600">
             <Ban className="w-4 h-4" />
           </button>
         </div>
@@ -60,10 +59,3 @@ const UserRow: React.FC<UserRowProps> = ({ user, avatarColor, onEdit }) => {
 };
 
 export default UserRow;
-
-
-
-
-
-
- 

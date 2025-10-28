@@ -38,26 +38,48 @@ const ReadingExerciseComplete: React.FC<ReadingExerciseCompleteProps> = ({ answe
 
       {/* Stats */}
       <div className="flex justify-between items-center gap-4 mb-6">
-        <div className="text-center bg-[#F5F5F5] w-full py-3 border rounded-2xl border-[#EBEBEB]">
-          <div className="text-3xl font-bold text-gray-800">{correctCount}</div>
-          <div className="text-xs text-gray-500">CORRECT ANSWERS</div>
+        <div className="text-center w-full py-3 border rounded-2xl 
+                  bg-gray-100 dark:bg-gray-800 
+                  border-gray-200 dark:border-gray-700">
+          <div className="text-3xl font-bold text-gray-800 dark:text-gray-200">
+            {correctCount}
+          </div>
+          <div className="text-xs text-gray-500 dark:text-gray-400">CORRECT ANSWERS</div>
         </div>
-        <div className="text-center py-3 w-full bg-[#F5F5F5] border rounded-2xl border-[#EBEBEB]">
-          <div className="text-3xl font-bold text-gray-800">{percentage}%</div>
-          <div className="text-xs text-gray-500">ACCURACY</div>
+
+        <div className="text-center w-full py-3 border rounded-2xl 
+                  bg-gray-100 dark:bg-gray-800 
+                  border-gray-200 dark:border-gray-700">
+          <div className="text-3xl font-bold text-gray-800 dark:text-gray-200">
+            {percentage}%
+          </div>
+          <div className="text-xs text-gray-500 dark:text-gray-400">ACCURACY</div>
         </div>
-        <div className="text-center w-full py-3 bg-[#F5F5F5] border rounded-2xl border-[#EBEBEB]">
-          <div className="text-3xl font-bold text-gray-800">30+</div>
-          <div className="text-xs text-gray-500">XP EARNED</div>
+
+        <div className="text-center w-full py-3 border rounded-2xl 
+                  bg-gray-100 dark:bg-gray-800 
+                  border-gray-200 dark:border-gray-700">
+          <div className="text-3xl font-bold text-gray-800 dark:text-gray-200">
+            30+
+          </div>
+          <div className="text-xs text-gray-500 dark:text-gray-400">XP EARNED</div>
         </div>
       </div>
 
+
       {/* Action Buttons */}
       <div className="flex gap-3 mb-6">
-        <button className="flex-1 py-3 px-4 border-2 rounded-2xl border-[#111827] font-medium cursor-pointer text-[#111827] hover:bg-gray-50 transition-colors flex items-center justify-center gap-2">
+        <button
+          className="flex-1 py-3 px-4 border-2 rounded-2xl font-medium cursor-pointer 
+             flex items-center justify-center gap-2 
+             border-gray-900 text-gray-900 
+             hover:bg-gray-50 dark:border-gray-300 dark:text-gray-200 dark:hover:bg-gray-700 
+             transition-colors"
+        >
           <RefreshCw className="w-5 h-5" />
           Try Again
         </button>
+
         <button className="flex-1 justify-center cursor-pointer flex items-center gap-1 py-3 px-4 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors">
           Keep Reading Practice
           <TiArrowForward className="text-2xl" />
@@ -117,4 +139,3 @@ export default ReadingExerciseComplete;
 
 
 
- 

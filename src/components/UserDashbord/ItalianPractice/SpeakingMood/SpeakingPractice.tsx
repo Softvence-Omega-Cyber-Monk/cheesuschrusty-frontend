@@ -142,20 +142,24 @@ const SpeakingPractice: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen  ">
-      <div className="  border-b border-gray-200">
-        <div className="  mx-auto px-4 py-4">
-          <button className="flex cursor-pointer items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors">
+    <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-200">
+      <div className="border-b border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900">
+        <div className="mx-auto px-4 py-4">
+          <button className="flex cursor-pointer items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 transition-colors">
             <ArrowLeft size={20} />
             <span className="text-sm font-medium">Back To Practice</span>
           </button>
         </div>
       </div>
 
-      <div className="  mx-auto px-4 py-8">
+      <div className="mx-auto px-4 py-8">
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">Speaking Practice</h1>
-          <p className="text-gray-600">Improve your Italian pronunciation and conversation skills</p>
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
+            Speaking Practice
+          </h1>
+          <p className="text-gray-600 dark:text-gray-400">
+            Improve your Italian pronunciation and conversation skills
+          </p>
         </div>
 
         {currentExercise !== 'complete' && (
@@ -211,9 +215,3 @@ const SpeakingPractice: React.FC = () => {
 };
 
 export default SpeakingPractice;
-
-
-
-
-
- 
