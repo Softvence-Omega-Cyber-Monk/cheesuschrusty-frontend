@@ -6,14 +6,15 @@ import themeicon from "../../assets/Component 10.svg";
 import { LayoutNavber } from "../LayoutNavber";
 
 const AdminLayout = () => {
-  const [sidebarOpen, setSidebarOpen] = useState(true);
- const handleclick =()=>{
-alert("clicked")
+  const [sidebarOpen, setSidebarOpen] = useState(false); // Start closed on mobile
+  
+  const handleclick = () => {
+    alert("clicked");
+  };
 
-  }
   return (
     <div className="flex h-screen bg-[#F5F5F5]">
-      {/* Sidebar */}
+      {/* Sidebar - Hidden on mobile by default */}
       <AdminSidebar
         sidebarOpen={sidebarOpen}
         setSidebarOpen={setSidebarOpen}
@@ -21,53 +22,40 @@ alert("clicked")
 
       {/* Main Content */}
       <div className="flex-1 flex flex-col overflow-hidden relative">
-        {/* Toggle button when sidebar is hidden */}
-        {!sidebarOpen && (
-          <button
-            onClick={() => setSidebarOpen(true)}
-            className="absolute cursor-pointer top-4 left-4 z-50 w-8 h-8 bg-gray-900 text-white rounded-full flex items-center justify-center"
-          >
-            ☰
-          </button>
+        {/* Toggle button - Always visible on mobile, conditional on desktop */}
+        <button
+          onClick={() => setSidebarOpen(!sidebarOpen)}
+          className="lg:hidden absolute cursor-pointer top-4 left-4 z-50 w-10 h-10 bg-gray-900 text-white rounded-full flex items-center justify-center shadow-lg"
+        >
+          ☰
+        </button>
+
+        {/* Only show close button when sidebar is open on mobile */}
+        {sidebarOpen && (
+          <div 
+            className="lg:hidden fixed inset-0 bg-black bg-opacity-50 z-40"
+            onClick={() => setSidebarOpen(false)}
+          />
         )}
 
-        {/* Top bar */}
-        {/* <div className="px-10 border-b border-b-[#C6C8CB] py-4 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <img
-              src={adminimg}
-              alt="Admin"
-              className="w-10 h-10 rounded-full"
-            />
-            <div>
-              <div className="font-semibold text-sm">Darlene Robertson</div>
-              <div className="text-base text-gray-500">Admin</div>
-            </div>
-          </div>
-          <button className="w-10 h-10 hover:cursor-pointer flex items-center justify-center">
-            <img src={themeicon} alt="Theme" />
-          </button>
-        </div> */}
-<LayoutNavber
-  userImage={adminimg}
-  userName="Darlene Robertson"
-  userRole="Admin"
-  themeIcon={themeicon}
-  onThemeClick={handleclick}
-/>
+        <LayoutNavber
+          userImage={adminimg}
+          userName="Darlene Robertson"
+          userRole="Admin"
+          themeIcon={themeicon}
+          onThemeClick={handleclick}
+        />
+        
         {/* Main content area */}
-       <div className="flex-1 overflow-auto p-4 bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors">
-  <Outlet />
-</div>
-
+        <div className="flex-1 overflow-auto p-4 bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors mt-16 lg:mt-0">
+          <Outlet />
+        </div>
       </div>
     </div>
   );
 };
 
 export default AdminLayout;
-
-
 
 
 

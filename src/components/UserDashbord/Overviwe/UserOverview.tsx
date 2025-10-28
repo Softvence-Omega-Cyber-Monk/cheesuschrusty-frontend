@@ -5,10 +5,8 @@ import {
   Target,
   Brain,
   Flame,
-  
   Zap,
   Award,
-
 } from "lucide-react";
 
 import ContinueLearningCard from "./UserContinueLearningCard";
@@ -24,9 +22,6 @@ import speaking from "../../../assets/Dashbord//speaking.svg"
 import { UserStatCard } from "./UserStatCard";
 import { UserPracticeAreaCard } from "./UserPracticeAreaCard";
 import { UserAchievementsCard } from "./UserAchievementsCard";
-
-
-
 
 export const UserOverview: React.FC = () => {
   const [stats] = useState({
@@ -73,10 +68,15 @@ export const UserOverview: React.FC = () => {
   };
 
   return (
-    <div className="p-6    mx-auto font-sans   min-h-screen">
-      <Header title={"Welcome back, Marco! 👋"} subtitle={"Ready to continue your Italian learning journey?"} />
-      <div className=" flex flex-col mt-8 gap-10">
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
+    <div className="p-3 sm:p-4 md:p-6 mx-auto font-sans min-h-screen">
+      <Header 
+        title={"Welcome back, Marco! 👋"} 
+        subtitle={"Ready to continue your Italian learning journey?"} 
+      />
+      
+      <div className="flex flex-col mt-4 sm:mt-6 md:mt-8 gap-4 sm:gap-6 md:gap-10">
+        {/* Stats Grid - Responsive columns */}
+        <div className="grid grid-cols-2 xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 md:gap-6">
           <UserStatCard
             title="Minutes Studied"
             icon={Clock}
@@ -110,11 +110,11 @@ export const UserOverview: React.FC = () => {
             progressBarColor="bg-[#0B5FFF]"
           />
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-6 ">
-          {/* Left Column */}
-          <div className="md:col-span-8  space-y-10">
 
-
+        {/* Main Content Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-6">
+          {/* Left Column - Main content */}
+          <div className="lg:col-span-8 space-y-4 sm:space-y-6 md:space-y-10">
             <ContinueLearningCard
               title="Continue Learning"
               goalText={`You're ${minutesRemaining} minutes away from your daily goal`}
@@ -123,15 +123,14 @@ export const UserOverview: React.FC = () => {
               onButtonClick={handleStartSession}
             />
 
-            <div className="bg-white 
-dark:bg-[linear-gradient(180deg,#34495E_0%,#2C3E50_100%)] rounded-xl shadow-md p-8">
-              <h2 className="text-xl font-semibold dark:text-gray-200 text-gray-900 mb-4">
+            <div className="bg-white dark:bg-[linear-gradient(180deg,#34495E_0%,#2C3E50_100%)] rounded-xl shadow-md p-4 sm:p-6 md:p-8">
+              <h2 className="text-lg sm:text-xl font-semibold dark:text-gray-200 text-gray-900 mb-3 sm:mb-4">
                 Practice Areas
               </h2>
-              <p className="text-gray-600 mb-6 dark:text-gray-200">
+              <p className="text-gray-600 mb-4 sm:mb-6 dark:text-gray-200 text-sm sm:text-base">
                 Track your progress across different skills
               </p>
-              <div className="grid grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 xs:grid-cols-2 gap-4 sm:gap-6">
                 {practiceAreas.map((area) => (
                   <UserPracticeAreaCard
                     key={area.name}
@@ -143,8 +142,8 @@ dark:bg-[linear-gradient(180deg,#34495E_0%,#2C3E50_100%)] rounded-xl shadow-md p
             </div>
           </div>
 
-          {/* Right Column */}
-          <div className="md:col-span-4 space-y-6">
+          {/* Right Column - Sidebar content */}
+          <div className="lg:col-span-4 space-y-4 sm:space-y-6">
             <StreakBadge
               streakCount={stats.streak}
               streakUnit="Day"
@@ -157,7 +156,7 @@ dark:bg-[linear-gradient(180deg,#34495E_0%,#2C3E50_100%)] rounded-xl shadow-md p
               subtitle="Your learning progress"
               progress={weeklyProgress}
               stats={weeklyStats}
-              buttonText="View Detailed Analytics"
+              buttonText="View Analytics"
               onButtonClick={handleViewAnalytics}
             />
 
@@ -168,13 +167,3 @@ dark:bg-[linear-gradient(180deg,#34495E_0%,#2C3E50_100%)] rounded-xl shadow-md p
     </div>
   );
 };
-
-
-
-
-
-
-
-
-
-
