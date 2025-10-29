@@ -25,6 +25,7 @@ export interface FlashcardDeck {
   category: Category;
   status: Status;
   lastModified: string;
+  avgRating: number;
 }
 
 export enum LessonSectionType {

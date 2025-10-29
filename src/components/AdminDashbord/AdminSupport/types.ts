@@ -40,8 +40,8 @@ export interface TeamMember {
   role: string
   email: string
   ticketsResolved: number
-  status: "Online" | "Offline" | "Busy"
   avgRating: number
+  status: "Online" | "Offline" | "Busy"
 }
 
 export type PageType = "dashboard" | "detail"

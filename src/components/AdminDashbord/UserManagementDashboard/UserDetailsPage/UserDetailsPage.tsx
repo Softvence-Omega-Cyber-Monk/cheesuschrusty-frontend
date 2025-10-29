@@ -24,13 +24,13 @@ const UserDetailsPage: React.FC = () => {
   };
 
   return (
-    <div className="bg-gray-50 min-h-screen p-8">
+    <div className="bg-gray-50 dark:bg-gray-900 min-h-screen p-8 dark:text-white">
       <header className="mb-6">
-        <p className="text-sm text-gray-500">
-          User Management &gt; <span className="font-medium text-gray-700">{user.fullName}</span>
+        <p className="text-sm text-gray-500 dark:text-gray-400">
+          User Management &gt; <span className="font-medium text-gray-700 dark:text-gray-300">{user.fullName}</span>
         </p>
-        <h1 className="text-3xl font-bold text-gray-800 mt-1">User Details</h1>
-        <p className="text-md text-gray-500">Comprehensive user information and management</p>
+        <h1 className="text-3xl font-bold text-gray-800 dark:text-gray-100 mt-1">User Details</h1>
+        <p className="text-md text-gray-500 dark:text-gray-400">Comprehensive user information and management</p>
       </header>
 
       <main className="max-w-7xl mx-auto">

@@ -34,49 +34,56 @@ const AdminSidebar: React.FC<AdminSidebarProps> = ({
   ];
 
   return (
-    <div
-      className={`relative flex flex-col bg-[#EBEBEB] dark:bg-[#1F1F1F] border-r border-[#C6C8CB] dark:border-[#444444] text-white dark:text-gray-300 transition-all duration-300 ease-in-out ${
-        sidebarOpen ? (isCollapsed ? "w-20" : "w-72") : "w-0 overflow-hidden"
-      }`}
-    >
-      {/* Close Button for mobile */}
+    <>
+      {/* Mobile Overlay */}
       {sidebarOpen && (
-        <div className="absolute top-2 right-2 lg:hidden">
+        <div 
+          className="lg:hidden fixed inset-0 bg-black/50 bg-opacity-50 z-40"
+          onClick={() => setSidebarOpen(false)}
+        />
+      )}
+      
+      {/* Sidebar */}
+      <div
+        className={`fixed lg:static inset-y-0 left-0 z-50 flex flex-col bg-[#EBEBEB] dark:bg-[#1F1F1F] border-r border-[#C6C8CB] dark:border-[#444444] text-white transition-all duration-300 ease-in-out ${
+          sidebarOpen 
+            ? (isCollapsed ? "w-20 translate-x-0" : "w-72 translate-x-0") 
+            : "-translate-x-full lg:translate-x-0 lg:w-20"
+        }`}
+      >
+        {/* Close Button for mobile */}
+        <div className="absolute top-4 right-4 lg:hidden z-50">
           <button
             onClick={() => setSidebarOpen(false)}
-            className="hover:cursor-pointer w-8 h-8 bg-gray-900 text-white rounded-full flex items-center justify-center"
+            className="hover:cursor-pointer w-10 h-10 bg-gray-900 text-white rounded-full flex items-center justify-center hover:bg-gray-700 transition-colors"
           >
-            ✖
+            ✕
           </button>
         </div>
-      )}
 
-      {/* Logo */}
-      {sidebarOpen && (
-        <div className="px-3">
+        {/* Logo */}
+        <div className={`px-3 ${!sidebarOpen ? 'lg:px-2' : ''}`}>
           <div
             className={`flex items-center gap-3 border-b border-b-[#C6C8CB] dark:border-b-[#444444] transition-all duration-300 ${
-              isCollapsed ? "justify-center px-2 py-5" : "px-6 py-6"
+              isCollapsed || !sidebarOpen ? "justify-center px-2 py-5" : "px-6 py-6"
             }`}
           >
             <img
               className={`transition-all duration-300 ${
-                isCollapsed ? "w-10" : "w-11"
+                isCollapsed || !sidebarOpen ? "w-10" : "w-11"
               }`}
               src={itimg}
               alt="Logo"
             />
-            {!isCollapsed && (
+            {(!isCollapsed && sidebarOpen) && (
               <h1 className="font-bold text-2xl text-[#111827] dark:text-white">
                 B1 Italian
               </h1>
             )}
           </div>
         </div>
-      )}
 
-      {/* Menu Items */}
-      {sidebarOpen && (
+        {/* Menu Items */}
         <nav className="flex-1 overflow-y-auto mt-4 p-3">
           {menuItems.map((item) => {
             const isActive = location.pathname === item.path;
@@ -88,39 +95,49 @@ const AdminSidebar: React.FC<AdminSidebarProps> = ({
                   isActive
                     ? "bg-[#111827] text-white dark:bg-[#333333] dark:text-white"
                     : "text-[#5e5e5e] hover:bg-[#111827] hover:text-white dark:text-gray-300 dark:hover:bg-[#333333]"
-                } ${isCollapsed ? "justify-center px-2" : ""}`}
+                } ${(isCollapsed || !sidebarOpen) ? "justify-center px-2" : ""}`}
+                onClick={() => {
+                  // Close sidebar on mobile when a menu item is clicked
+                  if (window.innerWidth < 1024) {
+                    setSidebarOpen(false);
+                  }
+                }}
               >
                 <img
                   src={item.icon}
                   alt={item.label}
                   className="w-6 h-6 transition-transform duration-200 group-hover:scale-110"
                 />
-                {!isCollapsed && <span>{item.label}</span>}
+                {(!isCollapsed && sidebarOpen) && (
+                  <span className="text-[#111827] dark:text-white group-hover:text-white">
+                    {item.label}
+                  </span>
+                )}
               </Link>
             );
           })}
         </nav>
-      )}
 
-      {/* Collapse / Expand Toggle (Desktop only) */}
-      {sidebarOpen && (
-        <div className="hidden lg:block border-t border-[#C6C8CB] dark:border-[#444444] p-3">
-          <button
-            onClick={() => setIsCollapsed(!isCollapsed)}
-            className="flex cursor-pointer text-[#7E7E7E] dark:text-gray-300 hover:bg-[#111827] hover:text-white justify-center w-full gap-2 px-3 py-2 rounded-lg bg-white dark:bg-[#333333] transition-all duration-200"
-          >
-            {isCollapsed ? (
-              <MdOutlineKeyboardDoubleArrowRight className="text-3xl" />
-            ) : (
-              <>
-                <MdKeyboardDoubleArrowLeft className="text-3xl" />
-                <span className="text-base pt-1">Collapse</span>
-              </>
-            )}
-          </button>
-        </div>
-      )}
-    </div>
+        {/* Collapse / Expand Toggle (Desktop only) */}
+        {sidebarOpen && (
+          <div className="hidden lg:block border-t border-[#C6C8CB] dark:border-[#444444] p-3">
+            <button
+              onClick={() => setIsCollapsed(!isCollapsed)}
+              className="flex cursor-pointer text-[#7E7E7E] dark:text-gray-300 hover:bg-[#111827] hover:text-white justify-center w-full gap-2 px-3 py-2 rounded-lg bg-white dark:bg-[#333333] transition-all duration-200"
+            >
+              {isCollapsed ? (
+                <MdOutlineKeyboardDoubleArrowRight className="text-3xl" />
+              ) : (
+                <>
+                  <MdKeyboardDoubleArrowLeft className="text-3xl" />
+                  <span className="text-base pt-1 text-[#111827] dark:text-white">Collapse</span>
+                </>
+              )}
+            </button>
+          </div>
+        )}
+      </div>
+    </>
   );
 };
 

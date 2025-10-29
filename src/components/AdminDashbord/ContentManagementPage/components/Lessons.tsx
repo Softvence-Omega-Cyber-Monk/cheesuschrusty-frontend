@@ -4,10 +4,10 @@ import CreateLessonForm from './CreateLessonForm';
 import { EyeIcon, PencilIcon, BlockIcon } from './icons';
 
 const mockLessons: Lesson[] = [
-  { id: 1, title: 'Basic Italian Greetings', description: 'Essential greetings and polite expressions', cards: 25, difficulty: Difficulty.Beginner, category: Category.Reading, status: Status.Published, lastModified: '29/09/2025', estimatedDuration: '15 mins', content: [], access: LessonAccess.Free },
-  { id: 2, title: 'Ordering Food', description: 'Phrases for restaurants and cafes', cards: 30, difficulty: Difficulty.Beginner, category: Category.Speaking, status: Status.Published, lastModified: '29/09/2025', estimatedDuration: '20 mins', content: [], access: LessonAccess.Free },
-  { id: 3, title: 'Common Verbs', description: 'Conjugations of essential verbs', cards: 50, difficulty: Difficulty.Intermediate, category: Category.Reading, status: Status.Published, lastModified: '29/09/2025', estimatedDuration: '30 mins', content: [], access: LessonAccess.Premium },
-  { id: 4, title: 'Past Tense', description: 'Understanding the passato prossimo', cards: 40, difficulty: Difficulty.Advanced, category: Category.Writing, status: Status.Drafted, lastModified: '29/09/2025', estimatedDuration: '45 mins', content: [], access: LessonAccess.Premium },
+  { id: 1, title: 'Basic Italian Greetings', description: 'Essential greetings and polite expressions', cards: 25, difficulty: Difficulty.Beginner, category: Category.Reading, status: Status.Published, lastModified: '29/09/2025', estimatedDuration: '15 mins', content: [], access: LessonAccess.Free, avgRating: 0 },
+  { id: 2, title: 'Ordering Food', description: 'Phrases for restaurants and cafes', cards: 30, difficulty: Difficulty.Beginner, category: Category.Speaking, status: Status.Published, lastModified: '29/09/2025', estimatedDuration: '20 mins', content: [], access: LessonAccess.Free, avgRating: 0 },
+  { id: 3, title: 'Common Verbs', description: 'Conjugations of essential verbs', cards: 50, difficulty: Difficulty.Intermediate, category: Category.Reading, status: Status.Published, lastModified: '29/09/2025', estimatedDuration: '30 mins', content: [], access: LessonAccess.Premium, avgRating: 0 },
+  { id: 4, title: 'Past Tense', description: 'Understanding the passato prossimo', cards: 40, difficulty: Difficulty.Advanced, category: Category.Writing, status: Status.Drafted, lastModified: '29/09/2025', estimatedDuration: '45 mins', content: [], access: LessonAccess.Premium, avgRating: 0 },
 ];
 
 const DifficultyBadge: React.FC<{ difficulty: Difficulty }> = ({ difficulty }) => {
@@ -37,6 +37,7 @@ const Lessons: React.FC = () => {
       id: lessons.length + 1,
       status: Status.Drafted,
       lastModified: new Date().toLocaleDateString('en-GB'),
+      avgRating: 0,
     };
     setLessons([lesson, ...lessons]);
     setIsCreating(false);

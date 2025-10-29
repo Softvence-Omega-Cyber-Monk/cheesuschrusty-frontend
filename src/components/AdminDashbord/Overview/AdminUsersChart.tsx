@@ -93,26 +93,29 @@ const AdminUsersChart: React.FC = () => {
     };
 
     return (
-        <div className="p-6 rounded-lg mb-6 border border-gray-100 dark:bg-gray-800 dark:border-gray-700">
-            <div className="flex items-center justify-between mb-4">
-                <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-200">Users Overview</h2>
+        <div className="p-4 sm:p-6 rounded-lg mb-6 border border-gray-100 dark:bg-gray-800 dark:border-gray-700">
+            {/* Header Section - Responsive layout */}
+            <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 mb-4">
+                <h2 className="text-xl sm:text-2xl font-bold text-gray-800 dark:text-gray-200">Users Overview</h2>
                 
-                <div className="flex items-center gap-6">
-                    {/* Legend */}
-                    <div className="flex items-center gap-4">
-                        <div className="w-6 h-6 rounded-full" style={{ backgroundColor: TOTAL_USERS_COLOR }}></div>
-                        <span className="text-base text-[#484848] font-semibold dark:text-gray-300">Total Users</span>
-                    </div>
-                    <div className="flex items-center gap-4">
-                        <div className="w-6 h-6  rounded-full" style={{ backgroundColor: NEW_USERS_COLOR }}></div>
-                        <span className="text-base font-semibold text-[#484848] dark:text-gray-300">New Users</span>
+                <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6">
+                    {/* Legend - Responsive layout */}
+                    <div className="flex flex-wrap gap-4 sm:gap-6">
+                        <div className="flex items-center gap-2 sm:gap-4">
+                            <div className="w-4 h-4 sm:w-6 sm:h-6 rounded-full" style={{ backgroundColor: TOTAL_USERS_COLOR }}></div>
+                            <span className="text-sm sm:text-base text-[#484848] font-semibold dark:text-gray-300 whitespace-nowrap">Total Users</span>
+                        </div>
+                        <div className="flex items-center gap-2 sm:gap-4">
+                            <div className="w-4 h-4 sm:w-6 sm:h-6 rounded-full" style={{ backgroundColor: NEW_USERS_COLOR }}></div>
+                            <span className="text-sm sm:text-base font-semibold text-[#484848] dark:text-gray-300 whitespace-nowrap">New Users</span>
+                        </div>
                     </div>
                     
-                    {/* 4. Update the select element to control state */}
+                    {/* Dropdown - Responsive styling */}
                     <select 
-                        className="text-xl ml-50 bg-white border border-gray-300 hover:cursor-pointer rounded-lg px-3 py-1   focus:outline-none appearance-none pr-6 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200"
+                        className="text-base sm:text-xl bg-white border border-gray-300 hover:cursor-pointer rounded-lg px-3 py-2 sm:py-1 focus:outline-none appearance-none pr-8 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200 w-full sm:w-auto"
                         value={selectedPeriod}
-                        onChange={handlePeriodChange} // Attach the handler
+                        onChange={handlePeriodChange}
                     >
                         {Object.keys(chartDataMap).map((period) => (
                             <option key={period} value={period}>{period}</option>
@@ -121,83 +124,65 @@ const AdminUsersChart: React.FC = () => {
                 </div>
             </div>
 
-            <ResponsiveContainer width="100%" height={300}>
-                {/* 5. Pass the currentChartData to the AreaChart component */}
-                <AreaChart data={currentChartData} 
-                // margin={{ top: 10, right: 30, left: 20, bottom: 0 }}
-                >
-                    
-                    {/* Gradients remain the same */}
-                    <defs>
-                        <linearGradient id={TOTAL_USERS_AREA_ID} x1="0" y1="0" x2="0" y2="1">
-                            <stop offset="5%" stopColor={TOTAL_USERS_COLOR} stopOpacity={0.4} />
-                            <stop offset="95%" stopColor={TOTAL_USERS_COLOR} stopOpacity={0} />
-                        </linearGradient>
-                        <linearGradient id={NEW_USERS_AREA_ID} x1="0" y1="0" x2="0" y2="1">
-                            <stop offset="5%" stopColor={NEW_USERS_COLOR} stopOpacity={0.4} />
-                            <stop offset="95%" stopColor={NEW_USERS_COLOR} stopOpacity={0} />
-                        </linearGradient>
-                    </defs>
-                    {/* //stroke="#f0f0f0" */}
-                    <CartesianGrid  strokeDasharray="3 3" vertical={false} />
-                    <XAxis 
-                        dataKey="month" 
-                        axisLine={false} 
-                        tickLine={false} 
-                        // padding={{ left: 20, right: 20 }}
-                        tick={{ fontSize: 12, fill: '#A0AEC0' }}
-                    />
-                    <YAxis 
-                        axisLine={false} 
-                        tickLine={false} 
-                        tickFormatter={formatYAxisTick}
-                        tick={{ fontSize: 14, fill: '#A0AEC0' }}
-                        domain={[0, 'dataMax + 5000']}
-                    />
-                    
-                    <Tooltip content={<CustomTooltip />} />
-                    
-                    <Area 
-                        type="monotone" 
-                        dataKey="totalUsers" 
-                        stroke={TOTAL_USERS_COLOR} 
-                        fillOpacity={1} 
-                        fill={`url(#${TOTAL_USERS_AREA_ID})`} 
-                        strokeWidth={2}
-                        dot={{ r: 0 }}
-                        activeDot={{ r: 6, fill: TOTAL_USERS_COLOR, stroke: 'white', strokeWidth: 2 }}
-                    />
-                    
-                    <Area 
-                        type="monotone" 
-                        dataKey="newUsers" 
-                        stroke={NEW_USERS_COLOR} 
-                        fillOpacity={1} 
-                        fill={`url(#${NEW_USERS_AREA_ID})`} 
-                        strokeWidth={2}
-                        dot={{ r: 0 }}
-                        activeDot={{ r: 6, fill: NEW_USERS_COLOR, stroke: 'white', strokeWidth: 2 }}
-                    />
-                </AreaChart>
-            </ResponsiveContainer>
+            {/* Chart Container - Responsive height */}
+            <div className="w-full h-[250px] sm:h-[300px] md:h-[350px]">
+                <ResponsiveContainer width="100%" height="100%">
+                    <AreaChart data={currentChartData}>
+                        {/* Gradients remain the same */}
+                        <defs>
+                            <linearGradient id={TOTAL_USERS_AREA_ID} x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="5%" stopColor={TOTAL_USERS_COLOR} stopOpacity={0.4} />
+                                <stop offset="95%" stopColor={TOTAL_USERS_COLOR} stopOpacity={0} />
+                            </linearGradient>
+                            <linearGradient id={NEW_USERS_AREA_ID} x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="5%" stopColor={NEW_USERS_COLOR} stopOpacity={0.4} />
+                                <stop offset="95%" stopColor={NEW_USERS_COLOR} stopOpacity={0} />
+                            </linearGradient>
+                        </defs>
+                        
+                        <CartesianGrid strokeDasharray="3 3" vertical={false} />
+                        <XAxis 
+                            dataKey="month" 
+                            axisLine={false} 
+                            tickLine={false} 
+                            tick={{ fontSize: 10, fill: '#A0AEC0' }}
+                        />
+                        <YAxis 
+                            axisLine={false} 
+                            tickLine={false} 
+                            tickFormatter={formatYAxisTick}
+                            tick={{ fontSize: 10, fill: '#A0AEC0' }}
+                            domain={[0, 'dataMax + 5000']}
+                        />
+                        
+                        <Tooltip content={<CustomTooltip />} />
+                        
+                        <Area 
+                            type="monotone" 
+                            dataKey="totalUsers" 
+                            stroke={TOTAL_USERS_COLOR} 
+                            fillOpacity={1} 
+                            fill={`url(#${TOTAL_USERS_AREA_ID})`} 
+                            strokeWidth={2}
+                            dot={{ r: 0 }}
+                            activeDot={{ r: 4, fill: TOTAL_USERS_COLOR, stroke: 'white', strokeWidth: 2 }}
+                        />
+                        
+                        <Area 
+                            type="monotone" 
+                            dataKey="newUsers" 
+                            stroke={NEW_USERS_COLOR} 
+                            fillOpacity={1} 
+                            fill={`url(#${NEW_USERS_AREA_ID})`} 
+                            strokeWidth={2}
+                            dot={{ r: 0 }}
+                            activeDot={{ r: 4, fill: NEW_USERS_COLOR, stroke: 'white', strokeWidth: 2 }}
+                        />
+                    </AreaChart>
+                </ResponsiveContainer>
+            </div>
         </div>
     );
 };
 
 export default AdminUsersChart;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- 

@@ -1,36 +1,43 @@
-
-
-import React, { useState } from "react";
-import { ChevronLeft,   } from "lucide-react";
+import React, { useState, useEffect } from "react";
+import { ChevronLeft } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import ReadingExerciseComplete from "./ReadingExerciseComplete";
-import readingicon from "../../../../assets/Dashbord/darkreading.svg"
+import readingicon from "../../../../assets/Dashbord/darkreading.svg";
 import { MdOutlineTranslate } from "react-icons/md";
 import { ProgressBar } from "@/components/ProgressBar/ProgressBar";
 import Header from "@/components/Header/Header";
 
- interface Question {
+interface Question {
   id: number;
   question: string;
   answers: string[];
   correctAnswer: string;
 }
 
-
-// interface AnswerResult {
-//   question: string;
-//   userAnswer: string | undefined;
-//   correctAnswer: string;
-//   isCorrect: boolean;
-// }
-
 const UserReadingPractice: React.FC = () => {
   const navigate = useNavigate();
 
+  // Theme state
+  const [darkMode, setDarkMode] = useState<boolean>(() => {
+    return localStorage.getItem("theme") === "dark";
+  });
+
+  // Question & answer state
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState<number>(0);
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
   const [answers, setAnswers] = useState<Record<number, string>>({});
   const [isComplete, setIsComplete] = useState<boolean>(false);
+
+  // Save theme to localStorage
+  useEffect(() => {
+    if (darkMode) {
+      document.documentElement.classList.add("dark");
+      localStorage.setItem("theme", "dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+      localStorage.setItem("theme", "light");
+    }
+  }, [darkMode]);
 
   const questions: Question[] = [
     {
@@ -100,73 +107,83 @@ const UserReadingPractice: React.FC = () => {
   });
 
   return (
-    <div className="min-h-screen  ">
+    <div className={`min-h-screen ${darkMode ? "bg-gray-900 text-gray-200" : "bg-gray-50 text-gray-900"}`}>
       {/* Header */}
-      <div className="    ">
-        <div className="  mx-auto px-6 py-4">
+      <div className="mx-auto px-6 py-4">
+        <div className="flex justify-between items-center mb-4">
           <button
             onClick={() => navigate("/user/practice")}
-            className="flex border p-3 cursor-pointer rounded-2xl dark:text-gray-200 items-center gap-2 text-gray-700 hover:text-gray-900 mb-4"
+            className={`flex border p-3 rounded-2xl items-center gap-2 ${darkMode ? "border-gray-700 text-gray-200 hover:text-white" : "border-gray-300 text-gray-700 hover:text-gray-900"}`}
           >
             <ChevronLeft className="w-6 h-6" />
-            <span className="text-base font-semibold ">Back To Practice</span>
+            <span className="text-base font-semibold">Back To Practice</span>
           </button>
 
-<Header  title="Reading Practice" subtitle="Improve your Italian reading comprehension" />
-
-           
+          {/* Theme Toggle */}
+          <button
+            onClick={() => setDarkMode(!darkMode)}
+            className={`px-4 py-2 rounded-lg font-medium border ${darkMode ? "border-gray-700 bg-gray-800 hover:bg-gray-700" : "border-gray-300 bg-white hover:bg-gray-100"}`}
+          >
+            {darkMode ? "Light Mode" : "Dark Mode"}
+          </button>
         </div>
+
+        <Header
+          title="Reading Practice"
+          subtitle="Improve your Italian reading comprehension"
+        />
       </div>
 
       {/* Main Content */}
-      <div className="  mx-auto px-6 py-8">
-        <div className=" flex flex-col md:flex-row gap-6">
+      <div className="mx-auto px-6 py-8">
+        <div className="flex flex-col md:flex-row gap-6">
           {/* Reading Passage */}
-          <div className="bg-white max-h-auto flex-1 flex flex-col gap-4 rounded-lg shadow-sm p-6">
+          <div className={`flex-1 flex flex-col gap-4 rounded-lg shadow-sm p-6 ${darkMode ? "bg-gray-800" : "bg-white"}`}>
             <div className="flex items-start justify-between mb-6">
               <div className="flex items-center gap-3">
-                <div className="  rounded-lg ">
-                   <img className="w-8 h-8" src={readingicon} alt="" />
+                <div className="rounded-lg">
+                  <img className="w-8 h-8" src={readingicon} alt="" />
                 </div>
-                <h2 className="text-xl font-semibold text-[#3C424E ]">
+                <h2 className="text-xl font-semibold dark:text-amber-50">
                   La Vita Universitaria in Italia
                 </h2>
               </div>
-              <button className="flex cursor-pointer items-center gap-2 px-3 py-1.5 border border-[#1C1B1F] rounded-lg hover:bg-gray-50 transition-colors">
-                <MdOutlineTranslate className="w-4 h-4 text-gray-600" />
-                <span className="text-sm text-[#3C424E]">Show Translation</span> 
+              <button className={`flex cursor-pointer items-center gap-2 px-3 py-1.5 border rounded-lg transition-colors ${darkMode ? "border-gray-700 hover:bg-gray-700 text-gray-200" : "border-gray-300 hover:bg-gray-50 text-gray-900"}`}>
+                <MdOutlineTranslate className="w-4 h-4" />
+                <span className="text-sm">Show Translation</span>
               </button>
             </div>
 
-            <div className="space-y-4   text-[#7E7E7E] leading-relaxed">
-              <p>
+            <div className="space-y-4 leading-relaxed text-gray-700 dark:text-[#ffff]">
+              <p className="dark:text-[#ffff]">
                 L'università italiana ha una lunga tradizione che risale al
                 Medioevo. Molte università italiane, come l'Università di
                 Bologna fondata nel 1088, sono tra le più antiche del mondo.
               </p>
-              <p>
+             <p className="dark:text-[#ffff]">
                 Gli studenti universitari in Italia seguono un percorso di studi
                 strutturato in tre livelli: la laurea triennale (tre anni), la
                 laurea magistrale (due anni) e il dottorato di ricerca.
               </p>
-              <p>
+            <p className="dark:text-[#ffff]">
                 La vita sociale degli studenti è molto importante. Molti
                 partecipano alle attività delle associazioni studentesche, che
                 organizzano eventi culturali e ricreativi. È comune vedere
                 gruppi di studenti nelle piazze o nei caffè vicino
                 all'università.
               </p>
-              <p>
+              <p className="dark:text-[#ffff]">
                 Il sistema di valutazione italiano è basato su un punteggio da
                 18 a 30, dove 18 è il voto minimo per superare un esame e 30 è
                 il massimo. Gli studenti che ottengono 30 possono anche ricevere
                 la "lode".
               </p>
             </div>
+
           </div>
 
           {/* Right Side */}
-          <div className="bg-white flex-1  rounded-lg shadow-sm p-6">
+          <div className={`flex-1 rounded-lg shadow-sm p-6 ${darkMode ? "bg-gray-800" : "bg-white"}`}>
             {isComplete ? (
               <ReadingExerciseComplete answers={resultAnswers} />
             ) : (
@@ -178,29 +195,18 @@ const UserReadingPractice: React.FC = () => {
                       Question {currentQuestionIndex + 1} of {totalQuestions}
                     </span>
                   </div>
-                  {/* <div className="w-full bg-gray-200 rounded-full h-2">
-                    <div
-                      className="bg-blue-600 h-2 rounded-full transition-all duration-500"
-                      style={{ width: `${progressPercentage}%` }}
-                    />
-                  </div> */}
-
-
-<ProgressBar
-  progress={progressPercentage}   // replace inline width
-  color="bg-black"             // fill color
-  height="h-3"                    // height of the bar
-  rounded="rounded-full"          // rounded corners
-  // showPercentage={true}           // optional numeric % display
-  className="mb-2"                // optional wrapper spacing
-/>
-
-
+                  <ProgressBar
+                    progress={progressPercentage}
+                    color={darkMode ? "bg-blue-400" : "bg-black"}
+                    height="h-3"
+                    rounded="rounded-full"
+                    className="mb-2"
+                  />
                 </div>
 
                 {/* Question */}
                 <div className="mb-8">
-                  <h3 className="text-lg bg-[#EBEBEB] py-6 px-4 font-semibold text-gray-900 rounded-xl mb-6">
+                  <h3 className={`text-lg py-6 px-4 font-semibold rounded-xl mb-6 ${darkMode ? "bg-gray-700 text-white" : "bg-[#EBEBEB] text-gray-900"}`}>
                     {currentQuestion.question}
                   </h3>
 
@@ -209,17 +215,18 @@ const UserReadingPractice: React.FC = () => {
                       <button
                         key={index}
                         onClick={() => setSelectedAnswer(answer)}
-                        className={`w-full text-left p-4 rounded-lg cursor-pointer border-2 transition-all duration-200 ${
-                          selectedAnswer === answer
-                            ? "border-blue-600 bg-blue-50"
-                            : "border-gray-200 hover:border-gray-300 bg-white"
-                        }`}
+                        className={`w-full text-left p-4 rounded-lg cursor-pointer border-2 transition-all duration-200 ${selectedAnswer === answer
+                            ? "border-blue-600 bg-blue-50 text-gray-900"
+                            : darkMode
+                              ? "border-gray-700 hover:border-gray-500 bg-gray-900 text-gray-200"
+                              : "border-gray-200 hover:border-gray-300 bg-white text-gray-900"
+                          }`}
                       >
                         <div className="flex items-center gap-3">
-                          <span className="font-semibold text-gray-900">
+                          <span className="font-semibold">
                             {String.fromCharCode(65 + index)}.
                           </span>
-                          <span className="text-[#3C424E]">{answer}</span>
+                          <span>{answer}</span>
                         </div>
                       </button>
                     ))}
@@ -231,7 +238,7 @@ const UserReadingPractice: React.FC = () => {
                   <button
                     onClick={handlePrevious}
                     disabled={currentQuestionIndex === 0}
-                    className="flex-1 px-6 py-3 border border-[#111827]  rounded-lg font-medium cursor-pointer text-gray-700 hover:bg-gray-50 text-base transition-colors flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="flex-1 px-6 py-3 border rounded-lg font-medium cursor-pointer text-gray-700 hover:bg-gray-50 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     <ChevronLeft className="w-4 h-4" />
                     Previous
@@ -240,13 +247,14 @@ const UserReadingPractice: React.FC = () => {
                   <button
                     onClick={handleNext}
                     disabled={!selectedAnswer}
-                    className={`flex-1 px-6 py-3 cursor-pointer rounded-lg font-medium flex text-base items-center justify-center gap-2 transition-colors duration-300 ${
-                      selectedAnswer
+                    className={`flex-1 px-6 py-3 cursor-pointer rounded-lg font-medium flex items-center justify-center gap-2 transition-colors duration-300 ${selectedAnswer
                         ? "bg-blue-600 text-white hover:bg-blue-700"
                         : "bg-gray-300 text-gray-500 cursor-not-allowed"
-                    }`}
+                      }`}
                   >
-                    {currentQuestionIndex === totalQuestions - 1 ? "Finish" : "Next"}
+                    {currentQuestionIndex === totalQuestions - 1
+                      ? "Finish"
+                      : "Next"}
                     <ChevronLeft className="w-4 h-4 rotate-180" />
                   </button>
                 </div>
@@ -260,13 +268,3 @@ const UserReadingPractice: React.FC = () => {
 };
 
 export default UserReadingPractice;
-
-
-
-
-
-
-
-
-
- 

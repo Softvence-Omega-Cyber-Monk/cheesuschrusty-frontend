@@ -3,10 +3,10 @@ import ToggleSwitch from './ToggleSwitch';
 import { LANGUAGES, TIMEZONES } from './constants';
 
 const GeneralSettings: React.FC = () => {
-  const [platformName, setPlatformName] = useState('ItalianMaster');
+  const [platformName, setPlatformName] = useState('');
   const [supportEmail, setSupportEmail] = useState('');
   const [platformDescription, setPlatformDescription] = useState(
-    'The best platform for learning Italian with interactive flashcards, lessons, and personalized learning paths.'
+    ''
   );
   const [defaultLanguage, setDefaultLanguage] = useState('English');
   const [timezone, setTimezone] = useState('Europe/Rome');

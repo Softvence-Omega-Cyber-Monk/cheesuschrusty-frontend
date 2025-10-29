@@ -44,7 +44,7 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({
     <div className={`w-full ${className}`}>
       {/* Optional label */}
       {label && (
-        <div className="text-xs text-gray-600 dark:text-gray-300 mb-2">
+        <div className="text-xs text-gray-600 dark:text-gray-400 mb-2">
           {total && current !== undefined
             ? `${label} ${current} of ${total}`
             : label}
@@ -52,9 +52,9 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({
       )}
 
       {/* Progress bar track */}
-      <div className={`w-full dark:bg-[#D9D9D9] bg-[#D9D9D9]  h-3 ${rounded} overflow-hidden`}>
+      <div className={`w-full dark:bg-gray-700 bg-[#D9D9D9]  h-3 ${rounded} overflow-hidden`}>
         <div
-          className={`${color} dark:bg-[#AFC7FF] h-3 ${rounded} transition-all duration-500 ease-out`}
+          className={`${color} dark:bg-blue-500 h-3 ${rounded} transition-all duration-500 ease-out`}
           style={{ width: `${percentage}%` }}
         />
       </div>

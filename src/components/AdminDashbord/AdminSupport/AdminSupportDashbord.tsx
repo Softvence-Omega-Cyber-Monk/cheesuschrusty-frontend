@@ -125,8 +125,8 @@ const teamMembers: TeamMember[] = [
         role: "Senior Agent",
         email: "anna.v@corp.com",
         ticketsResolved: 154,
-        status: "Online",
         avgRating: 4.8,
+        status: "Online",
     },
     {
         id: "TM-02",
@@ -134,8 +134,8 @@ const teamMembers: TeamMember[] = [
         role: "Billing Specialist",
         email: "marco.g@corp.com",
         ticketsResolved: 82,
-        status: "Busy",
         avgRating: 4.5,
+        status: "Busy",
     },
     {
         id: "TM-03",
@@ -143,8 +143,8 @@ const teamMembers: TeamMember[] = [
         role: "Technical Support",
         email: "sofia.r@corp.com",
         ticketsResolved: 110,
-        status: "Online",
         avgRating: 4.7,
+        status: "Online",
     },
 ]
 
@@ -155,8 +155,6 @@ export default function AdminSupportDashbord() {
     const [activeTab, setActiveTab] = useState<TabType>("allTickets")
     const [tickets, setTickets] = useState<Ticket[]>(initialTickets)
     const [knowledgeArticles, ] = useState<KnowledgeArticle[]>(initialKnowledgeArticles)
-
-    // --- Helper Functions ---
 
     const handleViewTicket = (ticket: Ticket): void => {
         setSelectedTicket(ticket)

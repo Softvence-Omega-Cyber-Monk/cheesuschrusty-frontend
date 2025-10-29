@@ -16,19 +16,19 @@ const StatCard: React.FC<{ icon: React.ReactNode, title: string, value: string |
   growth
 }) => {
   return (
-    <div className="bg-white p-5 rounded-lg border shadow-sm flex flex-col justify-between h-full">
+    <div className="bg-white dark:bg-gray-800 p-5 rounded-lg border shadow-sm flex flex-col justify-between h-full dark:border-gray-700">
       <div className="flex justify-between items-start">
-        <div className={`w-8 h-8 rounded-full flex items-center justify-center ${title === 'Lessons Completed' ? 'bg-blue-100 text-blue-600' : title === 'Words Learned' ? 'bg-yellow-100 text-yellow-600' : title === 'Day Streak' ? 'bg-green-100 text-green-600' : 'bg-green-100 text-green-600'}`}>
+        <div className={`w-8 h-8 rounded-full flex items-center justify-center ${title === 'Lessons Completed' ? 'bg-blue-100 text-blue-600 dark:bg-blue-700 dark:text-blue-200' : title === 'Words Learned' ? 'bg-yellow-100 text-yellow-600 dark:bg-yellow-700 dark:text-yellow-200' : title === 'Day Streak' ? 'bg-green-100 text-green-600 dark:bg-green-700 dark:text-green-200' : 'bg-green-100 text-green-600 dark:bg-green-700 dark:text-green-200'}`}>
           {icon}
         </div>
         {growth !== undefined && (
-          <div className="flex items-center text-xs font-medium text-yellow-600">
+          <div className="flex items-center text-xs font-medium text-yellow-600 dark:text-yellow-300">
             <span className="mr-1">📈</span>
             {growth}% this month
           </div>
         )}
         {title === 'Day Streak' && (
-           <div className="flex items-center text-xs font-medium text-green-600">
+           <div className="flex items-center text-xs font-medium text-green-600 dark:text-green-300">
             <span className="mr-1">✅</span>
             Personal best!
           </div>
@@ -36,14 +36,13 @@ const StatCard: React.FC<{ icon: React.ReactNode, title: string, value: string |
       </div>
       
       <div className="mt-4">
-        <p className="text-3xl font-bold text-gray-800">{value}</p>
-        <p className="text-sm text-gray-500 mt-1">{title}</p>
-        {subtext && <p className="text-xs text-gray-500 mt-1">{subtext}</p>}
+        <p className="text-3xl font-bold text-gray-800 dark:text-gray-200">{value}</p>
+        <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">{title}</p>
+        {subtext && <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">{subtext}</p>}
       </div>
     </div>
   );
 };
-
 
 const StatsGrid: React.FC<StatsGridProps> = ({ stats, dayStreak }) => {
   return (

@@ -42,7 +42,7 @@ const SettingsLayout: React.FC = () => {
       {/* Tabs */}
       <div className="mb-6">
         <nav
-          className="bg-gray-100 dark:bg-gray-800 p-1 rounded-lg inline-flex items-center space-x-1 transition-colors"
+          className="bg-gray-100 dark:bg-gray-800 p-1 rounded-lg inline-flex flex-wrap sm:flex-nowrap items-center space-x-1 transition-colors"
           aria-label="Tabs"
         >
           {tabs.map((tab) => (
@@ -51,11 +51,10 @@ const SettingsLayout: React.FC = () => {
               onClick={() => setActiveTab(tab)}
               className={`
                 whitespace-nowrap py-2 px-3 rounded-md cursor-pointer font-medium text-sm transition-all duration-200
-                ${
-                  activeTab === tab
-                    ? 'bg-white text-gray-900 dark:bg-gray-700 dark:text-gray-100 shadow-sm'
-                    : 'bg-transparent text-gray-600 dark:text-gray-400 hover:bg-white/70 dark:hover:bg-gray-600 hover:text-gray-900 dark:hover:text-gray-100'
-                }
+                ${activeTab === tab ? 
+                    'bg-white text-gray-900 dark:bg-gray-700 dark:text-gray-100 shadow-sm' : 
+                    'bg-transparent text-gray-600 dark:text-gray-400 hover:bg-white/70 dark:hover:bg-gray-600 hover:text-gray-900 dark:hover:text-gray-100'}
+                sm:text-base md:text-lg
               `}
             >
               {tab}

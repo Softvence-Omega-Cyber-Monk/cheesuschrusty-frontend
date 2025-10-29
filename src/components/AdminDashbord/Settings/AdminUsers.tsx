@@ -35,17 +35,20 @@ const AdminUsers: React.FC = () => {
   return (
     <>
       <div className="bg-white dark:bg-gray-800 p-8 rounded-lg shadow-sm border border-slate-200 dark:border-gray-700 transition-colors">
-        <div className="flex justify-between items-center">
+        <div className="flex justify-between items-center mb-6">
           <div>
             <h2 className="text-xl font-semibold text-slate-900 dark:text-gray-100">Admin Users & Permissions</h2>
             <p className="text-slate-500 dark:text-gray-400 mt-1 text-sm">Manage administrator accounts and their access levels</p>
           </div>
-          <button className="inline-flex items-center justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors">
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+          <button className="inline-flex items-center justify-center py-2 px-4 sm:py-2 sm:px-4 md:py-2 md:px-5 border border-transparent shadow-sm text-xs sm:text-xs md:text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 sm:h-5 sm:w-5 md:h-6 md:w-6 mr-2" viewBox="0 0 20 20" fill="currentColor">
               <path fillRule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clipRule="evenodd" />
             </svg>
-            Add Admin User
+            <span className="hidden sm:block">Add Admin User</span>
+            <span className="sm:hidden text-xs">Add User</span> {/* Smaller text for small screens */}
           </button>
+
+
         </div>
         <div className="mt-8 flow-root">
           <div className="-my-4 divide-y divide-slate-200 dark:divide-gray-700">
@@ -55,10 +58,10 @@ const AdminUsers: React.FC = () => {
           </div>
         </div>
       </div>
-      
+
       <div className="mt-8">
         <h2 className="text-xl font-semibold text-slate-900 dark:text-gray-100 mb-4">Role Permissions</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {ROLE_PERMISSIONS.map(role => (
             <div key={role.name} className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-sm border border-slate-200 dark:border-gray-700 transition-colors">
               <h3 className="text-md font-semibold text-slate-900 dark:text-gray-100">{role.name}</h3>
