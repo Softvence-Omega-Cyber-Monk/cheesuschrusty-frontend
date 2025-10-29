@@ -1,4 +1,3 @@
-
 import React, { useState, useMemo } from 'react';
 import StatCard from '../Analytics/componentes/StatCard';
 import TabButton from '../Analytics/componentes/TabButton';
@@ -38,31 +37,37 @@ const App: React.FC = () => {
   ], []);
 
   return (
-    <div className="min-h-screen p-6  text-gray-800 dark:bg-gray-900 dark:text-gray-200">
-      <div className="  mx-auto">
-        <header className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-200">Analytics</h1>
-          <p className="text-gray-500 mt-1 dark:text-gray-400">Welcome back! Here's what's happening with your platform today.</p>
+    <div className="min-h-screen p-4 sm:p-6 text-gray-800 dark:bg-gray-900 dark:text-gray-200">
+      <div className="mx-auto">
+        {/* Header */}
+        <header className="mb-6 sm:mb-8">
+          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-gray-200">Analytics</h1>
+          <p className="text-gray-500 mt-1 text-sm sm:text-base dark:text-gray-400">Welcome back! Here's what's happening with your platform today.</p>
         </header>
 
         <main>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+          {/* Stats Cards Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-6 sm:mb-8">
             {statCards.map(card => (
               <StatCard key={card.title} {...card} />
             ))}
           </div>
 
-          <div className="bg-white rounded-lg shadow-sm p-2 mb-8 inline-flex items-center space-x-1 dark:bg-gray-800">
-            {tabs.map(tab => (
-              <TabButton
-                key={tab}
-                label={tab}
-                isActive={activeTab === tab}
-                onClick={() => setActiveTab(tab)}
-              />
-            ))}
+          {/* Tabs Navigation */}
+          <div className="bg-white rounded-lg shadow-sm p-1 sm:p-2 mb-6 sm:mb-8 w-full overflow-x-auto dark:bg-gray-800">
+            <div className="flex space-x-1 min-w-max">
+              {tabs.map(tab => (
+                <TabButton
+                  key={tab}
+                  label={tab}
+                  isActive={activeTab === tab}
+                  onClick={() => setActiveTab(tab)}
+                />
+              ))}
+            </div>
           </div>
           
+          {/* Tab Content */}
           <div className="transition-all duration-300">
             {renderActiveView()}
           </div>

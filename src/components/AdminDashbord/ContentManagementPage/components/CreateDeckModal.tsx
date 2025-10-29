@@ -19,7 +19,7 @@ const CreateDeckModal: React.FC<CreateDeckModalProps> = ({ isOpen, onClose, onCr
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!title.trim() || !description.trim()) return;
-    onCreate({ title, description, difficulty, category, status });
+    onCreate({ title, description, difficulty, category, status, avgRating: 0 });
     setTitle('');
     setDescription('');
     setDifficulty(Difficulty.Beginner);

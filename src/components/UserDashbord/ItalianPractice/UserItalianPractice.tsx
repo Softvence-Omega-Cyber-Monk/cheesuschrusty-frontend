@@ -224,7 +224,7 @@ const UserItalianPractice: React.FC = () => {
         </div>
 
         {/* Skill Cards Grid */}
-        <div className="grid grid-cols-1 min-[480px]:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-3 sm:gap-4 lg:gap-6">
+        <div className="grid grid-cols-1 min-[480px]:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 gap-3 sm:gap-4 lg:gap-6">
           {skills.map((skill, index) => (
             <SkillCard key={index} {...skill} />
           ))}

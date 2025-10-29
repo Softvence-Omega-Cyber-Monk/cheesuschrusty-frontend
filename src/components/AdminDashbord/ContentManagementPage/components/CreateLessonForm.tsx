@@ -38,7 +38,7 @@ const CreateLessonForm: React.FC<CreateLessonFormProps> = ({ onSave, onCancel })
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        onSave({ title, description, difficulty, category, estimatedDuration, content: sections, access, cards: 0 });
+        onSave({ title, description, difficulty, category, estimatedDuration, content: sections, access, cards: 0, avgRating: 0 });
     };
 
     const getSectionIcon = (type: LessonSectionType) => {

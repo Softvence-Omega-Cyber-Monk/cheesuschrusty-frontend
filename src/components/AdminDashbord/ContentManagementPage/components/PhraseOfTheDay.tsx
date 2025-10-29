@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import { PhraseOfTheDay as PhraseType } from './types';
 
 const initialPhrase: PhraseType = {
-  italian: 'La vita è bella',
-  englishTranslation: 'Life is beautiful',
-  pronunciation: 'la VEE-ta eh BEL-la',
-  explanation: 'A famous Italian phrase expressing optimism and appreciation for life.'
+  italian: '',
+  englishTranslation: '',
+  pronunciation: '',
+  explanation: ''
 };
 
 const PhraseOfTheDay: React.FC = () => {

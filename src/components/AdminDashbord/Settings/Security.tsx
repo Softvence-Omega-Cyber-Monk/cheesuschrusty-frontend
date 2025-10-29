@@ -7,7 +7,7 @@ const Security: React.FC = () => {
     const [requireSpecial, setRequireSpecial] = useState(true);
     const [requireNumbers, setRequireNumbers] = useState(true);
     const [requireUppercase, setRequireUppercase] = useState(false);
-    const [sessionTimeout, setSessionTimeout] = useState(60);
+    const [sessionTimeout, setSessionTimeout] = useState(30);
     const [maxAttempts, setMaxAttempts] = useState(5);
     const [retentionPolicy, setRetentionPolicy] = useState(true);
     const [gdpr, setGdpr] = useState(true);

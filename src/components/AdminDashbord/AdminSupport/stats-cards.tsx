@@ -20,7 +20,7 @@ export const StatsCards: React.FC<StatsCardsProps> = ({ tickets }) => {
   ]
 
   return (
-    <div className="px-8 py-6 dark:bg-gray-800">
+    <div className="px-8 py-6 dark:bg-gray-800 mb-4 rounded-md">
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
         {stats.map((stat) => (
           <div

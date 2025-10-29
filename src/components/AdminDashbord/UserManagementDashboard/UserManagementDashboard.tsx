@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import StatsCards from '../Overview/AdminStatsCards';
 import SearchAndFilters from './SearchAndFilters';
@@ -55,12 +54,12 @@ const UserManagementDashboard: React.FC = () => {
   };
 
   return (
-    <div className="p-8 dark:bg-gray-900 dark:text-gray-200">
+    <div className="p-4 sm:p-6 lg:p-8 dark:bg-gray-900 dark:text-gray-200">
       <div className="flex flex-col mx-auto">
         {/* Header */}
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2 dark:text-gray-200">User Management </h1>
-          <p className="text-gray-500 dark:text-gray-400">Welcome back! Here's what's happening with your platform today.</p>
+        <div className="mb-6 sm:mb-8">
+          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2 dark:text-gray-200">User Management</h1>
+          <p className="text-sm sm:text-base text-gray-500 dark:text-gray-400">Welcome back! Here's what's happening with your platform today.</p>
         </div>
 
         <StatsCards />
@@ -78,15 +77,15 @@ const UserManagementDashboard: React.FC = () => {
         {/* Users Table */}
         <div className="bg-white rounded-lg shadow-sm overflow-hidden dark:bg-gray-800">
           <div className="overflow-x-auto">
-            <table className="w-full">
+            <table className="w-full min-w-[600px]">
               <thead className="bg-gray-50 border-b border-gray-200 dark:bg-gray-700 dark:border-gray-600">
                 <tr>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider dark:text-gray-300">Name</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider dark:text-gray-300">Email</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider dark:text-gray-300">Role</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider dark:text-gray-300">Status</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider dark:text-gray-300">Progress</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider dark:text-gray-300">Action</th>
+                  <th className="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider dark:text-gray-300">Name</th>
+                  <th className="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider dark:text-gray-300">Email</th>
+                  <th className="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider dark:text-gray-300">Role</th>
+                  <th className="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider dark:text-gray-300">Status</th>
+                  <th className="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider dark:text-gray-300">Progress</th>
+                  <th className="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider dark:text-gray-300">Action</th>
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
@@ -103,14 +102,17 @@ const UserManagementDashboard: React.FC = () => {
           </div>
 
           {/* Pagination */}
-          <div className="px-6 py-4 border-t border-gray-200 flex items-center justify-between dark:border-gray-700">
-            <p className="text-sm text-gray-700 dark:text-gray-300">
+          <div className="px-4 sm:px-6 py-4 border-t border-gray-200 flex flex-col sm:flex-row items-center justify-between gap-4 dark:border-gray-700">
+            <p className="text-sm text-gray-700 dark:text-gray-300 text-center sm:text-left">
               Showing {startIndex + 1} to {Math.min(startIndex + usersPerPage, filteredUsers.length)} of {filteredUsers.length} users
             </p>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-1 sm:gap-2">
               <button
                 onClick={() => handlePageChange(currentPage - 1)}
-                className="px-3 py-1 cursor-pointer text-gray-600 hover:bg-gray-100 rounded dark:text-gray-300 dark:hover:bg-gray-700"
+                disabled={currentPage === 1}
+                className={`px-2 sm:px-3 py-1 cursor-pointer text-gray-600 hover:bg-gray-100 rounded dark:text-gray-300 dark:hover:bg-gray-700 ${
+                  currentPage === 1 ? 'opacity-50 cursor-not-allowed' : ''
+                }`}
               >
                 &lt;
               </button>
@@ -118,13 +120,21 @@ const UserManagementDashboard: React.FC = () => {
                 <button
                   key={i + 1}
                   onClick={() => handlePageChange(i + 1)}
-                  className={`px-3 py-1 cursor-pointer rounded ${currentPage === i + 1 ? 'bg-blue-600 text-white' : 'text-gray-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700'}`}                >
+                  className={`px-2 sm:px-3 py-1 cursor-pointer rounded text-sm sm:text-base ${
+                    currentPage === i + 1 
+                      ? 'bg-blue-600 text-white' 
+                      : 'text-gray-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700'
+                  }`}
+                >
                   {i + 1}
                 </button>
               ))}
               <button
                 onClick={() => handlePageChange(currentPage + 1)}
-                className="px-3 py-1 cursor-pointer text-gray-600 hover:bg-gray-100 rounded dark:text-gray-300 dark:hover:bg-gray-700"
+                disabled={currentPage === totalPages}
+                className={`px-2 sm:px-3 py-1 cursor-pointer text-gray-600 hover:bg-gray-100 rounded dark:text-gray-300 dark:hover:bg-gray-700 ${
+                  currentPage === totalPages ? 'opacity-50 cursor-not-allowed' : ''
+                }`}
               >
                 &gt;
               </button>
