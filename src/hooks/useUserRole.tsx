@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 
 // Define the possible roles
-type UserRole = "admin" | "user" | "freeUser";
+export type UserRole = "admin" | "user" | "freeUser";
 
 // Define the return type of the hook
 interface UseUserRoleReturn {
