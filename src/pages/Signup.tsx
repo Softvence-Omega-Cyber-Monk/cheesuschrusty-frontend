@@ -119,7 +119,7 @@ const MockButton: React.FC<MockButtonProps> = ({
       {...props}
     >
       {/* Shine effect */}
-      <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent group-hover:translate-x-full transition-transform duration-1000"></div>
+      <div className="absolute inset-0 -translate-x-full  from-transparent via-white/20 to-transparent group-hover:translate-x-full transition-transform duration-1000"></div>
       
       {/* Content */}
       <span className="relative z-10 flex items-center gap-2">
@@ -222,11 +222,11 @@ const App: React.FC = () => {
   const renderContent = useMemo(() => {
     if (isSignedUp) {
       return (
-        <div className="flex flex-col items-center justify-center h-full p-8 text-center bg-gradient-to-br from-gray-800/80 to-gray-900/80 rounded-3xl shadow-2xl border border-gray-700/50 backdrop-blur-xl transform transition-all duration-1000 animate-fade-in">
-          <div className="mb-6 p-6 bg-gradient-to-r from-green-500/20 to-emerald-500/20 rounded-full border border-green-500/30 animate-bounce-in">
+        <div className="flex flex-col items-center justify-center h-full p-8 text-center  from-gray-800/80 to-gray-900/80 rounded-3xl shadow-2xl border border-gray-700/50 backdrop-blur-xl transform transition-all duration-1000 animate-fade-in">
+          <div className="mb-6 p-6  from-green-500/20 to-emerald-500/20 rounded-full border border-green-500/30 animate-bounce-in">
             <CheckCircle className="h-20 w-20 text-green-400 animate-pulse" />
           </div>
-          <h2 className="text-5xl font-black bg-gradient-to-r from-green-400 via-emerald-400 to-cyan-400 bg-clip-text text-transparent mb-6 animate-slide-up">
+          <h2 className="text-5xl font-black from-green-400 via-emerald-400 to-cyan-400 bg-clip-text text-transparent mb-6 animate-slide-up">
             Welcome Aboard!
           </h2>
           <p className="text-gray-300 text-lg mb-8 max-w-md leading-relaxed animate-slide-up delay-200">
@@ -236,7 +236,7 @@ const App: React.FC = () => {
             <MockButton 
               onClick={() => setIsSignedUp(false)}
               variant="gradient"
-              className="px-10 py-4 bg-gradient-to-r from-green-600 to-cyan-600 hover:from-green-700 hover:to-cyan-700"
+              className="px-10 py-4 from-green-600 to-cyan-600 hover:from-green-700 hover:to-cyan-700"
             >
               <Rocket className="h-5 w-5 mr-2" />
               Explore Dashboard
@@ -357,7 +357,7 @@ const App: React.FC = () => {
                   alt="Profile Preview"
                   className="absolute inset-0 w-full h-full object-cover rounded-3xl opacity-90 transition-all duration-500 group-hover:opacity-70"
                 />
-                <div className="absolute inset-0 bg-gradient-to-br from-black/40 to-transparent rounded-3xl opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center">
+                <div className="absolute inset-0 from-black/40 to-transparent rounded-3xl opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center">
                   <PlusSquare className="h-10 w-10 text-white mr-3 transform group-hover:scale-110 transition-transform duration-300" />
                   <span className="text-white text-base font-semibold">Change Image</span>
                 </div>
@@ -408,7 +408,7 @@ const App: React.FC = () => {
   }, [isSignedUp, formData, errors, isSubmitting, preview, handleInputChange, handleImageChange, handleSubmit]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900/80 to-gray-900 text-white flex items-center justify-center p-4 relative overflow-hidden">
+    <div className="min-h-screen from-gray-900 via-purple-900/80 to-gray-900 text-white flex items-center justify-center p-4 relative overflow-hidden">
       <AnimatedBackground />
       
       <div className="w-full max-w-6xl lg:grid lg:grid-cols-2 shadow-3xl rounded-3xl overflow-hidden border border-gray-700/50 backdrop-blur-xl transform transition-all duration-1000 hover:shadow-4xl relative z-10">
@@ -416,12 +416,12 @@ const App: React.FC = () => {
         <div className="flex items-center justify-center py-16 px-6 lg:px-16 bg-gray-800/30 backdrop-blur-2xl border-r border-gray-700/30">
           <div className="mx-auto grid w-full max-w-md gap-10">
             <div className="grid gap-6 text-center">
-              <div className="inline-flex items-center gap-3 bg-gradient-to-r from-blue-500/20 to-purple-500/20 px-6 py-3 rounded-2xl border border-blue-500/30 mb-4 transform transition-all duration-500 hover:scale-105">
+              <div className="inline-flex items-center gap-3 from-blue-500/20 to-purple-500/20 px-6 py-3 rounded-2xl border border-blue-500/30 mb-4 transform transition-all duration-500 hover:scale-105">
                 <div className="h-3 w-3 bg-blue-400 rounded-full animate-pulse"></div>
                 <span className="text-blue-400 text-base font-bold">Join Thousands of Creators</span>
                 <Sparkles className="h-4 w-4 text-blue-400" />
               </div>
-              <h1 className="text-6xl font-black bg-gradient-to-r from-blue-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent animate-gradient">
+              <h1 className="text-6xl font-black from-blue-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent animate-gradient">
                 Create Account
               </h1>
               <p className="text-balance text-gray-300 text-xl leading-relaxed animate-fade-in">
@@ -443,7 +443,7 @@ const App: React.FC = () => {
                   <Link to="/login">
                   <button 
                     onClick={() => console.log('Navigate to login')} 
-                    className="font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent hover:from-blue-300 hover:to-purple-300 transition-all duration-300 underline"
+                    className="font-bold from-blue-400 to-purple-400 bg-clip-text text-transparent hover:from-blue-300 hover:to-purple-300 transition-all duration-300 underline"
                   >
                     Sign In Here
                   </button>
@@ -456,7 +456,7 @@ const App: React.FC = () => {
 
         {/* Right Side: Visual */}
         <div className="hidden lg:block relative overflow-hidden group">
-          <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 via-purple-500/10 to-cyan-500/10 z-10"></div>
+          <div className="absolute inset-0 from-blue-500/10 via-purple-500/10 to-cyan-500/10 z-10"></div>
           <img
             src={CUBE_GROUP_IMAGE}
             alt="Abstract futuristic background"
