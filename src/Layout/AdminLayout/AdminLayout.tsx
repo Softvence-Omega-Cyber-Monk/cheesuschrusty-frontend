@@ -40,7 +40,7 @@ const AdminLayout = () => {
         {!sidebarOpen && (
           <button
             onClick={() => setSidebarOpen(true)}
-            className="lg:hidden fixed cursor-pointer top-4 left-4 z-50 w-12 h-12 bg-gray-900 text-white rounded-full flex items-center justify-center shadow-lg hover:bg-gray-700 transition-colors"
+            className="lg:hidden fixed cursor-pointer top-1 left-0 z-50 w-12 h-12 bg-gray-900 text-white rounded-full flex items-center justify-center shadow-lg hover:bg-gray-700 transition-colors"
           >
             ☰
           </button>

@@ -385,7 +385,7 @@ const Login = () => {
                 <>
                   New to our platform?{" "}
                   <Link to="/signup">
-                    <button className="font-bold from-blue-400 to-purple-400 bg-clip-text text-transparent hover:from-blue-300 hover:to-purple-300 transition-all duration-300 underline text-[10px] xs:text-xs md:text-base">
+                    <button className="font-bold from-blue-400 to-purple-400 bg-clip-text text-transparent hover:from-blue-300 hover:to-purple-300 transition-all duration-300 underline text-[10px] xs:text-xs md:text-base bg-amber-50">
                       Create Account Here
                     </button>
                   </Link>

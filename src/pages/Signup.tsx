@@ -470,7 +470,7 @@ const App: React.FC = () => {
                 <>
                   Already part of our community?{" "}
                   <Link to="/login">
-                    <button className="font-bold from-blue-400 to-purple-400 bg-clip-text text-transparent hover:from-blue-300 hover:to-purple-300 transition-all duration-300 underline">
+                    <button className="font-bold from-blue-400 to-purple-400 bg-clip-text text-transparent hover:from-blue-300 hover:to-purple-300 transition-all duration-300 underline bg-amber-50">
                       Sign In Here
                     </button>
                   </Link>

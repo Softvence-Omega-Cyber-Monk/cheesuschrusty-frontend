@@ -154,8 +154,6 @@ const weeklyStats = [
           />
         </div>
       </div>
-      
-      {/* --- Advanced Analytics Footer --- */}
       <AdvancedAnalyticsCard />
 
     </div>
