@@ -1,13 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
-import counterReducer from "./Slices/counterSlice/counterSlice";
 import authReducer from "./Slices/AuthSlice/authSlice";
-import formReducer from "./Slices/FormSlice/FormSlice";
+import baseApi from "./Features/BaseApi/BaseApi";
+
 
 export const store = configureStore({
   reducer: {
-    counter: counterReducer,
+    [baseApi.reducerPath] : baseApi.reducer,
     auth: authReducer,
-    form: formReducer,
   },
 });
 
