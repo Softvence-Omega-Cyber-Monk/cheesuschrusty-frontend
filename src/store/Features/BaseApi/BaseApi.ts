@@ -18,7 +18,7 @@ const baseQueryWithReauth: BaseQueryFn<
   let result = await baseQuery(args, api, extraOptions)
   if (result.error && result.error.status === 401) {
     // try to get a new token
-    const refreshResult = await baseQuery('/refreshToken', api, extraOptions)
+    const refreshResult = await baseQuery('/auth/refresh-token', api, extraOptions)
     if (refreshResult.data) {
       // store the new token
       api.dispatch(setUser(refreshResult.data))
